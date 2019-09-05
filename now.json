@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "website-2019",
+  "alias": ["webconf.tech", "www.webconf.tech"],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "status": 301,
+      "headers": { "Location": "https://2019.webconf.tech/$1" }
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
+import { transparentize } from 'polished';
 
 const Container = styled.main`
   display: flex;
@@ -14,7 +15,7 @@ const LandingSection = styled.section`
 const Header = styled.header`
   background-image: url(/images/backgrounds/header.png);
   background-repeat: no-repeat;
-  background-position: left center;
+  background-position: center;
 `;
 
 const HeaderContent = styled.div`
@@ -22,9 +23,10 @@ const HeaderContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url(/images/header-lines-left.svg), url(/images/header-lines-right.svg);
+  background-image: url(/images/header-lines-left.svg),
+    url(/images/header-lines-right.svg);
   background-repeat: no-repeat;
-  background-position: left center, right center;
+  background-position: calc(50% - 475px) 192px, calc(50% + 475px) 192px;
 `;
 
 const HeaderIntro = styled.p`
@@ -35,6 +37,7 @@ const HeaderIntro = styled.p`
   align-items: center;
   white-space: nowrap;
   font-size: 24px;
+  font-weight: 100;
   color: #FFF;
   img {
     display: inline-block;
@@ -54,7 +57,7 @@ const HeaderLocation = styled.p`
   justify-content: center;
   margin: 0 0 0 58px;
   padding: 0 0 0 49px;
-  border-left: 1px solid #A70050;
+  border-left: 1px solid ${transparentize(0.20, '#A70050')};
   img, span {
     display: block;
   }
@@ -69,9 +72,10 @@ const HeaderLocation = styled.p`
 const HeaderTitle = styled.h1`
   margin: 75px 0 30px 0;
   font-size: 56px;
+  line-height: 74px;
   color: #FFFFFF;
+  font-weight: 100;
   max-width: 770px;
-  font-weight: normal;
   text-align: center;
 `;
 
@@ -89,12 +93,15 @@ const HeaderCTA = styled.p`
 
 const Process = styled.div`
   padding: 100px 0 83px 0;
-  max-width: 1230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const ProcessTitle = styled.h2`
   margin: 0 0 80px 0;
   font-size: 72px;
-  font-weight: 500;
+  font-weight: 100;
   color: #A70050;
   text-align: center;
 `;
@@ -107,12 +114,14 @@ const ProcessList = styled.ul`
 `;
 const ProcessItem = styled.li`
   padding: 0 28px;
-  max-width: 320px;
+  width: 320px;
   text-align: center;
+  font-family: Source Sans Pro;
   p {
     color: #272D5B;
     font-size: 24px;
     line-height: 31px;
+    font-weight: bold;
   }
   &:first-child {
     padding-left: 0;
@@ -132,20 +141,30 @@ const InformationBlock = styled.div`
   `}
 `;
 
+const InformationBlockCenter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  max-width: 1920px;
+`;
+
 const InformationBlockTitleContainer = styled.div`
   border-right: 1px solid rgba(255, 255, 255, .5);
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  display: flex;
   flex-direction: column;
+  padding: 0 54px;
 `;
 const InformationBlockTitle = styled.h2`
+  width: 524px;
   margin: 0;
-  padding: 0 54px;
   color: #FFFFFF;
   font-size: 72px;
-  font-weight: normal;
+  line-height: 95px;
+  font-weight: 100;
+  text-align: right;
 `;
 const InformationBlockSubtitle = styled.h3`
   margin: 0;
@@ -153,17 +172,22 @@ const InformationBlockSubtitle = styled.h3`
   color: #FFFFFF;
   font-size: 36px;
   line-height: 48px;
+  text-align: right;
 `;
 const InformationBlockContent = styled.div`
+  max-width: 780px;
   padding: 0 38px;
-  flex-grow: 1;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-grow: 1;
 `;
 const InformationBlockText = styled.p`
+  font-family: Source Sans Pro;
   color: #FFF;
   font-size: 24px;
   line-height: 36px;
-  font-weight: normal;
 `;
 const InformationBlockItems = styled.ul`
   list-style: none;
@@ -175,6 +199,10 @@ const InformationBlockItems = styled.ul`
 const InformationBlockItem = styled.li`
   display: flex;
   flex-direction: row;
+  font-family: Source Sans Pro;
+  &:last-child {
+    margin-left: 48px;
+  }
 `;
 const InformationBlockItemText = styled.div`
   padding-left: 22px;
@@ -184,12 +212,14 @@ const InformationBlockItemText = styled.div`
   }
   strong {
     font-size: 36px;
+    line-height: 36px;
   }
   span {
     font-size: 24px;
     opacity: .54;
   }
   p {
+    padding-top: 6px;
     margin: 0;
     font-size: 18px;
     line-height: 22px;
@@ -203,11 +233,12 @@ const RequirementsTitle = styled.h2`
   margin: 0;
   padding: 95px 0;
   text-align: center;
-  font-size: #272D5B;
+  color: #272D5B;
   font-size: 72px;
-  font-weight: normal;
+  font-weight: 100;
 `;
 const RequirementsSubtitle = styled.h2`
+  font-family: Source Sans Pro;
   position: relative;
   margin: 0;
   padding: 95px 0;
@@ -240,6 +271,7 @@ const RequirementsItems = styled.ul`
   `}
 `;
 const RequirementsItem = styled.li`
+  font-family: Source Sans Pro;
   display: flex;
   flex-direction: row;
   max-width: 670px;
@@ -415,48 +447,52 @@ const Home = () => {
           </ProcessList>
         </Process>
         <InformationBlock>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Qué temáticas podés proponer?
-            </InformationBlockTitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <InformationBlockText>
-              Cualquier temática que toque de alguna forma al desarrollo de la Web es viable a ser
-              parte de una edición de WebConf, desde el proceso de ideación de un producto
-              orientado a la Web hasta su implementación desde la perspectiva de la experiencia de
-              usuario, pasando por todo lo relacionado a programación (HTML, CSS, JavaScript, etc.)
-              y otros aspectos transversales que afectan a todas las otras áreas, como es el caso
-              con accesibilidad y localización.
-            </InformationBlockText>
-          </InformationBlockContent>
+          <InformationBlockCenter>
+            <InformationBlockTitleContainer>
+              <InformationBlockTitle>
+                ¿Qué temáticas podés proponer?
+              </InformationBlockTitle>
+            </InformationBlockTitleContainer>
+            <InformationBlockContent>
+              <InformationBlockText>
+                Cualquier temática que toque de alguna forma al desarrollo de la Web es viable a ser
+                parte de una edición de WebConf, desde el proceso de ideación de un producto
+                orientado a la Web hasta su implementación desde la perspectiva de la experiencia de
+                usuario, pasando por todo lo relacionado a programación (HTML, CSS, JavaScript, etc.)
+                y otros aspectos transversales que afectan a todas las otras áreas, como es el caso
+                con accesibilidad y localización.
+              </InformationBlockText>
+            </InformationBlockContent>
+          </InformationBlockCenter>
         </InformationBlock>
         <InformationBlock alternativeBackground>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Cuánto tiempo dura una charla?
-            </InformationBlockTitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <InformationBlockItems>
-              <InformationBlockItem key="lightning">
-                <img src="/images/icons/icon-lightning.svg" alt="Icono de relámpago" aria-hidden="true" />
-                <InformationBlockItemText>
-                  <strong>10min.</strong>
-                  <span>Charla relámpago</span>
-                  <p>Ideal para presentar un único concepto.</p>
-                </InformationBlockItemText>
-              </InformationBlockItem>
-              <InformationBlockItem key="standard">
-                <img src="/images/icons/icon-time.svg" alt="Icono de reljo" aria-hidden="true" />
-                <InformationBlockItemText>
-                  <strong>40min.</strong>
-                  <span>Charla estándar</span>
-                  <p>Permite un desarrollo extenso del contenido.</p>
-                </InformationBlockItemText>
-              </InformationBlockItem>
-            </InformationBlockItems>
-          </InformationBlockContent>
+          <InformationBlockCenter>
+            <InformationBlockTitleContainer>
+              <InformationBlockTitle>
+                ¿Cuánto tiempo dura una charla?
+              </InformationBlockTitle>
+            </InformationBlockTitleContainer>
+            <InformationBlockContent>
+              <InformationBlockItems>
+                <InformationBlockItem key="lightning">
+                  <img src="/images/icons/icon-lightning.svg" alt="Icono de relámpago" aria-hidden="true" />
+                  <InformationBlockItemText>
+                    <strong>10min.</strong>
+                    <span>Charla relámpago</span>
+                    <p>Ideal para presentar un único concepto.</p>
+                  </InformationBlockItemText>
+                </InformationBlockItem>
+                <InformationBlockItem key="standard">
+                  <img src="/images/icons/icon-time.svg" alt="Icono de reljo" aria-hidden="true" />
+                  <InformationBlockItemText>
+                    <strong>40min.</strong>
+                    <span>Charla estándar</span>
+                    <p>Permite un desarrollo extenso del contenido.</p>
+                  </InformationBlockItemText>
+                </InformationBlockItem>
+              </InformationBlockItems>
+            </InformationBlockContent>
+          </InformationBlockCenter>
         </InformationBlock>
 
         <Requirements>
@@ -533,21 +569,23 @@ const Home = () => {
           </RequirementsItems>
         </Requirements>
         <InformationBlock>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Te animás?
-            </InformationBlockTitle>
-            <InformationBlockSubtitle>
-              Tenés tiempo hasta
-              <br />
-              el 31 de Marzo de 2020.
-            </InformationBlockSubtitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <button type="button">
-              Quiero participar
-            </button>
-          </InformationBlockContent>
+          <InformationBlockCenter>
+            <InformationBlockTitleContainer>
+              <InformationBlockTitle>
+                ¿Te animás?
+              </InformationBlockTitle>
+              <InformationBlockSubtitle>
+                Tenés tiempo hasta
+                <br />
+                el 31 de Marzo de 2020.
+              </InformationBlockSubtitle>
+            </InformationBlockTitleContainer>
+            <InformationBlockContent>
+              <button type="button">
+                Quiero participar
+              </button>
+            </InformationBlockContent>
+          </InformationBlockCenter>
         </InformationBlock>
         <Quotes>
           <Quote>

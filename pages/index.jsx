@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
+import { BREAKPOINTS } from '../style/constants';
 
 const Container = styled.main`
   display: flex;
@@ -16,7 +17,7 @@ const Header = styled.header`
 `;
 
 const HeaderContent = styled.div`
-  padding: 5rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -25,9 +26,14 @@ const HeaderContent = styled.div`
     url(/images/header-lines-right.svg);
   background-repeat: no-repeat;
   background-position: calc(50% - 475px) 192px, calc(50% + 475px) 192px;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 5rem;
+  }
 `;
 
 const HeaderIntro = styled.p`
+  margin: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -45,17 +51,31 @@ const HeaderIntro = styled.p`
 const HeaderInfo = styled.div`
   margin-top: 3rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
+`;
+
+const HeaderLogo = styled.div`
+  margin: 0 4rem;
+
+  img {
+    width: 100%;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 0;
+  }
 `;
 
 const HeaderLocation = styled.p`
+  margin: 2.5rem 0 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-left: 3rem;
-  padding-left: 3rem;
-  border-left: 1px solid ${transparentize(0.20, '#A70050')};
 
   img, span {
     display: block;
@@ -67,16 +87,27 @@ const HeaderLocation = styled.p`
     font-weight: bold;
     color: var(--color-secondary-light);
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 0 0 0 3rem;
+    padding-left: 3rem;
+    border-left: 1px solid ${transparentize(0.20, '#A70050')};
+  }
 `;
 
 const HeaderTitle = styled.h1`
-  margin: 4.5rem 0 0;
-  font-size: 3.5rem;
-  line-height: 4.625rem;
+  margin: 3.5rem 0 0;
+  font-size: 2.25rem;
   color: var(--color-text);
   font-weight: 100;
-  max-width: 48rem;
   text-align: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 4.5rem 0 0;
+    font-size: 3.5rem;
+    line-height: 4.625rem;
+    max-width: 48rem;
+  }
 `;
 
 const HeaderCTA = styled.p`
@@ -95,27 +126,40 @@ const HeaderCTA = styled.p`
 `;
 
 const Process = styled.div`
-  margin: 6.25rem 0 5rem 0;
+  margin: 2.5rem 3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 6.25rem 0 5rem 0;
+  }
 `;
 
 const ProcessTitle = styled.h2`
   margin: 0 0 5rem 0;
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   font-weight: 100;
   color: var(--color-secondary);
   text-align: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 4.5rem;
+  }
 `;
 
 const ProcessList = styled.ul`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
   padding: 0;
   list-style: none;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
 `;
 
 const ProcessItem = styled.li`
@@ -131,73 +175,97 @@ const ProcessItem = styled.li`
   }
 
   & + & {
-    margin-left: 3.5rem;
+    margin-top: 3rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    & + & {
+      margin-top: 0;
+      margin-left: 3.5rem;
+    }
   }
 `;
 
 const InformationBlock = styled.div`
+  padding: 4.5rem 4rem;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 75px 0 103px 0;
+  flex-direction: column;
+  align-items: center;
   background-color: var(--color-primary);
 
   ${({ alternativeBackground }) => alternativeBackground && css`
     background-color: var(--color-primary-light);
   `}
-`;
 
-const InformationBlockCenter = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 100%;
-  max-width: 120rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 75px 0 103px 0;
+    flex-direction: row;
+    justify-content: center;
+  }
 `;
 
 const InformationBlockTitleContainer = styled.div`
-  border-right: 1px solid rgba(255, 255, 255, .5);
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 3.375rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    display: flex;
+    padding: 0 3.375rem;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+    border-right: 1px solid rgba(255, 255, 255, .5);
+  }
 `;
 
 const InformationBlockTitle = styled.h2`
-  width: 32.75rem;
   margin: 0;
   color: var(--color-text);
-  font-size: 4.5rem;
-  line-height: 6rem;
+  font-size: 2.5rem;
+  text-align: center;
   font-weight: 100;
-  text-align: right;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    width: 32.75rem;
+    font-size: 4.5rem;
+    line-height: 6rem;
+    text-align: right;
+  }
 `;
 
 const InformationBlockSubtitle = styled.h3`
-  margin: 0;
-  margin-top: 1rem;
+  font-family: Source Sans Pro;
+  font-weight: 300;
+  font-size: 1.5rem;
   color: var(--color-text);
-  font-size: 2.25rem;
-  line-height: 3rem;
-  text-align: right;
+  text-align: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 0;
+    margin-top: 1rem;
+    font-size: 2.25rem;
+    text-align: right;
+  }
 `;
 
 const InformationBlockContent = styled.div`
-  max-width: 48.75rem;
-  padding: 0 38px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-grow: 1;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    max-width: 48.75rem;
+    padding: 0 38px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+  }
 `;
 
 const InformationBlockText = styled.p`
   font-family: Source Sans Pro;
   color: var(--color-text);
   font-size: 1.5rem;
-  line-height: 2rem;
+  text-align: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    text-align: left;
+  }
 `;
 
 const InformationBlockItems = styled.ul`
@@ -205,22 +273,35 @@ const InformationBlockItems = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
 `;
 
 const InformationBlockItem = styled.li`
+  margin-top: 3rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   font-family: Source Sans Pro;
 
-  & + & {
-    margin-left: 2.5rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 0;
+    flex-direction: row;
+    text-align: left;
+
+    & + & {
+      margin-left: 2.5rem;
+    }
   }
 `;
 
 const InformationBlockItemText = styled.div`
-  padding-left: 1.375rem;
+  margin-top: 2rem;
   color: var(--color-text);
+  text-align: center;
+  max-width: 11.25rem;
 
   strong, span {
     display: block;
@@ -237,38 +318,51 @@ const InformationBlockItemText = styled.div`
   }
 
   p {
-    margin-top: 0.5rem;
-    margin: 0;
+    margin: 0.5rem 0 0;
     font-size: 1.125rem;
     line-height: 1.375rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 0;
+    margin-left: 1.375rem;
+    text-align: left;
   }
 `;
 
 const Requirements = styled.div`
-  align-self: center;
-  margin: 8rem 6rem;
-  max-width: 94rem;
+  margin: 4rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: stretch;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    max-width: 94rem;
+    margin: 8rem 6rem;
+    align-self: center;
+  }
 `;
 
 const RequirementsTitle = styled.h2`
   margin: 0;
+  font-size: 2.5rem;
   text-align: center;
   color: var(--color-primary);
-  font-size: 4.5rem;
   font-weight: 100;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 4.5rem;
+  }
 `;
 
 const RequirementsSubtitle = styled.h2`
-  font-family: Source Sans Pro;
+  margin: 4rem 0 0;
+  padding-top: 4rem;
   position: relative;
-  margin: 6rem 0 0;
-  padding-top: 6rem;
+  font-family: Source Sans Pro;
+  font-size: 2.5rem;
   text-align: center;
   color: var(--color-secondary);
-  font-size: 4.5rem;
   font-weight: normal;
 
   &::before {
@@ -282,22 +376,39 @@ const RequirementsSubtitle = styled.h2`
     border-top: 1px solid var(--color-primary);
     opacity: .5;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 6rem 0 0;
+    padding-top: 6rem;
+    font-size: 4.5rem;
+  }
 `;
 
 const RequirementsItems = styled.ul`
+  margin: 3.5rem 0 0;
   list-style: none;
-  margin: 6rem 0 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 6rem;
-  grid-row-gap: 3rem;
+  grid-template-columns: 1fr;
+  grid-gap: 5rem;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 6rem 0 0;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 6rem;
+    grid-row-gap: 3rem;
+  }
 `;
 
 const RequirementsItem = styled.li`
-  font-family: Source Sans Pro;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  font-family: Source Sans Pro;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
 `;
 
 const RequirementsItemIcon = styled.div`
@@ -310,10 +421,11 @@ const RequirementsItemIcon = styled.div`
 `;
 
 const RequirementsItemText = styled.div`
-  margin-left: 4rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   strong {
     color: var(--color-secondary);
@@ -325,43 +437,65 @@ const RequirementsItemText = styled.div`
   }
 
   p {
-    margin: 0;
+    margin: 0.75rem 0 0;
     color: var(--color-primary);
     font-size: 1.5rem;
     line-height: 2rem;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 0;
+    margin-left: 4rem;
+    text-align: left;
+  }
 `;
 
 const CTABig = styled.span`
-  font-size: 2.75rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 2.75rem;
+  }
 `;
 
 const Quotes = styled.ul`
-  align-self: center;
-  width: 100%;
-  max-width: 90rem;
-  margin: 0 6rem;
+  margin: 4rem;
   padding: 0;
   list-style: none;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    align-self: center;
+    width: 100%;
+    max-width: 90rem;
+    margin: 0 6rem;
+  }
 `;
 
 const Quote = styled.li`
-  position: relative;
-  padding: 5.5rem 0;
+  text-align: center;
 
   &:nth-child(even) {
-    text-align: right;
+    margin-top: 2.5rem;
+  }
 
-    &::before {
-      content: '';
-      position: absolute;
-      width: 18.75rem;
-      margin-left: -9.375rem;
-      left: 50%;
-      top: 0;
-      height: 0.625rem;
-      border-top: 1px solid var(--color-primary);
-      opacity: .5;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    position: relative;
+    padding: 5.5rem 0;
+    text-align: left;
+
+    &:nth-child(even) {
+      text-align: right;
+
+      &::before {
+        width: 18.75rem;
+        height: 0.625rem;
+        margin-top: 0;
+        margin-left: -9.375rem;
+        position: absolute;
+        left: 50%;
+        top: 0;
+        content: '';
+        border-top: 1px solid var(--color-primary);
+        opacity: .5;
+      }
     }
   }
 `;
@@ -369,48 +503,63 @@ const Quote = styled.li`
 const QuoteTitle = styled.h3`
   margin: 0;
   color: var(--color-secondary);
-  font-size: 4.5rem;
+  font-size: 2.5rem;
   font-weight: 100;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 4.5rem;
+  }
 `;
 
 const QuoteDescription = styled.p`
   margin: 1.5rem 0 0;
   color: var(--color-primary);
-  font-size: 3rem;
+  font-size: 1.5rem;
 
   a {
     color: var(--color-primary);
     font-weight: bold;
     text-decoration: none;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 3rem;
+  }
 `;
 
 const Footer = styled.footer`
-  padding: 4rem 6rem;
+  padding: 4rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   background-image: url(/images/backgrounds/footer.png);
   background-repeat: no-repeat;
   background-size: cover;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 4rem 6rem;
+  }
 `;
 
 const FooterContent = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  max-width: 120rem;
-  position: relative;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  justify-content: space-between;
+  justify-items: center;
+  grid-row-gap: 3rem;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    width: 100%;
+    max-width: 120rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-between;
+  }
 `;
 
 const FooterSocialLinks = styled.div`
-  width: 146px;
-  position: absolute;
-  left: 50%;
-  margin-left: -73px;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    grid-column: 2;
+  }
 `;
 
 const FooterSocialLink = styled.a`
@@ -421,10 +570,15 @@ const FooterSocialLink = styled.a`
 `;
 
 const FooterLogoContainer = styled.div`
-`;
+  img {
+    width: 100%;
+  }
 
-const FooterSocialSpacer = styled.div`
-  width: 156px;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: flex-start;
+  }
 `;
 
 const FooterInfo = styled.p`
@@ -432,11 +586,18 @@ const FooterInfo = styled.p`
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: 1.25rem;
+  font-weight: 100;
   white-space: nowrap;
-  font-size: 32px;
   color: #FFFFFF;
+
   img {
-    margin-left: 10px;
+    margin-left: 0.625rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    justify-self: flex-end;
+    font-size: 2rem;
   }
 `;
 
@@ -459,7 +620,9 @@ const Home = () => {
             te invita a sumarte a
           </HeaderIntro>
           <HeaderInfo>
-            <img src="/images/logos/webconf-vertical.svg" alt="Logo de WebConf" />
+            <HeaderLogo>
+              <img src="/images/logos/webconf-vertical.svg" alt="Logo de WebConf" />
+            </HeaderLogo>
             <HeaderLocation>
               <span>29 y 30 de Mayo de 2020</span>
               <img src="/images/logos/utn.svg" alt="Logo de la UTN" />
@@ -505,52 +668,48 @@ const Home = () => {
         </ProcessList>
       </Process>
       <InformationBlock>
-        <InformationBlockCenter>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Qué temáticas podés proponer?
-            </InformationBlockTitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <InformationBlockText>
-              Cualquier temática que toque de alguna forma al desarrollo de la Web es viable a ser
-              parte de una edición de WebConf, desde el proceso de ideación de un producto
-              orientado a la Web hasta su implementación desde la perspectiva de la experiencia de
-              usuario, pasando por todo lo relacionado a programación (HTML, CSS, JavaScript, etc.)
-              y otros aspectos transversales que afectan a todas las otras áreas, como es el caso
-              con accesibilidad y localización.
-            </InformationBlockText>
-          </InformationBlockContent>
-        </InformationBlockCenter>
+        <InformationBlockTitleContainer>
+          <InformationBlockTitle>
+            ¿Qué temáticas podés proponer?
+          </InformationBlockTitle>
+        </InformationBlockTitleContainer>
+        <InformationBlockContent>
+          <InformationBlockText>
+            Cualquier temática que toque de alguna forma al desarrollo de la Web es viable a ser
+            parte de una edición de WebConf, desde el proceso de ideación de un producto
+            orientado a la Web hasta su implementación desde la perspectiva de la experiencia de
+            usuario, pasando por todo lo relacionado a programación (HTML, CSS, JavaScript, etc.)
+            y otros aspectos transversales que afectan a todas las otras áreas, como es el caso
+            con accesibilidad y localización.
+          </InformationBlockText>
+        </InformationBlockContent>
       </InformationBlock>
       <InformationBlock alternativeBackground>
-        <InformationBlockCenter>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Cuánto tiempo dura una charla?
-            </InformationBlockTitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <InformationBlockItems>
-              <InformationBlockItem key="lightning">
-                <img src="/images/icons/icon-lightning.svg" alt="Icono de relámpago" aria-hidden="true" />
-                <InformationBlockItemText>
-                  <strong>10min.</strong>
-                  <span>Charla relámpago</span>
-                  <p>Ideal para presentar un único concepto.</p>
-                </InformationBlockItemText>
-              </InformationBlockItem>
-              <InformationBlockItem key="standard">
-                <img src="/images/icons/icon-time.svg" alt="Icono de reljo" aria-hidden="true" />
-                <InformationBlockItemText>
-                  <strong>40min.</strong>
-                  <span>Charla estándar</span>
-                  <p>Permite un desarrollo extenso del contenido.</p>
-                </InformationBlockItemText>
-              </InformationBlockItem>
-            </InformationBlockItems>
-          </InformationBlockContent>
-        </InformationBlockCenter>
+        <InformationBlockTitleContainer>
+          <InformationBlockTitle>
+            ¿Cuánto tiempo dura una charla?
+          </InformationBlockTitle>
+        </InformationBlockTitleContainer>
+        <InformationBlockContent>
+          <InformationBlockItems>
+            <InformationBlockItem key="lightning">
+              <img src="/images/icons/icon-lightning.svg" alt="Icono de relámpago" aria-hidden="true" />
+              <InformationBlockItemText>
+                <strong>10min.</strong>
+                <span>Charla relámpago</span>
+                <p>Ideal para presentar un único concepto.</p>
+              </InformationBlockItemText>
+            </InformationBlockItem>
+            <InformationBlockItem key="standard">
+              <img src="/images/icons/icon-time.svg" alt="Icono de reljo" aria-hidden="true" />
+              <InformationBlockItemText>
+                <strong>40min.</strong>
+                <span>Charla estándar</span>
+                <p>Permite un desarrollo extenso del contenido.</p>
+              </InformationBlockItemText>
+            </InformationBlockItem>
+          </InformationBlockItems>
+        </InformationBlockContent>
       </InformationBlock>
 
       <Requirements>
@@ -635,25 +794,23 @@ const Home = () => {
         </RequirementsItems>
       </Requirements>
       <InformationBlock>
-        <InformationBlockCenter>
-          <InformationBlockTitleContainer>
-            <InformationBlockTitle>
-              ¿Te animás?
-            </InformationBlockTitle>
-            <InformationBlockSubtitle>
-              Tenés tiempo hasta
-              <br />
-              el 31 de Marzo de 2020.
-            </InformationBlockSubtitle>
-          </InformationBlockTitleContainer>
-          <InformationBlockContent>
-            <lilac-button href="/form">
-              <CTABig>
-                Quiero participar
-              </CTABig>
-            </lilac-button>
-          </InformationBlockContent>
-        </InformationBlockCenter>
+        <InformationBlockTitleContainer>
+          <InformationBlockTitle>
+            ¿Te animás?
+          </InformationBlockTitle>
+          <InformationBlockSubtitle>
+            Tenés tiempo hasta
+            <br />
+            el 31 de Marzo de 2020.
+          </InformationBlockSubtitle>
+        </InformationBlockTitleContainer>
+        <InformationBlockContent>
+          <lilac-button href="/form">
+            <CTABig>
+              Quiero participar
+            </CTABig>
+          </lilac-button>
+        </InformationBlockContent>
       </InformationBlock>
       <Quotes>
         <Quote>
@@ -696,7 +853,6 @@ const Home = () => {
           <FooterLogoContainer>
             <img src="/images/logos/webconf-horizontal.svg" alt="Logo de WebConf" />
           </FooterLogoContainer>
-          <FooterSocialSpacer />
           <FooterInfo>
             un evento de
             <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />

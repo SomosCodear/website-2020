@@ -836,14 +836,14 @@ const Home = () => {
         <FooterContent>
           <FooterSocialLinks>
             <FooterSocialLink
-              href="https://instagram.com/webconfcba"
+              href="https://www.instagram.com/WebConfAr/"
               title="Link al Instagram de WebConf"
               target="_blank"
             >
               <img src="/images/icons/icon-instagram.svg" alt="Icono de Instagram" />
             </FooterSocialLink>
             <FooterSocialLink
-              href="https://twitter.com/WebConfCBA"
+              href="https://twitter.com/WebConfAr"
               title="Link al Twitter de WebConf"
               target="_blank"
             >

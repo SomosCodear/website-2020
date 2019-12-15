@@ -766,7 +766,9 @@ const Home = () => {
         </RequirementsSubtitle>
         <RequirementsItems short>
           <RequirementsItem key="no-advertising">
-            <img src="/images/icons/icon-no-advertising.svg" alt="Icono de publicidad" aria-hidden="true" />
+            <RequirementsItemIcon>
+              <img src="/images/icons/icon-no-advertising.svg" alt="Icono de publicidad" aria-hidden="true" />
+            </RequirementsItemIcon>
             <RequirementsItemText alternative>
               <strong>Publicidad</strong>
               <p>
@@ -776,7 +778,13 @@ const Home = () => {
             </RequirementsItemText>
           </RequirementsItem>
           <RequirementsItem key="language">
-            <img src="/images/icons/icon-no-evangelization.svg" alt="Icono de evangelizacion" aria-hidden="true" />
+            <RequirementsItemIcon>
+              <img
+                src="/images/icons/icon-no-evangelization.svg"
+                alt="Icono de evangelizacion"
+                aria-hidden="true"
+              />
+            </RequirementsItemIcon>
             <RequirementsItemText alternative>
               <strong>Evangelización</strong>
               <p>

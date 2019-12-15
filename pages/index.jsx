@@ -450,12 +450,6 @@ const RequirementsItemText = styled.div`
   }
 `;
 
-const CTABig = styled.span`
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    font-size: 2.75rem;
-  }
-`;
-
 const Quotes = styled.ul`
   margin: 4rem;
   padding: 0;
@@ -630,7 +624,7 @@ const Home = () => {
           </HeaderInfo>
           <HeaderTitle>¡Abrimos nuestra convocatoria para disertantes!</HeaderTitle>
           <HeaderCTA>
-            <lilac-button href="/form">
+            <lilac-button href="/form" shadow>
               Quiero participar
             </lilac-button>
             <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
@@ -805,10 +799,8 @@ const Home = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <lilac-button href="/form">
-            <CTABig>
-              Quiero participar
-            </CTABig>
+          <lilac-button href="/form" secondary shadow big>
+            Quiero participar
           </lilac-button>
         </InformationBlockContent>
       </InformationBlock>

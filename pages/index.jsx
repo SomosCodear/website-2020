@@ -855,7 +855,9 @@ const Home = () => {
           </FooterLogoContainer>
           <FooterInfo>
             un evento de
-            <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+            <a href="https://codear.org" title="CoDeAr">
+              <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+            </a>
           </FooterInfo>
         </FooterContent>
       </Footer>

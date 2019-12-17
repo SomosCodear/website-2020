@@ -122,6 +122,7 @@ const HeaderCTA = styled.p`
   img {
     display: block;
     margin-top: 2rem;
+    height: 1.5rem;
   }
 `;
 
@@ -159,6 +160,9 @@ const ProcessList = styled.ul`
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
   }
 `;
 

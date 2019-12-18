@@ -2,11 +2,10 @@
   "version": 2,
   "name": "website-2019",
   "alias": ["webconf.tech", "www.webconf.tech"],
-  "routes": [
+  "redirects": [
     {
-      "src": "/(.*)",
-      "status": 301,
-      "headers": { "Location": "https://2019.webconf.tech/$1" }
+      "source": "/cfp",
+      "destination": "https://forms.gle/9gTiyXQC6oLRsP3u7"
     }
   ]
 }

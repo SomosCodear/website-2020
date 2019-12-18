@@ -1,5 +1,11 @@
 {
   "version": 2,
   "name": "website-2019",
-  "alias": ["webconf.tech", "www.webconf.tech"]
+  "alias": ["webconf.tech", "www.webconf.tech"],
+  "redirects": [
+    {
+      "source": "/cfp",
+      "destination": "https://forms.gle/9gTiyXQC6oLRsP3u7"
+    }
+  ]
 }

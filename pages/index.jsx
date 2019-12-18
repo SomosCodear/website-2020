@@ -628,7 +628,7 @@ const Home = () => {
           </HeaderInfo>
           <HeaderTitle>¡Abrimos nuestra convocatoria para disertantes!</HeaderTitle>
           <HeaderCTA>
-            <lilac-button href="/form" shadow>
+            <lilac-button href="/cfp" shadow>
               Quiero participar
             </lilac-button>
             <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
@@ -811,7 +811,7 @@ const Home = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <lilac-button href="/form" secondary shadow big>
+          <lilac-button href="/cfp" secondary shadow big>
             Quiero participar
           </lilac-button>
         </InformationBlockContent>

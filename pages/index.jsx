@@ -701,7 +701,7 @@ const Home = () => {
             <InformationBlockItem key="standard">
               <img src="/images/icons/icon-time.svg" alt="Icono de reljo" aria-hidden="true" />
               <InformationBlockItemText>
-                <strong>40min.</strong>
+                <strong>30min.</strong>
                 <span>Charla estándar</span>
                 <p>Permite un desarrollo extenso del contenido.</p>
               </InformationBlockItemText>

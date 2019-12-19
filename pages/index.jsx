@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
+import Head from 'next/head';
 import { BREAKPOINTS } from '../style/constants';
+import { META } from '../data/constants';
 
 const Container = styled.main`
   display: flex;
@@ -618,6 +620,23 @@ const Home = () => {
 
   return (
     <Container>
+      <Head>
+        <title>
+          Córdoba WebConf 2020
+          | ¡Estamos buscando disertantes!
+        </title>
+        <meta name="description" content={META.description} />
+        <meta property="og:title" content={META.ogTitle} />
+        <meta property="og:site_name" content={META.ogSiteName} />
+        <meta property="og:description" content={META.ogDescription} />
+        <meta property="og:url" content={META.ogUrl} />
+        <meta property="og:locale" content={META.ogLocale} />
+        <meta property="og:image" content={META.ogImage} />
+        <meta name="twitter:title" content={META.twitterTitle} />
+        <meta name="twitter:description" content={META.twitterDescription} />
+        <meta name="twitter:site" content={META.twitterSite} />
+        <meta name="twitter:creator" content={META.twitterCreator} />
+      </Head>
       <Header>
         <HeaderContent>
           <HeaderIntro>

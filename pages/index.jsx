@@ -1,9 +1,9 @@
+import Head from 'next/head';
+import { transparentize } from 'polished';
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
-import { transparentize } from 'polished';
-import Head from 'next/head';
-import { BREAKPOINTS } from '../style/constants';
 import { META } from '../data/constants';
+import { BREAKPOINTS } from '../style/constants';
 
 const Container = styled.main`
   display: flex;
@@ -459,6 +459,24 @@ const RequirementsItemText = styled.div`
   }
 `;
 
+const RequirementsNote = styled.div`
+  text-align: center;
+  color: var(--color-gray);
+  font-size: 2rem;
+  margin-top: 6rem;
+
+  a {
+    text-decoration: none;
+    font-weight: 700;
+    color: var(--color-secondary);
+    display: inline-block;
+  }
+
+  a:hover {
+    color: var(--color-accent);
+  }
+`;
+
 const Quotes = styled.ul`
   margin: 4rem;
   padding: 0;
@@ -704,9 +722,8 @@ const Home = () => {
             Cualquier temática que toque de alguna forma al desarrollo de la Web es viable a ser
             parte de una edición de WebConf, desde el proceso de ideación de un producto
             orientado a la Web hasta su implementación desde la perspectiva de la experiencia de
-            usuario, pasando por todo lo relacionado a programación (HTML, CSS, JavaScript, etc.)
-            y otros aspectos transversales que afectan a todas las otras áreas, como es el caso
-            con accesibilidad y localización.
+            usuario, pasando por todo lo relacionado a programación y otros aspectos transversales
+            que afectan a todas las otras áreas, como es el caso con accesibilidad y localización.
           </InformationBlockText>
         </InformationBlockContent>
       </InformationBlock>
@@ -737,7 +754,6 @@ const Home = () => {
           </InformationBlockItems>
         </InformationBlockContent>
       </InformationBlock>
-
       <Requirements>
         <RequirementsTitle>
           ¿Qué buscamos en una propuesta?
@@ -792,8 +808,16 @@ const Home = () => {
             </RequirementsItemText>
           </RequirementsItem>
         </RequirementsItems>
+        <RequirementsNote>
+          Participar de WebConf 2020 implica la aceptación y cumplimiento de nuestro
+          {' '}
+          <a href="https://codear.org/coc" target="_blank" rel="noopener noreferrer">
+            Código de Conducta
+          </a>
+          .
+        </RequirementsNote>
         <RequirementsSubtitle>
-          { /* eslint-disable-next-line react/jsx-one-expression-per-line */ }
+          { /* eslint-disable-next-line react/jsx-one-expression-per-line */}
           ¿Qué <strong>no</strong> queremos en una propuesta?
         </RequirementsSubtitle>
         <RequirementsItems short>
@@ -850,7 +874,7 @@ const Home = () => {
             ¿Preguntas?
           </QuoteTitle>
           <QuoteDescription>
-            { /* eslint-disable-next-line react/jsx-one-expression-per-line */ }
+            { /* eslint-disable-next-line react/jsx-one-expression-per-line */}
             Escribinos a <a href="mailto:contenido@webconf.tech">contenido@webconf.tech</a>
           </QuoteDescription>
         </Quote>
@@ -859,7 +883,7 @@ const Home = () => {
             ¿Te interesaría auspiciarnos?
           </QuoteTitle>
           <QuoteDescription>
-            { /* eslint-disable-next-line react/jsx-one-expression-per-line */ }
+            { /* eslint-disable-next-line react/jsx-one-expression-per-line */}
             Escribinos a <a href="mailto:hola@codear.org">hola@codear.org</a>
           </QuoteDescription>
         </Quote>

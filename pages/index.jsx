@@ -42,12 +42,12 @@ const HeaderIntro = styled.p`
   font-weight: 100;
   color: #FFF;
 
-  img {
-    display: inline-block;
-  }
-
   a {
     margin-right: 0.75rem;
+  }
+
+  img {
+    display: block;
   }
 `;
 
@@ -594,6 +594,10 @@ const FooterInfo = styled.p`
 
   a {
     margin-left: 0.625rem;
+  }
+
+  img {
+    display: block;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {

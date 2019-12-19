@@ -469,7 +469,6 @@ const RequirementsNote = styled.div`
     text-decoration: none;
     font-weight: 700;
     color: var(--color-secondary);
-    display: inline-block;
   }
 
   a:hover {

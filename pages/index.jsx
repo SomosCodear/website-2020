@@ -44,6 +44,9 @@ const HeaderIntro = styled.p`
 
   img {
     display: inline-block;
+  }
+
+  a {
     margin-right: 0.75rem;
   }
 `;
@@ -589,7 +592,7 @@ const FooterInfo = styled.p`
   white-space: nowrap;
   color: #FFFFFF;
 
-  img {
+  a {
     margin-left: 0.625rem;
   }
 
@@ -614,7 +617,9 @@ const Home = () => {
       <Header>
         <HeaderContent>
           <HeaderIntro>
-            <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+            <a href="https://codear.org" title="CoDeAr">
+              <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+            </a>
             te invita a sumarte a
           </HeaderIntro>
           <HeaderInfo>

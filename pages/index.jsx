@@ -3,6 +3,14 @@ import { transparentize } from 'polished';
 import React, { useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { META } from '../data/constants';
+import {
+  trackClickedCoC,
+  trackClickedCodear,
+  trackClickedInstagram,
+  trackClickedTwitter,
+  trackClickedParticipateAboveTheFold,
+  trackClickedParticipateBelowTheFold,
+} from '../src/utils/analytics';
 import { BREAKPOINTS } from '../style/constants';
 
 const Container = styled.main`
@@ -673,7 +681,7 @@ const Home = () => {
           </HeaderInfo>
           <HeaderTitle>¡Abrimos nuestra convocatoria para disertantes!</HeaderTitle>
           <HeaderCTA>
-            <lilac-button href="/cfp" shadow>
+            <lilac-button href="/cfp" shadow onClick={trackClickedParticipateAboveTheFold}>
               Quiero participar
             </lilac-button>
             <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
@@ -810,7 +818,7 @@ const Home = () => {
         <RequirementsNote>
           Participar de WebConf 2020 implica la aceptación y cumplimiento de nuestro
           {' '}
-          <a href="https://codear.org/coc" target="_blank" rel="noopener noreferrer">
+          <a href="https://codear.org/coc" target="_blank" rel="noopener noreferrer" onClick={trackClickedCoC}>
             Código de Conducta
           </a>
           .
@@ -862,7 +870,7 @@ const Home = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <lilac-button href="/cfp" secondary shadow big>
+          <lilac-button href="/cfp" secondary shadow big onClick={trackClickedParticipateBelowTheFold}>
             Quiero participar
           </lilac-button>
         </InformationBlockContent>
@@ -894,6 +902,7 @@ const Home = () => {
               href="https://www.instagram.com/WebConfAr/"
               title="Link al Instagram de WebConf"
               target="_blank"
+              onClick={trackClickedInstagram}
             >
               <img src="/images/icons/icon-instagram.svg" alt="Icono de Instagram" />
             </FooterSocialLink>
@@ -901,6 +910,7 @@ const Home = () => {
               href="https://twitter.com/WebConfAr"
               title="Link al Twitter de WebConf"
               target="_blank"
+              onClick={trackClickedTwitter}
             >
               <img src="/images/icons/icon-twitter.svg" alt="Icono de Twitter" />
             </FooterSocialLink>
@@ -910,7 +920,7 @@ const Home = () => {
           </FooterLogoContainer>
           <FooterInfo>
             un evento de
-            <a href="https://codear.org" title="CoDeAr">
+            <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
               <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
             </a>
           </FooterInfo>

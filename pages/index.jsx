@@ -465,6 +465,12 @@ const RequirementsNote = styled.div`
   font-size: 2rem;
   margin-top: 6rem;
 
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
   a {
     text-decoration: none;
     font-weight: 700;
@@ -499,10 +505,8 @@ const Quote = styled.li`
   @media (min-width: ${BREAKPOINTS.hd}) {
     position: relative;
     padding: 5.5rem 0;
-    text-align: left;
 
     &:nth-child(even) {
-      text-align: right;
 
       &::before {
         width: 18.75rem;

@@ -832,7 +832,7 @@ const Home = () => {
               <strong>Publicidad</strong>
               <p>
                 Existen otras alternativas para publicitar tu empresa y/o producto
-                como por ejemplo, auspiciando el evento).
+                como por ejemplo, auspiciando el evento.
               </p>
             </RequirementsItemText>
           </RequirementsItem>

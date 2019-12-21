@@ -1,17 +1,11 @@
 import Head from 'next/head';
 import { transparentize } from 'polished';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { META } from '../data/constants';
-import {
-  trackClickedCoC,
-  trackClickedCodear,
-  trackClickedInstagram,
-  trackClickedTwitter,
-  trackClickedParticipateAboveTheFold,
-  trackClickedParticipateBelowTheFold,
-} from '../src/utils/analytics';
+import { useAnalytics } from '../utils/analytics';
 import { BREAKPOINTS } from '../style/constants';
+import { LilacButton } from '../components/LilacButton';
 
 const Container = styled.main`
   display: flex;
@@ -634,14 +628,14 @@ const FooterInfo = styled.p`
 `;
 
 const Home = () => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      /* eslint-disable global-require */
-      require('@webcomponents/webcomponentsjs/webcomponents-bundle');
-      require('@codear/lilac');
-      /* eslint-enable global-require */
-    }
-  }, []);
+  const {
+    trackClickedCoC,
+    trackClickedCodear,
+    trackClickedInstagram,
+    trackClickedTwitter,
+    trackClickedParticipateAboveTheFold,
+    trackClickedParticipateBelowTheFold,
+  } = useAnalytics();
 
   return (
     <Container>
@@ -681,9 +675,9 @@ const Home = () => {
           </HeaderInfo>
           <HeaderTitle>¡Abrimos nuestra convocatoria para disertantes!</HeaderTitle>
           <HeaderCTA>
-            <lilac-button href="/cfp" shadow onClick={trackClickedParticipateAboveTheFold}>
+            <LilacButton href="/cfp" shadow onClick={trackClickedParticipateAboveTheFold}>
               Quiero participar
-            </lilac-button>
+            </LilacButton>
             <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
           </HeaderCTA>
         </HeaderContent>
@@ -870,9 +864,9 @@ const Home = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <lilac-button href="/cfp" secondary shadow big onClick={trackClickedParticipateBelowTheFold}>
+          <LilacButton href="/cfp" secondary shadow big onClick={trackClickedParticipateBelowTheFold}>
             Quiero participar
-          </lilac-button>
+          </LilacButton>
         </InformationBlockContent>
       </InformationBlock>
       <Quotes>

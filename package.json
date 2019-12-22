@@ -8,10 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "@codear/lilac": "^1.0.2",
+    "@codear/lilac": "^1.0.3",
     "@webcomponents/webcomponentsjs": "^2.4.0",
     "@zeit/next-css": "^1.0.1",
-    "next": "9.1.5",
+    "next": "9.1.6",
     "next-ga": "^2.3.4",
     "polished": "3.4.2",
     "react": "16.12.0",
@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^1.10.6",
-    "eslint": "^6.7.2",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -28,6 +28,6 @@
     "eslint-plugin-react-hooks": "^2.3.0",
     "prop-types": "^15.7.2",
     "typescript-styled-plugin": "^0.15.0",
-    "webpack": "^4.41.2"
+    "webpack": "^4.41.4"
   }
 }

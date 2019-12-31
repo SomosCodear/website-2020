@@ -655,6 +655,7 @@ const Home = () => {
         <meta property="og:url" content={META.ogUrl} />
         <meta property="og:locale" content={META.ogLocale} />
         <meta property="og:image" content={META.ogImage} />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={META.twitterTitle} />
         <meta name="twitter:description" content={META.twitterDescription} />
         <meta name="twitter:site" content={META.twitterSite} />

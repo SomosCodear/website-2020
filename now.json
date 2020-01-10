@@ -6,6 +6,10 @@
     {
       "source": "/cfp",
       "destination": "https://forms.gle/9gTiyXQC6oLRsP3u7"
+    },
+    {
+      "source": "/sponsorships",
+      "destination": "https://drive.google.com/open?id=1upEFAKQM_KiVPJJ3OgSW4dtvK0tG3vsV"
     }
   ]
 }

@@ -1,9 +1,11 @@
 import Head from 'next/head';
 import { transparentize } from 'polished';
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { META } from '../data/constants';
+import { useAnalytics } from '../utils/analytics';
 import { BREAKPOINTS } from '../style/constants';
+import { LilacButton } from '../components/LilacButton';
 
 const Container = styled.main`
   display: flex;
@@ -630,14 +632,14 @@ const FooterInfo = styled.p`
 `;
 
 const Home = () => {
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      /* eslint-disable global-require */
-      require('@webcomponents/webcomponentsjs/webcomponents-bundle');
-      require('@codear/lilac');
-      /* eslint-enable global-require */
-    }
-  }, []);
+  const {
+    trackClickedCoC,
+    trackClickedCodear,
+    trackClickedInstagram,
+    trackClickedTwitter,
+    trackClickedParticipateAboveTheFold,
+    trackClickedParticipateBelowTheFold,
+  } = useAnalytics();
 
   return (
     <Container>
@@ -653,6 +655,7 @@ const Home = () => {
         <meta property="og:url" content={META.ogUrl} />
         <meta property="og:locale" content={META.ogLocale} />
         <meta property="og:image" content={META.ogImage} />
+        <meta name="twitter:card" content="summary" />
         <meta name="twitter:title" content={META.twitterTitle} />
         <meta name="twitter:description" content={META.twitterDescription} />
         <meta name="twitter:site" content={META.twitterSite} />
@@ -677,9 +680,9 @@ const Home = () => {
           </HeaderInfo>
           <HeaderTitle>¡Abrimos nuestra convocatoria para disertantes!</HeaderTitle>
           <HeaderCTA>
-            <lilac-button href="/cfp" shadow>
+            <LilacButton href="/cfp" shadow onClick={trackClickedParticipateAboveTheFold}>
               Quiero participar
-            </lilac-button>
+            </LilacButton>
             <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
           </HeaderCTA>
         </HeaderContent>
@@ -814,7 +817,7 @@ const Home = () => {
         <RequirementsNote>
           Participar de WebConf 2020 implica la aceptación y cumplimiento de nuestro
           {' '}
-          <a href="https://codear.org/coc" target="_blank" rel="noopener noreferrer">
+          <a href="https://codear.org/coc" target="_blank" rel="noopener noreferrer" onClick={trackClickedCoC}>
             Código de Conducta
           </a>
           .
@@ -866,9 +869,9 @@ const Home = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <lilac-button href="/cfp" secondary shadow big>
+          <LilacButton href="/cfp" secondary shadow big onClick={trackClickedParticipateBelowTheFold}>
             Quiero participar
-          </lilac-button>
+          </LilacButton>
         </InformationBlockContent>
       </InformationBlock>
       <Quotes>
@@ -898,6 +901,7 @@ const Home = () => {
               href="https://www.instagram.com/WebConfAr/"
               title="Link al Instagram de WebConf"
               target="_blank"
+              onClick={trackClickedInstagram}
             >
               <img src="/images/icons/icon-instagram.svg" alt="Icono de Instagram" />
             </FooterSocialLink>
@@ -905,6 +909,7 @@ const Home = () => {
               href="https://twitter.com/WebConfAr"
               title="Link al Twitter de WebConf"
               target="_blank"
+              onClick={trackClickedTwitter}
             >
               <img src="/images/icons/icon-twitter.svg" alt="Icono de Twitter" />
             </FooterSocialLink>
@@ -914,7 +919,7 @@ const Home = () => {
           </FooterLogoContainer>
           <FooterInfo>
             un evento de
-            <a href="https://codear.org" title="CoDeAr">
+            <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
               <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
             </a>
           </FooterInfo>

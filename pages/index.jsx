@@ -1,11 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { transparentize } from 'polished';
-import React from 'react';
 import styled, { css } from 'styled-components';
-import { LilacButton } from '../components/LilacButton';
 import { META } from '../data/constants';
 import { BREAKPOINTS } from '../style/constants';
 import { useAnalytics } from '../utils/analytics';
+import { LilacButton } from '../components/LilacButton';
+import { WordCloud } from '../components/WordCloud';
 
 const Container = styled.main`
   display: flex;
@@ -18,6 +19,16 @@ const Header = styled.header`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  position: relative;
+`;
+
+const AbsoluteWordCloud = styled(WordCloud)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
 `;
 
 const HeaderContent = styled.div`
@@ -26,6 +37,8 @@ const HeaderContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 100;
   background-image: url(/images/header-lines-left.svg),
     url(/images/header-lines-right.svg);
   background-repeat: no-repeat;
@@ -644,6 +657,8 @@ const Home = () => {
     trackClickedParticipateAboveTheFold,
     trackClickedParticipateBelowTheFold,
   } = useAnalytics();
+  const [showWordCloud, setShowWordCloud] = useState(false);
+  useEffect(() => setShowWordCloud(true), []);
 
   return (
     <Container>
@@ -666,6 +681,9 @@ const Home = () => {
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
       <Header>
+        {showWordCloud ? (
+          <AbsoluteWordCloud />
+        ) : null}
         <HeaderContent>
           <HeaderIntro>
             <a href="https://codear.org" title="CoDeAr">

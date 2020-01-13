@@ -2,10 +2,10 @@ import Head from 'next/head';
 import { transparentize } from 'polished';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { META } from '../data/constants';
-import { useAnalytics } from '../utils/analytics';
-import { BREAKPOINTS } from '../style/constants';
 import { LilacButton } from '../components/LilacButton';
+import { META } from '../data/constants';
+import { BREAKPOINTS } from '../style/constants';
+import { useAnalytics } from '../utils/analytics';
 
 const Container = styled.main`
   display: flex;
@@ -548,6 +548,10 @@ const QuoteDescription = styled.p`
     text-decoration: none;
   }
 
+  a:hover {
+    text-decoration: underline;
+  }
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     font-size: 3rem;
   }
@@ -890,7 +894,7 @@ const Home = () => {
           </QuoteTitle>
           <QuoteDescription>
             { /* eslint-disable-next-line react/jsx-one-expression-per-line */}
-            Escribinos a <a href="mailto:hola@codear.org">hola@codear.org</a>
+            Informate con nuestro <a href="/sponsorships">Prospecto para Auspicios</a>
           </QuoteDescription>
         </Quote>
       </Quotes>

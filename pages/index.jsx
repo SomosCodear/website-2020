@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Head from 'next/head';
+import useSWR from 'swr';
 import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
 import { META } from '../data/constants';
@@ -648,16 +649,13 @@ const FooterInfo = styled.p`
   }
 `;
 
-const hashtags = [
-  { hashtag: '#frontend', count: 10 },
-  { hashtag: '#frameworks', count: 5 },
-  { hashtag: '#accesibilidad', count: 12 },
-  { hashtag: '#backend', count: 2 },
-  { hashtag: '#nodejs', count: 10 },
-  { hashtag: '#javascript', count: 6 },
-  { hashtag: '#design', count: 3 },
-  { hashtag: '#webcomponents', count: 13 },
-];
+const UTILS_URL = 'https://utils.webconf.tech';
+
+const utilsFetcher = async (path) => {
+  const res = await fetch(`${UTILS_URL}${path}`);
+  const json = await res.json();
+  return json;
+};
 
 const Home = () => {
   const {
@@ -668,8 +666,7 @@ const Home = () => {
     trackClickedParticipateAboveTheFold,
     trackClickedParticipateBelowTheFold,
   } = useAnalytics();
-  const [showWordCloud, setShowWordCloud] = useState(false);
-  useEffect(() => setShowWordCloud(true), []);
+  const { data } = useSWR('/lambdas/cfp_hashtags.js', utilsFetcher);
 
   return (
     <Container>
@@ -692,8 +689,8 @@ const Home = () => {
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
       <Header>
-        {showWordCloud ? (
-          <AbsoluteWordCloud hashtags={hashtags} />
+        {data ? (
+          <AbsoluteWordCloud hashtags={data.hashtags} />
         ) : null}
         <HeaderContent>
           <HeaderIntro>

@@ -37,7 +37,7 @@ export const WordCloud = ({ hashtags, className }) => {
   const prepareHashtag = useCallback((hashtagIndex) => {
     const { hashtag, count } = hashtags[hashtagIndex];
     return {
-      text: hashtag,
+      text: `#${hashtag}`,
       url: `https://twitter.com/search?q=${encodeURIComponent(hashtag)}&src=typed_query`,
       size: BASE_SIZE + count / average,
       initialPosition: {

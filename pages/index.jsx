@@ -1,11 +1,13 @@
-import Head from 'next/head';
-import { transparentize } from 'polished';
 import React from 'react';
+import Head from 'next/head';
+import useSWR from 'swr';
+import { transparentize } from 'polished';
 import styled, { css } from 'styled-components';
-import { LilacButton } from '../components/LilacButton';
 import { META } from '../data/constants';
 import { BREAKPOINTS } from '../style/constants';
 import { useAnalytics } from '../utils/analytics';
+import { LilacButton } from '../components/LilacButton';
+import { WordCloud } from '../components/WordCloud';
 
 const Container = styled.main`
   display: flex;
@@ -18,6 +20,17 @@ const Header = styled.header`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  position: relative;
+`;
+
+const AbsoluteWordCloud = styled(WordCloud)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 100;
 `;
 
 const HeaderContent = styled.div`
@@ -26,6 +39,7 @@ const HeaderContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
   background-image: url(/images/header-lines-left.svg),
     url(/images/header-lines-right.svg);
   background-repeat: no-repeat;
@@ -635,6 +649,14 @@ const FooterInfo = styled.p`
   }
 `;
 
+const UTILS_URL = 'https://utils.webconf.tech';
+
+const utilsFetcher = async (path) => {
+  const res = await fetch(`${UTILS_URL}${path}`);
+  const json = await res.json();
+  return json;
+};
+
 const Home = () => {
   const {
     trackClickedCoC,
@@ -644,6 +666,7 @@ const Home = () => {
     trackClickedParticipateAboveTheFold,
     trackClickedParticipateBelowTheFold,
   } = useAnalytics();
+  const { data } = useSWR('/lambdas/cfp_hashtags.js', utilsFetcher);
 
   return (
     <Container>
@@ -666,6 +689,9 @@ const Home = () => {
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
       <Header>
+        {data ? (
+          <AbsoluteWordCloud hashtags={data.hashtags} />
+        ) : null}
         <HeaderContent>
           <HeaderIntro>
             <a href="https://codear.org" title="CoDeAr">

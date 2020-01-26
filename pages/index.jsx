@@ -29,6 +29,7 @@ const AbsoluteWordCloud = styled(WordCloud)`
   top: 0;
   bottom: 0;
   overflow: hidden;
+  z-index: 100;
 `;
 
 const HeaderContent = styled.div`
@@ -38,7 +39,6 @@ const HeaderContent = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-  z-index: 100;
   background-image: url(/images/header-lines-left.svg),
     url(/images/header-lines-right.svg);
   background-repeat: no-repeat;
@@ -648,6 +648,17 @@ const FooterInfo = styled.p`
   }
 `;
 
+const hashtags = [
+  { hashtag: '#frontend', count: 10 },
+  { hashtag: '#frameworks', count: 5 },
+  { hashtag: '#accesibilidad', count: 12 },
+  { hashtag: '#backend', count: 2 },
+  { hashtag: '#nodejs', count: 10 },
+  { hashtag: '#javascript', count: 6 },
+  { hashtag: '#design', count: 3 },
+  { hashtag: '#webcomponents', count: 13 },
+];
+
 const Home = () => {
   const {
     trackClickedCoC,
@@ -682,7 +693,7 @@ const Home = () => {
       </Head>
       <Header>
         {showWordCloud ? (
-          <AbsoluteWordCloud />
+          <AbsoluteWordCloud hashtags={hashtags} />
         ) : null}
         <HeaderContent>
           <HeaderIntro>

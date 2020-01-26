@@ -1,28 +1,27 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+} from 'react';
 import PropTypes from 'prop-types';
 import useDimensions from 'react-use-dimensions';
 import useInterval from '@use-it/interval';
 import { Hashtag } from './Hashtag';
 
-const hashtags = [
-  { text: '#frontend', size: 'l' },
-  { text: '#frameworks', size: 'm' },
-  { text: '#accesibilidad', size: 'l' },
-  { text: '#backend', size: 's' },
-  { text: '#nodejs', size: 'l' },
-  { text: '#javascript', size: 'm' },
-  { text: '#design', size: 's' },
-  { text: '#webcomponents', size: 'l' },
-];
-
 const SIMULTANEOUS_HASHTAGS = 5;
 const HASHTAG_TTL = 3000;
+const BASE_SIZE = 1;
 const getRandomSign = () => (Math.round(Math.random()) === 0 ? -1 : 1);
 
-export const WordCloud = ({ className }) => {
+export const WordCloud = ({ hashtags, className }) => {
   const [containerRef, containerDimensions] = useDimensions();
   const [baseIndex, setBaseIndex] = useState(0);
   const [currentHashtags, setCurrentHashtags] = useState([]);
+  const average = useMemo(
+    () => hashtags.reduce((sum, { count }) => sum + count, 0) / hashtags.length,
+    [hashtags],
+  );
 
   const updateBaseIndex = useCallback(() => setBaseIndex((currentIndex) => {
     let nextIndex = currentIndex + 1;
@@ -32,14 +31,15 @@ export const WordCloud = ({ className }) => {
     }
 
     return nextIndex;
-  }), [setBaseIndex]);
+  }), [hashtags, setBaseIndex]);
   useInterval(updateBaseIndex, HASHTAG_TTL / SIMULTANEOUS_HASHTAGS);
 
   const prepareHashtag = useCallback((hashtagIndex) => {
-    const { text } = hashtags[hashtagIndex];
-
+    const { hashtag, count } = hashtags[hashtagIndex];
     return {
-      text,
+      text: hashtag,
+      url: `https://twitter.com/search?q=${encodeURIComponent(hashtag)}&src=typed_query`,
+      size: BASE_SIZE + count / average,
       initialPosition: {
         x: Math.ceil(Math.random() * containerDimensions.width),
         y: Math.ceil(Math.random() * containerDimensions.height),
@@ -49,7 +49,7 @@ export const WordCloud = ({ className }) => {
         y: 100 * getRandomSign(),
       },
     };
-  }, [containerDimensions]);
+  }, [hashtags, average, containerDimensions]);
 
   // clear hashtags when container dimensions change
   useEffect(() => {
@@ -66,12 +66,21 @@ export const WordCloud = ({ className }) => {
 
   return (
     <div className={className} ref={containerRef}>
-      {currentHashtags.map(({ text, initialPosition, translation }) => (
+      {currentHashtags.map(({
+        text,
+        url,
+        size,
+        initialPosition,
+        translation,
+      }) => (
         <Hashtag
+          size={size}
           initialPosition={initialPosition}
           translation={translation}
           duration={HASHTAG_TTL}
           key={text}
+          href={url}
+          target="_blank"
         >
           {text}
         </Hashtag>
@@ -81,6 +90,10 @@ export const WordCloud = ({ className }) => {
 };
 
 WordCloud.propTypes = {
+  hashtags: PropTypes.arrayOf(PropTypes.shape({
+    hashtag: PropTypes.string,
+    count: PropTypes.number,
+  })).isRequired,
   className: PropTypes.string,
 };
 

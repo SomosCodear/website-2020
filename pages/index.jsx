@@ -23,7 +23,7 @@ const Container = styled.main`
   background-size: cover;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    background-image: url(/images/backgrounds/background.jpg);
+    background-image: url(/images/backgrounds/home-background.jpg);
     background-position: left center;
     background-size: auto;
   }

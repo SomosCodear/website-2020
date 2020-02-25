@@ -11,18 +11,18 @@ import { EventCountdown } from '../components/EventCountdown';
 
 const Container = styled.main`
   min-height: 100vh;
-  padding: 2rem 0;
+  padding: 2rem;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-image: url(/images/backgrounds/header.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    padding: 4rem 2rem;
     background-image: url(/images/backgrounds/background.jpg);
     background-position: left center;
     background-size: auto;
@@ -60,6 +60,7 @@ const HeaderInfo = styled.div`
   justify-content: center;
 
   img {
+    width: 100%;
     display: block;
   }
 
@@ -74,6 +75,7 @@ const HeaderInfo = styled.div`
 const HeaderDate = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
+  text-align: center;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--color-secondary-light);

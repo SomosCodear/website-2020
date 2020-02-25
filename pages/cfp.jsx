@@ -873,7 +873,13 @@ const CFP = () => {
           </InformationBlockSubtitle>
         </InformationBlockTitleContainer>
         <InformationBlockContent>
-          <LilacButton href="/cfp" secondary shadow big onClick={trackClickedParticipateBelowTheFold}>
+          <LilacButton
+            href="/cfp"
+            color="secondary"
+            shadow
+            big
+            onClick={trackClickedParticipateBelowTheFold}
+          >
             Quiero participar
           </LilacButton>
         </InformationBlockContent>

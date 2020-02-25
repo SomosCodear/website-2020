@@ -900,10 +900,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@codear/lilac@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@codear/lilac/-/lilac-1.0.3.tgz#3af40842b0c4f5b3f53380aadcf963ba1c434a55"
-  integrity sha512-4FPAo/B4heuv8LhwCCZUK3hPH9y4MwaKlXTCUZ93mxNK4XnD9FC64254PE0q085lYdkcldp8qUs47Z2y6DmjUg==
+"@codear/lilac@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@codear/lilac/-/lilac-2.0.0.tgz#e58cb3e0734138f324fbff3f7d92eb2545c7ffc0"
+  integrity sha512-din4HWgXLbmlGzBb1wSD+dx8gL06/MK7uBbVMbMflB0b04a6oBnMIIWH7tCQPDCnWPKeP8xUmIfhCEbmZqOVGw==
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"

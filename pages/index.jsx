@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
-import { COLORS } from '../style/constants';
+import { BREAKPOINTS, COLORS } from '../style/constants';
 import { META } from '../data/constants';
 import { useAnalytics } from '../utils/analytics';
 import { LilacButton } from '../components/LilacButton';
@@ -11,47 +11,69 @@ import { EventCountdown } from '../components/EventCountdown';
 
 const Container = styled.main`
   min-height: 100vh;
+  padding: 2rem 0;
   display: flex;
-  padding: 4rem 2rem;
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-  background-image: url(/images/backgrounds/background.jpg);
-  background-position: left center;
+  background-image: url(/images/backgrounds/header.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 4rem 2rem;
+    background-image: url(/images/backgrounds/background.jpg);
+    background-position: left center;
+    background-size: auto;
+  }
 `;
 
 const Header = styled.header`
-  flex-shrink: 1;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
 `;
 
 const HeaderLogo = styled.div`
-  align-self: center;
-  padding: 0 2rem;
+  padding: 0 1.25rem;
 
   img {
     width: 100%;
     max-height: 20rem;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 0 2rem;
+  }
 `;
 
 const HeaderInfo = styled.div`
-  align-self: stretch;
-  padding: 0 2rem 0 2rem;
+  margin-top: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid ${transparentize(0.2, COLORS.lilac.text)};
 
   img {
     display: block;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    align-self: stretch;
+    margin-top: 0;
+    padding: 0 2rem 0 2rem;
+    border-left: 1px solid ${transparentize(0.2, COLORS.lilac.text)};
+  }
 `;
 
 const HeaderDate = styled.p`
-  margin: 0 1rem 1rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
   font-size: 1.75rem;
   font-weight: 700;
   color: var(--color-secondary-light);
@@ -77,25 +99,33 @@ const HeaderCodear = styled.div`
 `;
 
 const TimerSection = styled.section`
-  flex-shrink: 1;
-  margin-top: 5rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 300;
-  letter-spacing: 1.2rem;
-  color: var(--color-text);
-  text-transform: uppercase;
+  display: none;
 
-  p {
-    letter-spacing: 0;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 5rem;
+    display: block;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: 1.2rem;
+    color: var(--color-text);
+    text-transform: uppercase;
+
+    p {
+      letter-spacing: 0;
+    }
   }
 `;
 
 const ActionsSection = styled.section`
-  flex-shrink: 1;
-  margin-top: 4rem;
+  margin-top: 2rem;
   display: flex;
+  flex-direction: column;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 4rem;
   flex-direction: row;
+  }
 `;
 
 const Action = styled.div`
@@ -103,7 +133,14 @@ const Action = styled.div`
   flex-direction: column;
 
   & + & {
-    margin-left: 2.75rem;
+    margin-top: 1rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    & + & {
+      margin-top: 0;
+      margin-left: 2.75rem;
+    }
   }
 `;
 
@@ -170,7 +207,7 @@ const Home = () => {
       <ActionsSection>
         <Action>
           <Link href="/cfp">
-            <LilacButton href="/cfp">
+            <LilacButton href="/cfp" color="primary-light" shadow>
               <ActionText>
                 Proponé tu Charla
               </ActionText>
@@ -182,7 +219,7 @@ const Home = () => {
         </Action>
         <Action>
           <Link href="/">
-            <LilacButton href="/">
+            <LilacButton href="/" color="accent" shadow>
               <ActionText>
                 Comprá tu Pase
               </ActionText>
@@ -193,7 +230,7 @@ const Home = () => {
           </ActionDate>
         </Action>
         <Action>
-          <LilacButton href="/sponsorships">
+          <LilacButton href="/sponsorships" color="primary-light" shadow>
             <ActionText>
               Auspiciá el Evento
             </ActionText>

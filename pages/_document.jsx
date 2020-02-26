@@ -64,7 +64,7 @@ class WebconfDocument extends Document {
           <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png" />
           <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png" />
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Source+Sans+Pro:400,700&display=swap"
+            href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700|Source+Sans+Pro:400,700&display=swap"
             rel="stylesheet"
           />
         </Head>

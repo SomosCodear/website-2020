@@ -5,3 +5,4 @@ export {
   ANALYTICS_EVENTS,
 } from './analytics';
 export { META } from './meta';
+export { EVENT_DATE } from './event';

@@ -1,0 +1,200 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import Head from 'next/head';
+import styled, { css } from 'styled-components';
+import { BREAKPOINTS } from '../style/constants';
+import { META } from '../data/constants';
+import { useAnalytics } from '../utils/analytics';
+
+const Container = styled.main`
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(/images/backgrounds/header.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  align-items: stretch;
+`;
+
+const ContainerLines = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    background-image: url(/images/header-lines-left.svg),
+      url(/images/header-lines-right.svg);
+    background-repeat: no-repeat;
+    background-position: calc(50% - 475px) 192px, calc(50% + 475px) 192px;
+  }
+`;
+
+const Section = styled.section`
+  max-width: 312px;
+  padding: 2.5rem 0;
+  box-sizing: border-box;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 1690px;
+    padding: 5rem;
+  }
+`;
+
+const Header = styled.header`
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    min-width: 312px;
+    padding-right: 138px;
+  }
+`;
+
+const HeaderLogo = styled.div`
+  img {
+    max-width: 100%;
+  }
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    img {
+      width: 100%;
+    }
+  }
+`;
+
+const HeaderInfo = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    display: block;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 2.5rem;
+    align-self: stretch;
+    margin-top: 0;
+  }
+`;
+
+const HeaderDate = styled.p`
+  margin-top: 0;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.72rem;
+  font-weight: 700;
+  color: var(--color-secondary-light);
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 57px;
+  }
+`;
+
+const HeaderCodear = styled.div`
+  margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.75rem;
+  font-weight: 100;
+  white-space: nowrap;
+  color: var(--color-text);
+
+  a {
+    margin-left: 0.625rem;
+  }
+
+  img {
+    display: block;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 57px;
+  }
+`;
+
+const Logo = styled.img`
+  ${({ hideOnMobile }) => hideOnMobile && css`
+    display:none;
+  `}
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    ${({ hideOnDesktop }) => hideOnDesktop && css`
+      display:none;
+    `}
+  }
+`;
+
+const Content = styled.div``;
+
+const CheckoutStep = ({ children }) => {
+  const {
+    trackClickedCodear,
+  } = useAnalytics();
+
+  return (
+    <Container>
+      <Head>
+        <title>
+          Córdoba WebConf 2020
+        </title>
+        <meta name="description" content={META.description} />
+        <meta property="og:title" content={META.ogTitle} />
+        <meta property="og:site_name" content={META.ogSiteName} />
+        <meta property="og:description" content={META.ogDescription} />
+        <meta property="og:url" content={META.ogUrl} />
+        <meta property="og:locale" content={META.ogLocale} />
+        <meta property="og:image" content={META.ogImage} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={META.twitterTitle} />
+        <meta name="twitter:description" content={META.twitterDescription} />
+        <meta name="twitter:site" content={META.twitterSite} />
+        <meta name="twitter:creator" content={META.twitterCreator} />
+      </Head>
+      <ContainerLines>
+        <Section>
+          <Header>
+            <HeaderLogo>
+              <Logo
+                hideOnMobile
+                src="/images/logos/webconf-vertical.svg"
+                alt="Logo de WebConf"
+              />
+              <Logo
+                hideOnDesktop
+                src="/images/logos/webconf-horizontal.svg"
+                alt="Logo de WebConf"
+              />
+            </HeaderLogo>
+            <HeaderInfo>
+              <HeaderDate>
+                29 y 30 de Mayo de 2020
+              </HeaderDate>
+              <img src="/images/logos/utn.svg" alt="Logo de la UTN" />
+              <HeaderCodear>
+                un evento de
+                <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
+                  <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+                </a>
+              </HeaderCodear>
+            </HeaderInfo>
+          </Header>
+          <Content>
+            {children}
+          </Content>
+        </Section>
+      </ContainerLines>
+    </Container>
+  );
+};
+
+CheckoutStep.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default CheckoutStep;

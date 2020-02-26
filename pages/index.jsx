@@ -219,9 +219,9 @@ const Home = () => {
             Hasta el 31/03
           </ActionDate>
         </Action>
-        {/* <Action>
-          <Link href="/">
-            <LilacButton href="/" color="accent" shadow>
+        <Action>
+          <Link href="/checkout">
+            <LilacButton href="/checkout" color="accent" shadow>
               <ActionText>
                 Comprá tu Pase
               </ActionText>
@@ -230,7 +230,7 @@ const Home = () => {
           <ActionDate>
             Hasta el 01/05
           </ActionDate>
-        </Action> */}
+        </Action>
         <Action>
           <LilacButton href="/sponsorships" color="primary-light" shadow>
             <ActionText>

@@ -874,7 +874,7 @@ const CFP = () => {
         </InformationBlockTitleContainer>
         <InformationBlockContent>
           <LilacButton
-            href="/cfp"
+            href="/cfp-form"
             color="secondary"
             shadow
             big

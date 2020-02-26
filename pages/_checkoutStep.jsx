@@ -34,22 +34,22 @@ const ContainerLines = styled.div`
 `;
 
 const Section = styled.section`
-  max-width: 312px;
-  padding: 2.5rem 0;
+  width: 20rem;
+  padding: 2.5rem;
   box-sizing: border-box;
   @media (min-width: ${BREAKPOINTS.hd}) {
     display: flex;
     flex-direction: row;
     width: 100%;
-    max-width: 1690px;
+    max-width: 105.625rem;
     padding: 5rem;
   }
 `;
 
 const Header = styled.header`
   @media (min-width: ${BREAKPOINTS.hd}) {
-    min-width: 312px;
-    padding-right: 138px;
+    min-width: 19.5rem;
+    padding-right: 8.625rem;
   }
 `;
 
@@ -65,7 +65,7 @@ const HeaderLogo = styled.div`
 `;
 
 const HeaderInfo = styled.div`
-  margin-top: 30px;
+  margin-top: 1.875rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -87,17 +87,17 @@ const HeaderDate = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 1.72rem;
+  font-size: 1.30rem;
   font-weight: 700;
   color: var(--color-secondary-light);
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    margin-top: 57px;
+    margin-top: 3.5625rem;
   }
 `;
 
 const HeaderCodear = styled.div`
-  margin-top: 30px;
+  margin-top: 1.875rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -115,7 +115,7 @@ const HeaderCodear = styled.div`
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    margin-top: 57px;
+    margin-top: 3.5625rem;
   }
 `;
 

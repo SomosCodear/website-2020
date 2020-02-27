@@ -37,7 +37,7 @@ const Section = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2.5rem;
+  padding: 1.25rem;
   box-sizing: border-box;
   @media (min-width: ${BREAKPOINTS.hd}) {
     flex-direction: row;

@@ -6,15 +6,16 @@ const Container = styled.div`
   text-align: center;
 `;
 const Title = styled.h1`
-  font-size: 1.6875rem;
+  font-size: 2rem;
   font-weight: normal;
   color: var(--color-accent);
   margin: 1.25rem 0 0 0;
 `;
 const Description = styled.p`
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--color-text);
   margin: 0.4375rem 0 0 0;
+  line-height: 1.375rem;
 `;
 
 export const CheckoutTitle = ({ title, description }) => (

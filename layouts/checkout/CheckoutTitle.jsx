@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   text-align: center;
+  margin-bottom: 0.875rem;
 `;
 const Title = styled.h1`
   font-size: 2rem;

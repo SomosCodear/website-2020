@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { BREAKPOINTS } from '../../style/constants';
 import { META } from '../../data/constants';
 import { useAnalytics } from '../../utils/analytics';
@@ -34,11 +34,12 @@ const ContainerLines = styled.div`
 `;
 
 const Section = styled.section`
-  width: 20rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 2.5rem;
   box-sizing: border-box;
   @media (min-width: ${BREAKPOINTS.hd}) {
-    display: flex;
     flex-direction: row;
     width: 100%;
     max-width: 105.625rem;
@@ -47,6 +48,7 @@ const Section = styled.section`
 `;
 
 const Header = styled.header`
+  width: 17rem;
   @media (min-width: ${BREAKPOINTS.hd}) {
     min-width: 19.5rem;
     padding-right: 8.625rem;
@@ -87,7 +89,7 @@ const HeaderDate = styled.p`
   margin-top: 0;
   margin-bottom: 1rem;
   text-align: center;
-  font-size: 1.30rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-secondary-light);
 

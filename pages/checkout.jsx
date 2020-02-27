@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckoutLayout, CheckoutTitle } from '../layouts/checkout';
-import { TextBox } from '../style/lilac/components';
+import { TextBox, ErrorNugget } from '../style/lilac/components';
 
 const Checkout = () => (
   <CheckoutLayout>
@@ -30,6 +30,9 @@ const Checkout = () => (
         type="email"
         value="cosme@fulanito.com"
       />
+      <ErrorNugget>
+        Revisá estos datos.
+      </ErrorNugget>
     </form>
   </CheckoutLayout>
 );

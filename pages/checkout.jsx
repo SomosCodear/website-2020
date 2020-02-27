@@ -1,15 +1,13 @@
 import React from 'react';
-import CheckoutStep from './_checkoutStep';
-import { CheckoutTitle } from '../components/CheckoutTitle';
-
+import { CheckoutLayout, CheckoutTitle } from '../layouts/checkout';
 
 const Checkout = () => (
-  <CheckoutStep>
+  <CheckoutLayout>
     <CheckoutTitle
       title="Completá tus datos"
       description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
     />
-  </CheckoutStep>
+  </CheckoutLayout>
 );
 
 export default Checkout;

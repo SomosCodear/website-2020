@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import styled, { css } from 'styled-components';
-import { BREAKPOINTS } from '../style/constants';
-import { META } from '../data/constants';
-import { useAnalytics } from '../utils/analytics';
+import { BREAKPOINTS } from '../../style/constants';
+import { META } from '../../data/constants';
+import { useAnalytics } from '../../utils/analytics';
 
 const Container = styled.main`
   display: flex;
@@ -132,7 +132,7 @@ const Logo = styled.img`
 
 const Content = styled.div``;
 
-const CheckoutStep = ({ children }) => {
+export const CheckoutLayout = ({ children }) => {
   const {
     trackClickedCodear,
   } = useAnalytics();
@@ -193,8 +193,6 @@ const CheckoutStep = ({ children }) => {
   );
 };
 
-CheckoutStep.propTypes = {
+CheckoutLayout.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default CheckoutStep;

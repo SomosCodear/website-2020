@@ -7,7 +7,7 @@ const Container = styled.div`
   margin-bottom: 0.875rem;
 `;
 const Title = styled.h1`
-  font-size: 2rem;
+  font-size: 1.9375rem;
   font-weight: normal;
   color: var(--color-accent);
   margin: 1.25rem 0 0 0;

@@ -120,13 +120,9 @@ const HeaderCodear = styled.div`
 `;
 
 const Logo = styled.img`
-  ${({ hideOnMobile }) => hideOnMobile && css`
-    display:none;
-  `}
+  display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'block')};
   @media (min-width: ${BREAKPOINTS.hd}) {
-    ${({ hideOnDesktop }) => hideOnDesktop && css`
-      display:none;
-    `}
+    display: ${({ hideOnDesktop }) => (hideOnDesktop ? 'none' : 'block')};
   }
 `;
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckoutLayout, CheckoutTitle } from '../layouts/checkout';
 import { TextBox, ErrorNugget } from '../style/lilac/components';
+import { LilacButton } from '../components/LilacButton';
 
 const Checkout = () => (
   <CheckoutLayout>
@@ -33,6 +34,9 @@ const Checkout = () => (
       <ErrorNugget>
         Revisá estos datos.
       </ErrorNugget>
+      <LilacButton color="primary-light" shadow>
+        CONTINUAR
+      </LilacButton>
     </form>
   </CheckoutLayout>
 );

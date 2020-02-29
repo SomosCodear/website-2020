@@ -23,11 +23,17 @@ const Description = styled.p`
 export const CheckoutTitle = ({ title, description }) => (
   <Container>
     <Title>{title}</Title>
-    <Description>{description}</Description>
+    {description && (
+      <Description>{description}</Description>
+    )}
   </Container>
 );
 
+CheckoutTitle.defaultProps = {
+  description: '',
+};
+
 CheckoutTitle.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
 };

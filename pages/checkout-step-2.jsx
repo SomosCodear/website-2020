@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckoutLayout, CheckoutTitle } from '../layouts/checkout';
+import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../layouts/checkout';
 import { RadioButton } from '../style/lilac/components';
-import { LilacButton } from '../components/LilacButton';
 
 const Disclaimer = styled.p`
   font-size: 0.875rem;
@@ -40,27 +39,6 @@ const RadioButtonsContainer = styled.div`
  */
 const RadioButtons = styled.div``;
 
-const GoBackIconContainer = styled.span`
-  display: block;
-  min-width: 37px;
-  img {
-    transform: rotate(-90deg);
-    margin-bottom: 3px;
-  }
-`;
-
-const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 332px;
-  margin: 0 auto;
-  > *:last-child {
-    flex-grow: 1;
-    margin-left: 2.4375rem;
-  }
-`;
-
 const CheckoutSecondStep = () => (
   <CheckoutLayout>
     <CheckoutTitle
@@ -93,16 +71,10 @@ const CheckoutSecondStep = () => (
     <Disclaimer>
       Todos los precios son finales y en Pesos Argentinos.
     </Disclaimer>
-    <ButtonsContainer>
-      <LilacButton color="primary-light" shadow>
-        <GoBackIconContainer>
-          <img src="/images/chevron-text.svg" alt="Botón de volver" />
-        </GoBackIconContainer>
-      </LilacButton>
-      <LilacButton color="primary-light" shadow>
-        CONTINUAR
-      </LilacButton>
-    </ButtonsContainer>
+    <CheckoutActions
+      onContinue={() => {}}
+      onGoBack={() => {}}
+    />
   </CheckoutLayout>
 );
 

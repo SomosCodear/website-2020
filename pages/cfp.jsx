@@ -687,7 +687,7 @@ const CFP = () => {
             <LilacButton href="/cfp-form" shadow onClick={trackClickedParticipateAboveTheFold}>
               Quiero participar
             </LilacButton>
-            <img src="/images/chevron-down.svg" alt="" aria-hidden="true" />
+            <img src="/images/chevron-accent.svg" alt="" aria-hidden="true" />
           </HeaderCTA>
         </HeaderContent>
       </Header>

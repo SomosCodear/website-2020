@@ -11,8 +11,8 @@ const Container = styled.div`
 `;
 
 const Label = styled.label`
-  padding: 0.125rem 0 0 1rem;
-  font-size: 1.9375rem;
+  padding: 0.125rem 0 0 2.3125rem;
+  font-size: 2.25rem;
   color: var(--color-text);
   font-weight: lighter;
   display: flex;

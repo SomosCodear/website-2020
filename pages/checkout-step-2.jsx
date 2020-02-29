@@ -26,6 +26,18 @@ const TotalPrice = styled.strong`
   display: block;
 `;
 
+export const RadioButtonsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+/**
+ * This is necessary so the radio buttons will be aligned on the same Y no matter
+ * the width of their labels.
+ */
+export const RadioButtons = styled.div``;
+
 const CheckoutSecondStep = () => (
   <CheckoutLayout>
     <CheckoutTitle
@@ -33,19 +45,23 @@ const CheckoutSecondStep = () => (
       description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
     />
     <form>
-      <RadioButton
-        id="ticket-type"
-        label="Full"
-      />
-      <RadioButton
-        id="ticket-type"
-        label="Simple (29/05)"
-        checked
-      />
-      <RadioButton
-        id="ticket-type"
-        label="Simple (30/05)"
-      />
+      <RadioButtonsContainer>
+        <RadioButtons>
+          <RadioButton
+            id="ticket-type"
+            label="Full"
+          />
+          <RadioButton
+            id="ticket-type"
+            label="Simple (29/05)"
+            checked
+          />
+          <RadioButton
+            id="ticket-type"
+            label="Simple (30/05)"
+          />
+        </RadioButtons>
+      </RadioButtonsContainer>
     </form>
     <Total>
       <TotalLabel>Tu pase costará</TotalLabel>

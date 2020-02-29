@@ -10,6 +10,7 @@ const Container = styled.div`
   justify-content: space-between;
   width: 20.75rem;
   margin: 0 auto;
+  padding-bottom: 1.25rem;
   > *:last-child {
     flex-grow: 1;
     ${({ twoButtons }) => (twoButtons ? css`margin-left: 2.4375rem;` : css`width: 100%;`)}

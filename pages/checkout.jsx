@@ -1,6 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../layouts/checkout';
 import { TextBox, ErrorNugget } from '../style/lilac/components';
+
+const Form = styled.form`
+  display: block;
+  padding: 0 1.25rem;
+`;
 
 const Checkout = () => (
   <CheckoutLayout>
@@ -8,7 +14,7 @@ const Checkout = () => (
       title="Completá tus datos"
       description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
     />
-    <form>
+    <Form>
       <TextBox
         id="checkout-fname"
         label="Nombre"
@@ -37,7 +43,7 @@ const Checkout = () => (
         onContinue={() => {}}
         onGoBack={() => {}}
       />
-    </form>
+    </Form>
   </CheckoutLayout>
 );
 

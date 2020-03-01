@@ -1,13 +1,23 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useMemo } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+const HiddenSubmitButton = styled.button.attrs(() => ({
+  type: 'submit',
+}))`
+  display: none;
+`;
 
 export const LilacButton = React.forwardRef(({
   children,
   onClick,
   onMouseEnter,
+  type,
   ...props
 }, ref) => {
+  const isSubmit = useMemo(() => type === 'submit', [type]);
   const buttonRef = useRef(null);
+  const hiddenSubmitRef = useRef(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -38,6 +48,18 @@ export const LilacButton = React.forwardRef(({
     }
   }, [onMouseEnter]);
 
+  // eslint-disable-next-line consistent-return
+  useEffect(() => {
+    if (isSubmit) {
+      const currentButtonRef = buttonRef.current;
+      const currentSubmitRef = hiddenSubmitRef.current;
+      const fireSubmit = () => currentSubmitRef.click();
+      currentButtonRef.addEventListener('click', fireSubmit);
+
+      return () => currentButtonRef.removeEventListener('mouseenter', fireSubmit);
+    }
+  }, [isSubmit, buttonRef, hiddenSubmitRef]);
+
   useEffect(() => {
     if (ref != null && buttonRef.current != null) {
       ref(buttonRef.current);
@@ -45,15 +67,19 @@ export const LilacButton = React.forwardRef(({
   }, [ref]);
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <lilac-button {...props} ref={buttonRef}>
-      {children}
-    </lilac-button>
+    <div>
+      <HiddenSubmitButton ref={hiddenSubmitRef} />
+      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+      <lilac-button type={type} {...props} ref={buttonRef}>
+        {children}
+      </lilac-button>
+    </div>
   );
 });
 
 LilacButton.propTypes = {
   children: PropTypes.node.isRequired,
+  type: PropTypes.string,
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
 };
@@ -61,4 +87,5 @@ LilacButton.propTypes = {
 LilacButton.defaultProps = {
   onClick: null,
   onMouseEnter: null,
+  type: null,
 };

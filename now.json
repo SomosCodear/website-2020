@@ -10,6 +10,14 @@
     {
       "source": "/sponsorships",
       "destination": "https://drive.google.com/open?id=1upEFAKQM_KiVPJJ3OgSW4dtvK0tG3vsV"
+    },
+    {
+      "source": "/media-kit/flyers",
+      "destination": "https://drive.google.com/open?id=1qddqK5PcyC0rjn-stGeEw9dEhqEn2VJG"
+    },
+    {
+      "source": "/media-kit/brandbook",
+      "destination": "https://drive.google.com/open?id=1hI8jqS2i7lqWkz67v-gFxmhufL6L4Fz1"
     }
   ]
 }

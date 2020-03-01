@@ -11,6 +11,7 @@
     "@codear/lilac": "^2.0.0",
     "@webcomponents/webcomponentsjs": "^2.4.1",
     "@zeit/next-css": "^1.0.1",
+    "formik": "^2.1.4",
     "moment": "^2.24.0",
     "next": "9.2.2",
     "next-ga": "^2.3.4",
@@ -22,7 +23,8 @@
     "react-redux": "^7.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.0.1",
+    "yup": "^0.28.1"
   },
   "devDependencies": {
     "babel-plugin-ramda": "^2.0.0",

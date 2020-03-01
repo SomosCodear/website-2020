@@ -32,19 +32,11 @@ const Input = styled.input`
 export const TextBox = ({
   id,
   label,
-  onChange,
-  hasError,
-  value,
   labelProps,
-  inputProps,
+  ...inputProps
 }) => {
   const allInputProps = {
-    name: id,
     id,
-    onChange,
-    hasError,
-    value,
-    type: 'text',
     ...inputProps,
   };
   return (
@@ -56,19 +48,11 @@ export const TextBox = ({
 };
 
 TextBox.defaultProps = {
-  onChange: () => {},
-  hasError: false,
-  value: '',
   labelProps: {},
-  inputProps: {},
 };
 
 TextBox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  hasError: PropTypes.bool,
-  value: PropTypes.string,
   labelProps: PropTypes.object,
-  inputProps: PropTypes.object,
 };

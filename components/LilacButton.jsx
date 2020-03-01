@@ -13,6 +13,7 @@ export const LilacButton = React.forwardRef(({
   onClick,
   onMouseEnter,
   type,
+  disabled,
   ...props
 }, ref) => {
   const isSubmit = useMemo(() => type === 'submit', [type]);
@@ -61,6 +62,14 @@ export const LilacButton = React.forwardRef(({
   }, [isSubmit, buttonRef, hiddenSubmitRef]);
 
   useEffect(() => {
+    if (disabled) {
+      buttonRef.current.setAttribute('disabled', null);
+    } else {
+      buttonRef.current.removeAttribute('disabled');
+    }
+  }, [disabled, buttonRef]);
+
+  useEffect(() => {
     if (ref != null && buttonRef.current != null) {
       ref(buttonRef.current);
     }
@@ -80,6 +89,7 @@ export const LilacButton = React.forwardRef(({
 LilacButton.propTypes = {
   children: PropTypes.node.isRequired,
   type: PropTypes.string,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
 };
@@ -88,4 +98,5 @@ LilacButton.defaultProps = {
   onClick: null,
   onMouseEnter: null,
   type: null,
+  disabled: false,
 };

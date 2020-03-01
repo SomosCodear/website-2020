@@ -10,13 +10,12 @@ const Container = styled.main`
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   background-image: url(/images/backgrounds/header.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  align-items: stretch;
 `;
 
 const ContainerLines = styled.div`

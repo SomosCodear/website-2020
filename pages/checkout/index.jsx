@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../layouts/checkout';
-import { TextBox, ErrorNugget } from '../style/lilac/components';
+import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../../layouts/checkout';
+import { TextBox, ErrorNugget } from '../../style/lilac/components';
 
 const Form = styled.form`
   display: block;
-  padding: 0 1.25rem;
+  padding: 0 2rem;
 `;
 
 const Checkout = () => (

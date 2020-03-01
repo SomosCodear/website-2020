@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../layouts/checkout';
-import { RadioButton } from '../style/lilac/components';
+import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../../layouts/checkout';
+import { RadioButton } from '../../style/lilac/components';
 
 const Disclaimer = styled.p`
   font-size: 0.875rem;

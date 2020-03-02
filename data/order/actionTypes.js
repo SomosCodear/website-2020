@@ -1,0 +1,1 @@
+export const ORDER_SET_PASS_INFO = 'ORDER_SET_PASS_INFO';

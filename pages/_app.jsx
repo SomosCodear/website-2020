@@ -2,6 +2,7 @@
 import '@codear/lilac/dist/lilac.css';
 import R from 'ramda';
 import React from 'react';
+import App from 'next/app';
 import Router from 'next/router';
 import { Provider } from 'react-redux';
 import withGA from 'next-ga';
@@ -23,6 +24,12 @@ const WebConfApp = ({
     </Provider>
   </AnalyticsContext.Provider>
 );
+
+WebConfApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+
+  return { ...appProps };
+};
 
 export default R.compose(
   withRedux(configureStore),

@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types, react/jsx-props-no-spreading */
-import React from 'react';
+import React, { useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -56,40 +56,34 @@ const Input = styled.input`
 export const RadioButton = ({
   id,
   label,
-  onChange,
-  checked,
   labelProps,
-  inputProps,
+  ...inputProps
 }) => {
   const allInputProps = {
-    id: `${id}-id`,
-    name: id,
-    onChange,
-    checked,
+    id,
     type: 'radio',
     ...inputProps,
   };
+  const radioRef = useRef(null);
+  const onFakeRadioClick = useCallback(() => {
+    radioRef.current.click();
+  }, [radioRef]);
+
   return (
     <Container>
-      <Input {...allInputProps} />
-      <Radio />
+      <Input ref={radioRef} {...allInputProps} />
+      <Radio onClick={onFakeRadioClick} />
       <Label htmlFor={allInputProps.id} {...labelProps}>{label}</Label>
     </Container>
   );
 };
 
 RadioButton.defaultProps = {
-  onChange: () => {},
-  checked: false,
   labelProps: {},
-  inputProps: {},
 };
 
 RadioButton.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  checked: PropTypes.bool,
   labelProps: PropTypes.object,
-  inputProps: PropTypes.object,
 };

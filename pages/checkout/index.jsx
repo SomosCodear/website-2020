@@ -72,7 +72,6 @@ const Checkout = () => {
               </ErrorNugget>
             ) : null}
             <CheckoutActions>
-              <CheckoutAction backButton disabled={isSubmitting} />
               <CheckoutAction type="submit" disabled={isSubmitting} />
             </CheckoutActions>
           </FormWrapper>

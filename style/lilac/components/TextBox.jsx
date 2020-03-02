@@ -32,6 +32,10 @@ const Container = styled.div`
     ${({ large }) => large && css`
       width: calc(65% - 10px);
     `}
+    ${({ inlineLabel }) => inlineLabel && css`
+      flex-direction: row;
+      padding: 8px;
+    `}
   }
 `;
 const Label = styled.label`
@@ -40,6 +44,14 @@ const Label = styled.label`
   font-weight: bold;
   opacity: 0.6;
   font-size: 1.125rem;
+  ${({ inline }) => inline && css`
+    word-break: break-all;
+    white-space: nowrap;
+    padding-right: 8px;
+    border-right: 1px solid var(--color-text);
+    height: 20px;
+    margin: 4px 8px 0 0;
+  `}
 `;
 const Input = styled.input`
   width: 100%;
@@ -50,6 +62,9 @@ const Input = styled.input`
   background: transparent;
   color: white;
   font-size: 3rem;
+  ${({ inlineLabel }) => inlineLabel && css`
+    font-size: 1.5rem;
+  `}
 `;
 
 export const TextBox = ({
@@ -59,20 +74,29 @@ export const TextBox = ({
   medium,
   large,
   small,
+  inlineLabel,
   ...inputProps
 }) => {
   const allInputProps = {
     id,
+    inlineLabel,
     ...inputProps,
   };
   const containerProps = {
     small,
     medium,
     large,
+    inlineLabel,
   };
   return (
     <Container {...containerProps}>
-      <Label htmlFor={id} {...labelProps}>{label}</Label>
+      <Label
+        htmlFor={id}
+        inline={inlineLabel}
+        {...labelProps}
+      >
+        {label}
+      </Label>
       <Input {...allInputProps} />
     </Container>
   );
@@ -83,6 +107,7 @@ TextBox.defaultProps = {
   medium: false,
   large: false,
   small: false,
+  inlineLabel: false,
 };
 
 TextBox.propTypes = {
@@ -92,4 +117,5 @@ TextBox.propTypes = {
   medium: PropTypes.bool,
   large: PropTypes.bool,
   small: PropTypes.bool,
+  inlineLabel: PropTypes.bool,
 };

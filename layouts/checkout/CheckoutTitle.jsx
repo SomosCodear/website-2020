@@ -37,20 +37,31 @@ const Description = styled.p`
   }
 `;
 
-export const CheckoutTitle = ({ title, description }) => (
+const Subtitle = styled.div``;
+
+export const CheckoutTitle = ({ title, description, children }) => (
   <Container>
     <Title>{title}</Title>
-    {description && (
-      <Description>{description}</Description>
-    )}
+    {
+      description
+        ? (<Description>{description}</Description>)
+        : null
+    }
+    {
+      children
+        ? (<Subtitle>{children}</Subtitle>)
+        : null
+    }
   </Container>
 );
 
 CheckoutTitle.defaultProps = {
   description: '',
+  children: null,
 };
 
 CheckoutTitle.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+  children: PropTypes.node,
 };

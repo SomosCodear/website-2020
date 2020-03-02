@@ -5653,6 +5653,11 @@ raw-body@2.4.0:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
+re-reselect@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/re-reselect/-/re-reselect-3.4.0.tgz#0f2303f3c84394f57f0cd31fea08a1ca4840a7cd"
+  integrity sha512-JsecfN+JlckncVXTWFWjn0Vk6uInl8GSf4eEd9tTk5qXHlgqkPdILpnYpgZcISXNYAzvfvsCZviaDk8AxyS5sg==
+
 react-dom@16.12.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
@@ -5906,6 +5911,11 @@ requires-port@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
   integrity sha1-kl0mAdOaxIXgkc8NpcbmlNw9yv8=
+
+reselect@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-4.0.0.tgz#f2529830e5d3d0e021408b246a206ef4ea4437f7"
+  integrity sha512-qUgANli03jjAyGlnbYVAV5vvnOmJnODyABz51RdBN7M4WaVu8mecZWgyQNkG8Yqe3KRGRt0l4K4B3XVEULC4CA==
 
 resolve-from@^3.0.0:
   version "3.0.0"

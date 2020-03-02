@@ -1,5 +1,5 @@
-/* eslint-disable react/forbid-prop-types, react/jsx-props-no-spreading */
 import styled from 'styled-components';
+import { BREAKPOINTS } from '../../style/constants';
 
 export const CheckoutActions = styled.div`
   display: flex;
@@ -15,5 +15,16 @@ export const CheckoutActions = styled.div`
   * + * {
     flex-grow: 1;
     margin-left: 2.5rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    width: 100%;
+    margin: 0;
+    > * {
+      min-width: 310px;
+      flex-grow: 0;
+      margin-left: 0;
+    }
+
   }
 `;

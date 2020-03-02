@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { BREAKPOINTS } from '../../style/constants';
 import { passHolderSchema } from '../../data/order/schemas';
 import { setOrderPassInfo } from '../../data/order/actions';
 import { getPassHolder } from '../../data/order/selectors';
@@ -17,6 +18,21 @@ import { TextBox, ErrorNugget } from '../../style/lilac/components';
 const FormWrapper = styled(Form)`
   display: block;
   padding: 0 2rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
+const Fields = styled.div`
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `;
 
 const Checkout = () => {
@@ -30,10 +46,6 @@ const Checkout = () => {
 
   return (
     <CheckoutLayout>
-      <CheckoutTitle
-        title="Completá tus datos"
-        description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
-      />
       <Formik
         initialValues={passHolder}
         validationSchema={passHolderSchema}
@@ -41,38 +53,55 @@ const Checkout = () => {
       >
         {({ isSubmitting, isValid, submitCount }) => (
           <FormWrapper>
-            <Field
-              as={TextBox}
-              id="firstName"
-              name="firstName"
-              label="Nombre"
+            <CheckoutTitle
+              title="Completá tus datos"
+              description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
             />
-            <Field
-              as={TextBox}
-              id="lastName"
-              name="lastName"
-              label="Apellido"
-            />
-            <Field
-              as={TextBox}
-              id="identityDocument"
-              name="identityDocument"
-              label="DNI o Pasaporte"
-            />
-            <Field
-              as={TextBox}
-              id="email"
-              name="email"
-              label="E-mail"
-              type="email"
-            />
+            <Fields>
+              <Field
+                as={TextBox}
+                id="firstName"
+                name="firstName"
+                label="Nombre"
+                medium
+              />
+              <Field
+                as={TextBox}
+                id="lastName"
+                name="lastName"
+                label="Apellido"
+                medium
+              />
+              <Field
+                as={TextBox}
+                id="identityDocument"
+                name="identityDocument"
+                label="DNI o Pasaporte"
+                small
+              />
+              <Field
+                as={TextBox}
+                id="email"
+                name="email"
+                label="E-mail"
+                type="email"
+                large
+              />
+            </Fields>
             {submitCount > 0 && !isValid ? (
               <ErrorNugget>
                 Revisá estos datos.
               </ErrorNugget>
             ) : null}
             <CheckoutActions>
-              <CheckoutAction type="submit" disabled={isSubmitting} />
+              <CheckoutAction
+                label="Comprar varios pases"
+                color="accent"
+              />
+              <CheckoutAction
+                type="submit"
+                disabled={isSubmitting}
+              />
             </CheckoutActions>
           </FormWrapper>
         )}

@@ -14,12 +14,17 @@ const GoBackIconContainer = styled.span.attrs(() => ({
   }
 `;
 
-export const CheckoutAction = styled(LilacButton).attrs(({ backButton }) => ({
-  color: 'primary-light',
-  shadow: true,
+export const CheckoutAction = styled(LilacButton).attrs(({
+  backButton,
+  shadow = true,
+  color = 'primary-light',
+  label = 'Continuar',
+}) => ({
+  color,
+  shadow,
   children: backButton ? (
     <GoBackIconContainer />
-  ) : 'Continuar',
+  ) : label,
 }))`
   text-transform: uppercase;
 `;

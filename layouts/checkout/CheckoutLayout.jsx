@@ -17,6 +17,9 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    height: 100%;
+  }
 `;
 
 const ContainerLines = styled.div`
@@ -42,6 +45,7 @@ const Section = styled.section`
   min-width: 20.75rem;
   box-sizing: border-box;
   @media (min-width: ${BREAKPOINTS.hd}) {
+    height: 100%;
     flex-direction: row;
     width: 100%;
     max-width: 105.625rem;
@@ -134,6 +138,12 @@ const Logo = styled.img`
 
 const Content = styled.div`
   width: 100%;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    height: 100%;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const CheckoutLayout = ({ children }) => {

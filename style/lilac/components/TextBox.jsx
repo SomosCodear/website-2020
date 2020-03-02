@@ -1,7 +1,8 @@
 /* eslint-disable react/forbid-prop-types, react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { BREAKPOINTS } from '../../constants';
 
 const Container = styled.div`
   border: 1px solid var(--color-text);
@@ -10,6 +11,28 @@ const Container = styled.div`
   flex-direction: column;
   margin: 0.875rem 0;
   padding: 15px 15px 4px 15px;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    box-sizing: border-box;
+    margin: 0 18px 0.875rem 0;
+    &:last-child {
+      margin-left: 0;
+    }
+    ${({ medium }) => medium && css`
+      width: calc(50% - 10px);
+      &:nth-child(even) {
+        margin-right: 0;
+      }
+    `}
+    ${({ small }) => small && css`
+      width: calc(35% - 10px);
+      & + ${Container} {
+        margin-right: 0;
+      }
+    `}
+    ${({ large }) => large && css`
+      width: calc(65% - 10px);
+    `}
+  }
 `;
 const Label = styled.label`
   text-transform: uppercase;
@@ -33,14 +56,22 @@ export const TextBox = ({
   id,
   label,
   labelProps,
+  medium,
+  large,
+  small,
   ...inputProps
 }) => {
   const allInputProps = {
     id,
     ...inputProps,
   };
+  const containerProps = {
+    small,
+    medium,
+    large,
+  };
   return (
-    <Container>
+    <Container {...containerProps}>
       <Label htmlFor={id} {...labelProps}>{label}</Label>
       <Input {...allInputProps} />
     </Container>
@@ -49,10 +80,16 @@ export const TextBox = ({
 
 TextBox.defaultProps = {
   labelProps: {},
+  medium: false,
+  large: false,
+  small: false,
 };
 
 TextBox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   labelProps: PropTypes.object,
+  medium: PropTypes.bool,
+  large: PropTypes.bool,
+  small: PropTypes.bool,
 };

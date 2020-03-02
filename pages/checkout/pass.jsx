@@ -1,15 +1,21 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import R from 'ramda';
+import React, { useMemo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { Formik, Form } from 'formik';
 import { fetchItems } from '../../data/items/actions';
-import { getItems } from '../../data/items/selectors';
+import { getItemsById } from '../../data/items/selectors';
+import { setOrderPassInfo } from '../../data/order/actions';
+import { getPassHolder } from '../../data/order/selectors';
+import { RadioGroup } from '../../components/RadioGroup';
+import { ItemPrice } from '../../components/ItemPrice';
 import {
   CheckoutLayout,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
 } from '../../layouts/checkout';
-import { RadioButton } from '../../style/lilac/components';
 
 const Disclaimer = styled.p`
   font-size: 0.875rem;
@@ -48,7 +54,15 @@ const RadioButtonsContainer = styled.div`
 const RadioButtons = styled.div``;
 
 const CheckoutSecondStep = () => {
-  const items = useSelector(getItems);
+  const itemsById = useSelector(getItemsById);
+  const items = useMemo(() => R.values(itemsById), [itemsById]);
+  const { item } = useSelector((state) => getPassHolder(state, 0));
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const onSubmit = useCallback((values) => {
+    dispatch(setOrderPassInfo(0, values));
+    router.push('/checkout/addons');
+  }, [dispatch, router]);
 
   return (
     <CheckoutLayout>
@@ -56,30 +70,38 @@ const CheckoutSecondStep = () => {
         title="Elegí el tipo de pase"
         description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
       />
-      <form>
-        <RadioButtonsContainer>
-          <RadioButtons>
-            {items.map(({ id, name }) => (
-              <RadioButton
-                key={id}
-                id="ticket-type"
-                label={name}
-              />
-            ))}
-          </RadioButtons>
-        </RadioButtonsContainer>
-      </form>
-      <Total>
-        <TotalLabel>Tu pase costará</TotalLabel>
-        <TotalPrice>$ 1.200</TotalPrice>
-      </Total>
-      <Disclaimer>
-        Todos los precios son finales y en Pesos Argentinos.
-      </Disclaimer>
-      <CheckoutActions>
-        <CheckoutAction backButton />
-        <CheckoutAction />
-      </CheckoutActions>
+      {items.length > 0 ? (
+        <Formik
+          initialValues={{ item: item != null ? item : items[0].id }}
+          onSubmit={onSubmit}
+        >
+          {({ values }) => (
+            <Form>
+              <RadioButtonsContainer>
+                <RadioButtons>
+                  <RadioGroup
+                    name="item"
+                    options={items.map(({ id, name }) => ({ label: name, value: id }))}
+                  />
+                </RadioButtons>
+              </RadioButtonsContainer>
+              <Total>
+                <TotalLabel>Tu pase costará</TotalLabel>
+                <TotalPrice>
+                  <ItemPrice id={values.item} />
+                </TotalPrice>
+              </Total>
+              <Disclaimer>
+                Todos los precios son finales y en Pesos Argentinos.
+              </Disclaimer>
+              <CheckoutActions>
+                <CheckoutAction backButton onClick={router.back} />
+                <CheckoutAction type="submit" />
+              </CheckoutActions>
+            </Form>
+          )}
+        </Formik>
+      ) : null}
     </CheckoutLayout>
   );
 };

@@ -1,6 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../../layouts/checkout';
+import { fetchItems } from '../../data/items/actions';
+import { getItems } from '../../data/items/selectors';
+import {
+  CheckoutLayout,
+  CheckoutTitle,
+  CheckoutActions,
+  CheckoutAction,
+} from '../../layouts/checkout';
 import { RadioButton } from '../../style/lilac/components';
 
 const Disclaimer = styled.p`
@@ -39,43 +47,51 @@ const RadioButtonsContainer = styled.div`
  */
 const RadioButtons = styled.div``;
 
-const CheckoutSecondStep = () => (
-  <CheckoutLayout>
-    <CheckoutTitle
-      title="Elegí el tipo de pase"
-      description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
-    />
-    <form>
-      <RadioButtonsContainer>
-        <RadioButtons>
-          <RadioButton
-            id="ticket-type"
-            label="Full"
-          />
-          <RadioButton
-            id="ticket-type"
-            label="Simple (29/05)"
-            checked
-          />
-          <RadioButton
-            id="ticket-type"
-            label="Simple (30/05)"
-          />
-        </RadioButtons>
-      </RadioButtonsContainer>
-    </form>
-    <Total>
-      <TotalLabel>Tu pase costará</TotalLabel>
-      <TotalPrice>$ 1.200</TotalPrice>
-    </Total>
-    <Disclaimer>
-      Todos los precios son finales y en Pesos Argentinos.
-    </Disclaimer>
-    <CheckoutActions
-      onContinue={() => {}}
-      onGoBack={() => {}}
-    />
-  </CheckoutLayout>
-);
+const CheckoutSecondStep = () => {
+  const items = useSelector(getItems);
+
+  return (
+    <CheckoutLayout>
+      <CheckoutTitle
+        title="Elegí el tipo de pase"
+        description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
+      />
+      <form>
+        <RadioButtonsContainer>
+          <RadioButtons>
+            {items.map(({ id, name }) => (
+              <RadioButton
+                key={id}
+                id="ticket-type"
+                label={name}
+              />
+            ))}
+          </RadioButtons>
+        </RadioButtonsContainer>
+      </form>
+      <Total>
+        <TotalLabel>Tu pase costará</TotalLabel>
+        <TotalPrice>$ 1.200</TotalPrice>
+      </Total>
+      <Disclaimer>
+        Todos los precios son finales y en Pesos Argentinos.
+      </Disclaimer>
+      <CheckoutActions>
+        <CheckoutAction backButton />
+        <CheckoutAction />
+      </CheckoutActions>
+    </CheckoutLayout>
+  );
+};
+
+CheckoutSecondStep.getInitialProps = async ({ store, isServer }) => {
+  const promise = store.dispatch(fetchItems('PASS'));
+
+  if (isServer) {
+    await promise;
+  }
+
+  return {};
+};
 
 export default CheckoutSecondStep;

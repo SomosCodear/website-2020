@@ -901,9 +901,9 @@
     to-fast-properties "^2.0.0"
 
 "@codear/lilac@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@codear/lilac/-/lilac-2.0.0.tgz#e58cb3e0734138f324fbff3f7d92eb2545c7ffc0"
-  integrity sha512-din4HWgXLbmlGzBb1wSD+dx8gL06/MK7uBbVMbMflB0b04a6oBnMIIWH7tCQPDCnWPKeP8xUmIfhCEbmZqOVGw==
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@codear/lilac/-/lilac-2.1.0.tgz#cc1c020a75a143b807bf2ac57756186d574c8c77"
+  integrity sha512-9LaWtbUG7h/lAVDmiAvJeFB9Pf7Kn8Zwv7HPYxioEWt4g6yTh4OPnp0sc9sanlpvv+VLMQ5pBA36taojQvOIlg==
 
 "@csstools/convert-colors@^1.4.0":
   version "1.4.0"

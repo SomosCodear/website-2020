@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
+import Link from 'next/link';
 import styled from 'styled-components';
 import { BREAKPOINTS } from '../../style/constants';
 import { META } from '../../data/constants';
@@ -57,6 +58,8 @@ const Header = styled.header`
 `;
 
 const HeaderLogo = styled.div`
+  cursor: pointer;
+
   img {
     max-width: 100%;
   }
@@ -160,18 +163,20 @@ export const CheckoutLayout = ({ children }) => {
       <ContainerLines>
         <Section>
           <Header>
-            <HeaderLogo>
-              <Logo
-                hideOnMobile
-                src="/images/logos/webconf-vertical.svg"
-                alt="Logo de WebConf"
-              />
-              <Logo
-                hideOnDesktop
-                src="/images/logos/webconf-horizontal.svg"
-                alt="Logo de WebConf"
-              />
-            </HeaderLogo>
+            <Link href="/">
+              <HeaderLogo>
+                <Logo
+                  hideOnMobile
+                  src="/images/logos/webconf-vertical.svg"
+                  alt="Logo de WebConf"
+                />
+                <Logo
+                  hideOnDesktop
+                  src="/images/logos/webconf-horizontal.svg"
+                  alt="Logo de WebConf"
+                />
+              </HeaderLogo>
+            </Link>
             <HeaderInfo>
               <HeaderDate>
                 29 y 30 de Mayo de 2020

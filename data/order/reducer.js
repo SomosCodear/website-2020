@@ -7,12 +7,13 @@ const defaultPassHolder = {
   lastName: '',
   identityDocument: '',
   email: '',
+  item: null,
 };
 const defaultPassHolders = [defaultPassHolder];
 const passHolders = (state = defaultPassHolders, { type, payload }) => {
   switch (type) {
     case ORDER_SET_PASS_INFO:
-      return R.update(payload.index, payload.value)(state);
+      return R.adjust(payload.index, R.mergeLeft(payload.value))(state);
     default:
       return state;
   }

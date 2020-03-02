@@ -8,11 +8,11 @@ export const CheckoutActions = styled.div`
   margin: 0 auto;
   padding-bottom: 1.25rem;
 
-  *:only-child {
+  > *:only-child {
     flex-grow: 1;
   }
 
-  * + * {
+  > * + * {
     flex-grow: 1;
     margin-left: 2.5rem;
   }
@@ -25,6 +25,5 @@ export const CheckoutActions = styled.div`
       flex-grow: 0;
       margin-left: 0;
     }
-
   }
 `;

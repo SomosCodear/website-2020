@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BREAKPOINTS } from '../../style/constants';
 
 const Container = styled.div`
@@ -34,17 +34,31 @@ const Description = styled.p`
     line-height: 2.6875rem;
     font-weight: lighter;
     padding: 0;
+    ${({ hideDescriptionOnDesktop }) => hideDescriptionOnDesktop && css`
+      display: none;
+    `}
   }
 `;
 
 const Subtitle = styled.div``;
 
-export const CheckoutTitle = ({ title, description, children }) => (
+export const CheckoutTitle = ({
+  title,
+  description,
+  hideDescriptionOnDesktop,
+  children,
+}) => (
   <Container>
     <Title>{title}</Title>
     {
       description
-        ? (<Description>{description}</Description>)
+        ? (
+          <Description
+            hideDescriptionOnDesktop={hideDescriptionOnDesktop}
+          >
+            {description}
+          </Description>
+        )
         : null
     }
     {
@@ -57,11 +71,13 @@ export const CheckoutTitle = ({ title, description, children }) => (
 
 CheckoutTitle.defaultProps = {
   description: '',
+  hideDescriptionOnDesktop: false,
   children: null,
 };
 
 CheckoutTitle.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
+  hideDescriptionOnDesktop: PropTypes.bool,
   children: PropTypes.node,
 };

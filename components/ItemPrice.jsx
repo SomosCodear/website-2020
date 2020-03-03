@@ -10,7 +10,7 @@ export const ItemPrice = ({ id, amount }) => {
   return `$ ${finalPrice}`;
 };
 
-ItemPrice.PropTypes = {
+ItemPrice.propTypes = {
   id: PropTypes.string.isRequired,
   amount: PropTypes.number,
 };

@@ -17,9 +17,6 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    height: 100%;
-  }
 `;
 
 const ContainerLines = styled.div`
@@ -28,6 +25,7 @@ const ContainerLines = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     background-image: url(/images/header-lines-left.svg),
       url(/images/header-lines-right.svg);

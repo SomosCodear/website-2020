@@ -5,7 +5,7 @@ export const CheckoutActions = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
+  margin: 0 2rem;
   padding-bottom: 1.25rem;
 
   > *:only-child {
@@ -20,6 +20,7 @@ export const CheckoutActions = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
     width: 100%;
     margin: 0;
+
     > * {
       min-width: 310px;
       flex-grow: 0;

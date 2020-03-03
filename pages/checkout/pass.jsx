@@ -106,7 +106,7 @@ const CheckoutSecondStep = () => {
 };
 
 CheckoutSecondStep.getInitialProps = async ({ store, isServer }) => {
-  const promise = store.dispatch(fetchItems(ITEM_TYPE_PASS));
+  const promise = store.dispatch(fetchItems());
 
   if (isServer) {
     await promise;

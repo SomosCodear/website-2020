@@ -12,6 +12,20 @@ export const getPassHolder = createCachedSelector(
   [R.nthArg(1), getPassHolders],
   R.nth,
 )(R.nthArg((1)));
+export const getOrderPasses = createSelector(
+  [getPassHolders],
+  R.compose(
+    R.map(R.length),
+    R.groupBy(R.prop('item')),
+  ),
+);
+export const getOrderPassHolderNames = createSelector(
+  [getPassHolders],
+  R.map(R.compose(
+    R.join(' '),
+    R.props(['firstName', 'lastName']),
+  )),
+);
 
 export const getAddons = createSelector(
   [getOrder],

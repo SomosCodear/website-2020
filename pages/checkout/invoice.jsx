@@ -1,137 +1,111 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { CheckoutLayout, CheckoutTitle, CheckoutActions } from '../../layouts/checkout';
+import R from 'ramda';
+import React, { useMemo, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import { Formik, Form, Field } from 'formik';
+import { conditionallyFetchItems } from '../../utils/dataFetching';
+import { getCustomer, getPassHolder } from '../../data/order/selectors';
+import { setOrderCustomer } from '../../data/order/actions';
+import { customerSchema } from '../../data/order/schemas';
+import {
+  CheckoutLayout,
+  CheckoutTitle,
+  CheckoutActions,
+  CheckoutAction,
+} from '../../layouts/checkout';
 import { TextBox, ErrorNugget } from '../../style/lilac/components';
+import { OrderDetails } from '../../components/OrderDetails';
 
-const Form = styled.form`
+const FormWrapper = styled(Form)`
   display: block;
   padding: 0 2rem;
 `;
-const DetailContainer = styled.div`
-  color: var(--color-text);
-  background: #00000080 0% 0%;
-  padding: 0 2.125rem;
-`;
-const DetailTitle = styled.h2`
-  font-size: 2rem;
-  margin: 0;
-  padding-top: 1.5rem;
-  font-weight: lighter;
-  opacity: .5;
-`;
-const Disclaimer = styled.p`
-  font-size: 0.875rem;
-  margin: 0 0 1.5rem 0;
-  opacity: .5;
-`;
-const DetailItems = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`;
-const DetailItem = styled.li`
-  padding-bottom: 0.9375rem;
-  margin-bottom: 0.9375rem;
-  border-bottom: 1px solid var(--color-accent);
-  &:last-child {
-    border-bottom: 0;
-  }
-`;
-const DetailItemTitle = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.5rem;
-`;
-const DetailItemLabel = styled.span`
-  display: block;
-`;
-const DetailItemPrice = styled.span`
-  display: block;
-  ${({ bold }) => bold && css`font-weight: bold;`}
-  ${({ big }) => big && css`font-size: 2rem;`}
-`;
-const DetailItemSubtitle = styled.p`
-  opacity: .5;
-  font-size: 0.875rem;
-  margin: 0.25rem 0 0 0;
-`;
-const DetailSubItem = styled.li`
-  opacity: .5;
-  margin-left: 1.9375rem;
-  padding: 0.5rem 0;
-  font-size: 1.5rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  &:first-child {
-    padding-top: 0.8rem;
-  }
-  &:last-child {
-    padding-bottom: 0;
-  }
-`;
 
-const CheckoutSecondStep = () => (
-  <CheckoutLayout>
-    <CheckoutTitle
-      title="¿A quién le emitimos la factura?"
-      description="Los siguientes datos son necesarios para poder generar tu factura electrónica."
-    />
-    <Form>
-      <TextBox
-        id="checkout-id"
-        label="Número de documento o CUIT"
-        value="12345678"
-      />
-      <TextBox
-        id="checkout-lname"
-        label="Nombre o razón social"
-        value="Cosme Fulanito"
-      />
-      <TextBox
-        id="checkout-email"
-        label="E-mail"
-        type="email"
-        value="cosme@fulanito.com"
-      />
-      <ErrorNugget>
-        Revisá estos datos.
-      </ErrorNugget>
-    </Form>
-    <DetailContainer>
-      <DetailTitle>Resumen de cuenta</DetailTitle>
-      <Disclaimer>Todos los precios son finales y en Pesos Argentinos.</Disclaimer>
-      <DetailItems>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Pase de conferencia</DetailItemLabel>
-            <DetailItemPrice bold>$ 1.200</DetailItemPrice>
-          </DetailItemTitle>
-        </DetailItem>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Extras</DetailItemLabel>
-            <DetailItemPrice bold>$ 2.250</DetailItemPrice>
-          </DetailItemTitle>
-        </DetailItem>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Total a pagar</DetailItemLabel>
-            <DetailItemPrice big bold>$ 3.450</DetailItemPrice>
-          </DetailItemTitle>
-        </DetailItem>
-      </DetailItems>
+const CheckoutFourthStep = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-      <CheckoutActions
-        onContinue={() => {}}
-        onGoBack={() => {}}
+  const customer = useSelector(getCustomer);
+  const firstPassHolder = useSelector((store) => getPassHolder(store, 0));
+
+  const initialValues = useMemo(
+    () => R.defaultTo({
+      identityDocument: firstPassHolder.identityDocument,
+      firstName: `${firstPassHolder.firstName} ${firstPassHolder.lastName}`,
+      email: firstPassHolder.email,
+    })(customer),
+    [customer, firstPassHolder],
+  );
+  const onSubmit = useCallback((values) => {
+    dispatch(setOrderCustomer(values));
+    router.push('/checkout');
+  }, [dispatch, router]);
+
+  return (
+    <CheckoutLayout>
+      <CheckoutTitle
+        title="¿A quién le emitimos la factura?"
+        description="Los siguientes datos son necesarios para poder generar tu factura electrónica."
       />
+      <Formik
+        initialValues={initialValues}
+        validationSchema={customerSchema}
+        onSubmit={onSubmit}
+      >
+        {({ isSubmitting, isValid, submitCount }) => (
+          <FormWrapper>
+            <Field
+              as={TextBox}
+              id="identityDocument"
+              name="identityDocument"
+              label="Número de documento o CUIT"
+              small
+            />
+            <Field
+              as={TextBox}
+              id="firstName"
+              name="firstName"
+              label="Nombre y apellido o razón social"
+              medium
+            />
+            <Field
+              as={TextBox}
+              id="email"
+              name="email"
+              label="Dirección de correo electrónico"
+              type="email"
+              large
+            />
+            {submitCount > 0 && !isValid ? (
+              <ErrorNugget>
+                Revisá estos datos.
+              </ErrorNugget>
+            ) : null}
+            <OrderDetails>
+              <CheckoutActions>
+                <CheckoutAction
+                  onClick={router.back}
+                  disabled={isSubmitting}
+                  backButton
+                />
+                <CheckoutAction
+                  type="submit"
+                  disabled={isSubmitting}
+                />
+              </CheckoutActions>
+            </OrderDetails>
+          </FormWrapper>
+        )}
+      </Formik>
+    </CheckoutLayout>
+  );
+};
 
-    </DetailContainer>
-  </CheckoutLayout>
-);
+CheckoutFourthStep.getInitialProps = async ({ store, isServer }) => {
+  await conditionallyFetchItems(store, isServer);
 
-export default CheckoutSecondStep;
+  return {};
+};
+
+export default CheckoutFourthStep;

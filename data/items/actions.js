@@ -15,11 +15,11 @@ const itemsFetchFailure = (error) => ({
   payload: error,
 });
 
-export const fetchItems = (type) => async (dispatch) => {
+export const fetchItems = () => async (dispatch) => {
   dispatch(itemsFetchRequest());
 
   try {
-    const items = await api.findAll('items', { filter: { type }, include: ['options'] });
+    const items = await api.findAll('items', { include: ['options'] });
     dispatch(itemsFetchSuccess(items));
   } catch (e) {
     dispatch(itemsFetchFailure(e.message));

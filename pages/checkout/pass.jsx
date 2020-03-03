@@ -47,6 +47,10 @@ const RadioButtonsContainer = styled.div`
   justify-content: center;
 `;
 
+const WrappedCheckoutActions = styled(CheckoutActions)`
+  margin: 0 2rem;
+`;
+
 /**
  * This is necessary so the radio buttons will be aligned on the same Y no matter
  * the width of their labels.
@@ -93,10 +97,10 @@ const CheckoutSecondStep = () => {
               <Disclaimer>
                 Todos los precios son finales y en Pesos Argentinos.
               </Disclaimer>
-              <CheckoutActions>
+              <WrappedCheckoutActions>
                 <CheckoutAction backButton onClick={router.back} />
                 <CheckoutAction type="submit" />
-              </CheckoutActions>
+              </WrappedCheckoutActions>
             </Form>
           )}
         </Formik>

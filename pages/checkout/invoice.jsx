@@ -17,8 +17,7 @@ import {
 import { TextBox, ErrorNugget } from '../../style/lilac/components';
 import { OrderDetails } from '../../components/OrderDetails';
 
-const FormWrapper = styled(Form)`
-  display: block;
+const Fields = styled.div`
   padding: 0 2rem;
 `;
 
@@ -54,34 +53,36 @@ const CheckoutFourthStep = () => {
         onSubmit={onSubmit}
       >
         {({ isSubmitting, isValid, submitCount }) => (
-          <FormWrapper>
-            <Field
-              as={TextBox}
-              id="identityDocument"
-              name="identityDocument"
-              label="Número de documento o CUIT"
-              small
-            />
-            <Field
-              as={TextBox}
-              id="firstName"
-              name="firstName"
-              label="Nombre y apellido o razón social"
-              medium
-            />
-            <Field
-              as={TextBox}
-              id="email"
-              name="email"
-              label="Dirección de correo electrónico"
-              type="email"
-              large
-            />
-            {submitCount > 0 && !isValid ? (
-              <ErrorNugget>
-                Revisá estos datos.
-              </ErrorNugget>
-            ) : null}
+          <Form>
+            <Fields>
+              <Field
+                as={TextBox}
+                id="identityDocument"
+                name="identityDocument"
+                label="Número de documento o CUIT"
+                small
+              />
+              <Field
+                as={TextBox}
+                id="firstName"
+                name="firstName"
+                label="Nombre y apellido o razón social"
+                medium
+              />
+              <Field
+                as={TextBox}
+                id="email"
+                name="email"
+                label="Dirección de correo electrónico"
+                type="email"
+                large
+              />
+              {submitCount > 0 && !isValid ? (
+                <ErrorNugget>
+                  Revisá estos datos.
+                </ErrorNugget>
+              ) : null}
+            </Fields>
             <OrderDetails>
               <CheckoutActions>
                 <CheckoutAction
@@ -95,7 +96,7 @@ const CheckoutFourthStep = () => {
                 />
               </CheckoutActions>
             </OrderDetails>
-          </FormWrapper>
+          </Form>
         )}
       </Formik>
     </CheckoutLayout>

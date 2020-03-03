@@ -31,3 +31,8 @@ export const getAddons = createSelector(
   [getOrder],
   R.prop('addons'),
 );
+
+export const getCustomer = createSelector(
+  [getOrder],
+  R.prop('customer'),
+);

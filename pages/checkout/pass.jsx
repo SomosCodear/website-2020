@@ -1,11 +1,11 @@
-import R from 'ramda';
-import React, { useMemo, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import { fetchItems } from '../../data/items/actions';
-import { getItemsById } from '../../data/items/selectors';
+import { ITEM_TYPE_PASS } from '../../data/items/constants';
+import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
 import { getPassHolder } from '../../data/order/selectors';
 import { RadioGroup } from '../../components/RadioGroup';
@@ -54,8 +54,7 @@ const RadioButtonsContainer = styled.div`
 const RadioButtons = styled.div``;
 
 const CheckoutSecondStep = () => {
-  const itemsById = useSelector(getItemsById);
-  const items = useMemo(() => R.values(itemsById), [itemsById]);
+  const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
   const { item } = useSelector((state) => getPassHolder(state, 0));
   const dispatch = useDispatch();
   const router = useRouter();
@@ -107,7 +106,7 @@ const CheckoutSecondStep = () => {
 };
 
 CheckoutSecondStep.getInitialProps = async ({ store, isServer }) => {
-  const promise = store.dispatch(fetchItems('PASS'));
+  const promise = store.dispatch(fetchItems(ITEM_TYPE_PASS));
 
   if (isServer) {
     await promise;

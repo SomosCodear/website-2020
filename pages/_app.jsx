@@ -7,6 +7,7 @@ import Router from 'next/router';
 import { Provider } from 'react-redux';
 import withGA from 'next-ga';
 import withRedux from 'next-redux-wrapper';
+import { PersistGate } from 'redux-persist/integration/react';
 import { configureStore } from '../data/store';
 import { ANALYTICS_ID } from '../data/constants';
 import { AnalyticsContext } from '../utils/analytics';
@@ -19,8 +20,10 @@ const WebConfApp = ({
 }) => (
   <AnalyticsContext.Provider value={analytics}>
     <Provider store={store}>
-      {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-      <Component {...pageProps} />
+      <PersistGate persistor={store.persistor}>
+        {/* eslint-disable-next-line react/jsx-props-no-spreading */}
+        <Component {...pageProps} />
+      </PersistGate>
     </Provider>
   </AnalyticsContext.Provider>
 );

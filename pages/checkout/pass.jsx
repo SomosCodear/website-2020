@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
-import { fetchItems } from '../../data/items/actions';
+import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_PASS } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
@@ -106,11 +106,7 @@ const CheckoutSecondStep = () => {
 };
 
 CheckoutSecondStep.getInitialProps = async ({ store, isServer }) => {
-  const promise = store.dispatch(fetchItems());
-
-  if (isServer) {
-    await promise;
-  }
+  await conditionallyFetchItems(store, isServer);
 
   return {};
 };

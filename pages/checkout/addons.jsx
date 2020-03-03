@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { fetchItems } from '../../data/items/actions';
+import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_ADDON } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { getAddons } from '../../data/order/selectors';
@@ -73,11 +73,7 @@ const CheckoutThirdStep = () => {
 };
 
 CheckoutThirdStep.getInitialProps = async ({ store, isServer }) => {
-  const promise = store.dispatch(fetchItems());
-
-  if (isServer) {
-    await promise;
-  }
+  await conditionallyFetchItems(store, isServer);
 
   return {};
 };

@@ -18,7 +18,10 @@ const getItemsIndexedByType = createSelector(
 );
 export const getItemsByType = createCachedSelector(
   [R.nthArg(1), getItemsIndexedByType],
-  R.prop,
+  R.compose(
+    R.defaultTo([]),
+    R.prop,
+  ),
 )(R.nthArg(1));
 
 export const getItemPrice = createCachedSelector(

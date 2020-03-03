@@ -1,6 +1,6 @@
 import R from 'ramda';
 import { combineReducers } from 'redux';
-import { ORDER_SET_PASS_INFO } from './actionTypes';
+import { ORDER_SET_PASS_INFO, ORDER_SET_ADDON_AMOUNT } from './actionTypes';
 
 const defaultPassHolder = {
   firstName: '',
@@ -19,6 +19,20 @@ const passHolders = (state = defaultPassHolders, { type, payload }) => {
   }
 };
 
+const defaultAddons = {};
+const addons = (state = defaultAddons, { type, payload }) => {
+  switch (type) {
+    case ORDER_SET_ADDON_AMOUNT:
+      return R.compose(
+        R.reject(R.equals(0)),
+        R.assoc(payload.id, payload.amount),
+      )(state);
+    default:
+      return state;
+  }
+};
+
 export const order = combineReducers({
   passHolders,
+  addons,
 });

@@ -46,7 +46,7 @@ const findAll = async (resource, params) => {
 
 const create = async (resource, data, params) => {
   const url = makeURL(resource, params).toString();
-  const serializedData = serialize(resource, data);
+  const serializedData = serialize(data);
 
   const response = await fetch(url, {
     headers,

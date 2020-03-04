@@ -1,4 +1,7 @@
-import { ORDER_SET_PASS_INFO, ORDER_SET_ADDON_AMOUNT, ORDER_SET_CUSTOMER } from './actionTypes';
+import {
+  ORDER_SET_PASS_INFO,
+  ORDER_SET_ADDON_AMOUNT,
+} from './actionTypes';
 
 export const setOrderPassInfo = (index, value) => ({
   type: ORDER_SET_PASS_INFO,
@@ -14,9 +17,4 @@ export const setOrderAddonAmount = (id, amount) => ({
     id,
     amount,
   },
-});
-
-export const setOrderCustomer = (customer) => ({
-  type: ORDER_SET_CUSTOMER,
-  payload: customer,
 });

@@ -5,8 +5,9 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
-import { getCustomer, getPassHolder } from '../../data/order/selectors';
-import { setOrderCustomer } from '../../data/order/actions';
+import { getPassHolder } from '../../data/order/selectors';
+import { getCustomer } from '../../data/customer/selectors';
+import { setCustomerData } from '../../data/customer/actions';
 import { customerSchema } from '../../data/order/schemas';
 import {
   CheckoutLayout,
@@ -36,8 +37,9 @@ const CheckoutFourthStep = () => {
     })(customer),
     [customer, firstPassHolder],
   );
+
   const onSubmit = useCallback((values) => {
-    dispatch(setOrderCustomer(values));
+    dispatch(setCustomerData(values));
     router.push('/checkout/confirmation');
   }, [dispatch, router]);
 

@@ -36,7 +36,7 @@ export function configureStore(initialState = {}, { isServer }) {
 
   const persistConfig = {
     key: 'nextjs',
-    whitelist: ['order'],
+    whitelist: ['customer', 'order'],
     storage,
   };
 

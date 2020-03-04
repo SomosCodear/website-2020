@@ -17,7 +17,7 @@ const appendParameters = (urlObject, params) => {
     });
   }
 
-  if (params.includes != null) {
+  if (params.include != null) {
     const include = params.include.join(',');
     urlObject.searchParams.append('include', include);
   }

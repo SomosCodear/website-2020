@@ -38,7 +38,7 @@ const CheckoutFourthStep = () => {
   );
   const onSubmit = useCallback((values) => {
     dispatch(setOrderCustomer(values));
-    router.push('/checkout');
+    router.push('/checkout/confirmation');
   }, [dispatch, router]);
 
   return (

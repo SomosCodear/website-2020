@@ -1,18 +1,11 @@
-import R from 'ramda';
 import fetch from 'isomorphic-unfetch';
-import Jsona from 'jsona';
-import { API_URL } from './config';
+import { API_URL } from '../config';
+import { serialize, deserialize } from './serialization';
 
 const headers = {
   Accept: 'application/vnd.api+json',
   'Content-Type': 'application/vnd.api+json',
 };
-const formatter = new Jsona();
-
-const deserialize = R.compose(
-  R.map(R.dissoc('relationshipNames')),
-  R.bind(formatter.deserialize, formatter),
-);
 
 const appendParameters = (urlObject, params) => {
   if (params.filter != null) {
@@ -51,6 +44,21 @@ const findAll = async (resource, params) => {
   return deserialize(json);
 };
 
+const create = async (resource, data, params) => {
+  const url = makeURL(resource, params).toString();
+  const serializedData = serialize(resource, data);
+
+  const response = await fetch(url, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(serializedData),
+  });
+
+  const json = await response.json();
+  return deserialize(json);
+};
+
 export const api = {
   findAll,
+  create,
 };

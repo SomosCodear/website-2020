@@ -1,8 +1,9 @@
+import R from 'ramda';
 import fetch from 'isomorphic-unfetch';
 import { API_URL } from '../config';
 import { serialize, deserialize } from './serialization';
 
-const headers = {
+const DEFAULT_HEADERS = {
   Accept: 'application/vnd.api+json',
   'Content-Type': 'application/vnd.api+json',
 };
@@ -34,22 +35,24 @@ const makeURL = (resource, params) => {
   return urlObject;
 };
 
-const findAll = async (resource, params) => {
-  const url = makeURL(resource, params).toString();
+const makeHeaders = (headers = {}) => R.mergeLeft(headers, DEFAULT_HEADERS);
+
+const findAll = async (resource, options = {}) => {
+  const url = makeURL(resource, options.params).toString();
   const response = await fetch(url, {
-    headers,
+    heders: makeHeaders(options.headers),
   });
 
   const json = await response.json();
   return deserialize(json);
 };
 
-const create = async (resource, data, params) => {
-  const url = makeURL(resource, params).toString();
+const create = async (resource, data, options = {}) => {
+  const url = makeURL(resource, options.params).toString();
   const serializedData = serialize(data);
 
   const response = await fetch(url, {
-    headers,
+    headers: makeHeaders(options.headers),
     method: 'POST',
     body: JSON.stringify(serializedData),
   });

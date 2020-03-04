@@ -19,7 +19,7 @@ export const fetchItems = () => async (dispatch) => {
   dispatch(itemsFetchRequest());
 
   try {
-    const items = await api.findAll('items', { include: ['options'] });
+    const items = await api.findAll('items', { params: { include: ['options'] } });
     dispatch(itemsFetchSuccess(items));
   } catch (e) {
     dispatch(itemsFetchFailure(e.message));

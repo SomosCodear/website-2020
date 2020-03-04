@@ -6,3 +6,8 @@ export const getCustomer = createSelector(
   [getCustomerData],
   R.prop('customer'),
 );
+
+export const isCreatingCustomer = createSelector(
+  [getCustomerData],
+  R.prop('creating'),
+);

@@ -23,20 +23,19 @@ const applyNestedCasing = R.curry(
   )(object),
 );
 
-const buildJSONApiIdentifier = (type, id) => ({
-  type,
-  id,
-});
+const buildJSONApiIdentifier = R.curry(
+  (type, id) => ({
+    type,
+    id,
+  }),
+);
 
-const buildJSONApiResource = (type, attributes) => ({
-  type,
-  attributes,
-});
-
-
-const buildJSONApiPayload = (type, data) => ({
-  data: buildJSONApiResource(type, data),
-});
+const buildJSONApiResource = R.curry(
+  (type, attributes) => ({
+    type,
+    attributes,
+  }),
+);
 
 export const deserialize = R.compose(
   (data) => (
@@ -48,31 +47,47 @@ export const deserialize = R.compose(
   baseDeserialize,
 );
 
-export const serialize = ({
+export const baseSerialize = ({
   type,
   data,
   typeMapping = {},
   nestedIdentifiers = [],
-}) => {
-  const serialized = R.compose(
-    applyCasing(paramCase),
-    R.mapObjIndexed((value, key) => {
-      let serializedValue = value;
+}) => R.compose(
+  applyCasing(paramCase),
+  buildJSONApiResource(type),
+  R.mapObjIndexed((value, key) => {
+    const serializationContext = {
+      type: typeMapping[key],
+      typeMapping,
+      nestedIdentifiers,
+    };
+    let serializedValue = value;
 
-      if (R.type(value) === 'Object') {
-        serializedValue = serialize({
-          type: typeMapping[key],
+    switch (R.type(value)) {
+      case 'Object':
+        serializedValue = baseSerialize({
+          ...serializationContext,
           data: value,
-          typeMapping,
-          nestedIdentifiers,
         });
-      } else if (nestedIdentifiers.includes(key)) {
-        serializedValue = buildJSONApiIdentifier(key, value);
-      }
+        break;
+      case 'Array':
+        serializedValue = value.map((item) => baseSerialize({
+          ...serializationContext,
+          data: item,
+        }));
+        break;
+      default:
+        if (nestedIdentifiers.includes(key)) {
+          serializedValue = buildJSONApiIdentifier(serializationContext.type, value);
+        }
+    }
 
-      return serializedValue;
-    }),
-  )(data);
+    return serializedValue;
+  }),
+)(data);
 
-  return buildJSONApiPayload(type, serialized);
-};
+export const serialize = (data) => R.compose(
+  applyCasing(paramCase),
+  (serialized) => ({ data: serialized }),
+  baseSerialize,
+)(data);

@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
+import { createOrder } from '../../data/order/actions';
 import {
   CheckoutLayout,
   CheckoutTitle,
@@ -11,6 +13,11 @@ import { OrderDetails } from '../../components/OrderDetails';
 
 const CheckoutFifthStep = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const onProceed = useCallback(
+    () => dispatch(createOrder()),
+    [dispatch],
+  );
 
   return (
     <CheckoutLayout>
@@ -24,7 +31,11 @@ const CheckoutFifthStep = () => {
             onClick={router.back}
             backButton
           />
-          <CheckoutAction label="Proceder al pago" color="accent" />
+          <CheckoutAction
+            label="Proceder al pago"
+            color="accent"
+            onClick={onProceed}
+          />
         </CheckoutActions>
       </OrderDetails>
     </CheckoutLayout>

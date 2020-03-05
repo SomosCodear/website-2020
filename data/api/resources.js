@@ -12,4 +12,22 @@ export const ENDPOINTS = {
 };
 
 export const RELATIONSHIP_DEFINITIONS = {
+  [ORDER]: {
+    orderItems: {
+      nestedType: ORDER_ITEM,
+      isIdentifier: false,
+    },
+    item: {
+      nestedType: ITEM,
+      isIdentifier: true,
+    },
+    options: {
+      nestedType: ORDER_ITEM_OPTION,
+      isIdentifier: false,
+    },
+    itemOption: {
+      nestedType: ITEM_OPTION,
+      isIdentifier: true,
+    },
+  },
 };

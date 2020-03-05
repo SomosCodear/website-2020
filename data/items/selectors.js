@@ -24,11 +24,25 @@ export const getItemsByType = createCachedSelector(
   ),
 )(R.nthArg(1));
 
-export const getItemPrice = createCachedSelector(
+export const getItem = createCachedSelector(
   [R.nthArg(1), getItemsById],
+  R.prop,
+)(R.nthArg(1));
+
+export const getItemPrice = createCachedSelector(
+  [getItem],
   R.compose(
     (price) => parseInt(price, 10),
     R.prop('price'),
-    R.prop,
   ),
 )(R.nthArg(1));
+
+export const getItemOptions = createCachedSelector(
+  [getItem],
+  R.prop('options'),
+)(R.nthArg(1));
+
+export const getItemOption = createCachedSelector(
+  [R.nthArg(2), getItemOptions],
+  (name, options) => R.find(R.propEq('name', name))(options),
+)((_, id, optionName) => `${id}:${optionName}`);

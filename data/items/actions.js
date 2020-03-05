@@ -1,4 +1,4 @@
-import { api } from '../api';
+import { api, ITEM } from '../api';
 import { ITEMS_FETCH_REQUEST, ITEMS_FETCH_SUCCESS, ITEMS_FETCH_FAILURE } from './actionTypes';
 
 const itemsFetchRequest = () => ({
@@ -19,7 +19,7 @@ export const fetchItems = () => async (dispatch) => {
   dispatch(itemsFetchRequest());
 
   try {
-    const items = await api.findAll('items', { params: { include: ['options'] } });
+    const items = await api.findAll(ITEM, { params: { include: ['options'] } });
     dispatch(itemsFetchSuccess(items));
   } catch (e) {
     dispatch(itemsFetchFailure(e.message));

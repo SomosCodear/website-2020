@@ -1,6 +1,7 @@
 import R from 'ramda';
 import fetch from 'isomorphic-unfetch';
 import { API_URL } from '../config';
+import { ENDPOINTS } from './resources';
 import { serialize, deserialize } from './serialization';
 
 const DEFAULT_HEADERS = {
@@ -25,7 +26,7 @@ const appendParameters = (urlObject, params) => {
 };
 
 const makeURL = (resource, params) => {
-  const url = `${API_URL}/${resource}/`;
+  const url = `${API_URL}/${ENDPOINTS[resource]}/`;
   const urlObject = new URL(url);
 
   if (params != null) {
@@ -49,7 +50,7 @@ const findAll = async (resource, options = {}) => {
 
 const create = async (resource, data, options = {}) => {
   const url = makeURL(resource, options.params).toString();
-  const serializedData = serialize(data);
+  const serializedData = serialize(resource, data);
 
   const response = await fetch(url, {
     headers: makeHeaders(options.headers),

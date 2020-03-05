@@ -1,6 +1,7 @@
 import R from 'ramda';
 import { paramCase, camelCase } from 'change-case';
 import { deserialize as baseDeserialize } from 'deserialize-json-api';
+import { RELATIONSHIP_DEFINITIONS } from './resources';
 
 const applyCasing = (casing) => R.compose(
   R.fromPairs,
@@ -47,38 +48,26 @@ export const deserialize = R.compose(
   baseDeserialize,
 );
 
-export const baseSerialize = ({
-  type,
-  data,
-  typeMapping = {},
-  nestedIdentifiers = [],
-}) => R.compose(
-  applyCasing(paramCase),
+export const baseSerialize = (type, data, rootType = type) => R.compose(
   buildJSONApiResource(type),
+  applyCasing(paramCase),
   R.mapObjIndexed((value, key) => {
-    const serializationContext = {
-      type: typeMapping[key],
-      typeMapping,
-      nestedIdentifiers,
-    };
+    const { nestedType, isIdentifier } = R.compose(
+      R.defaultTo({}),
+      R.path([rootType, key]),
+    )(RELATIONSHIP_DEFINITIONS);
     let serializedValue = value;
 
     switch (R.type(value)) {
       case 'Object':
-        serializedValue = baseSerialize({
-          ...serializationContext,
-          data: value,
-        });
+        serializedValue = baseSerialize(nestedType, value);
         break;
       case 'Array':
-        serializedValue = value.map((item) => baseSerialize({
-          ...serializationContext,
-          data: item,
-        }));
+        serializedValue = value.map((item) => baseSerialize(nestedType, item, rootType));
         break;
       default:
-        if (nestedIdentifiers.includes(key)) {
-          serializedValue = buildJSONApiIdentifier(serializationContext.type, value);
+        if (isIdentifier) {
+          serializedValue = buildJSONApiIdentifier(nestedType, value);
         }
     }
 
@@ -86,8 +75,8 @@ export const baseSerialize = ({
   }),
 )(data);
 
-export const serialize = (data) => R.compose(
+export const serialize = (type, data) => R.compose(
   applyCasing(paramCase),
   (serialized) => ({ data: serialized }),
   baseSerialize,
-)(data);
+)(type, data);

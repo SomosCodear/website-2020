@@ -1,5 +1,5 @@
 import R from 'ramda';
-import { api } from '../api';
+import { api, CUSTOMER } from '../api';
 import { getCustomer } from './selectors';
 import {
   CUSTOMER_SET_DATA,
@@ -35,7 +35,7 @@ export const createCustomer = () => async (dispatch, getState) => {
   )(getState());
 
   try {
-    const customer = await api.create('customers', { data, type: 'customer' });
+    const customer = await api.create(CUSTOMER, data);
     const relevantCustomerData = R.pick(['id', 'email', 'firstName', 'identityDocument'], customer);
 
     dispatch(customerCreateSuccess(relevantCustomerData));

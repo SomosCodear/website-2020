@@ -1,3 +1,4 @@
+/* globals window */
 import R from 'ramda';
 import { api, ORDER } from '../api';
 import { createCustomer } from '../customer/actions';
@@ -11,6 +12,7 @@ import {
   ORDER_CREATE_SUCCESS,
   ORDER_CREATE_FAILURE,
 } from './actionTypes';
+import { buildPaymentURL } from './utils';
 
 export const setOrderPassInfo = (index, value) => ({
   type: ORDER_SET_PASS_INFO,
@@ -50,10 +52,6 @@ export const createOrder = () => async (dispatch, getState) => {
   const state = getState();
   const customer = getCustomer(state);
 
-  if (customer.id == null) {
-    return;
-  }
-
   const passHolders = getPassHolders(state);
   const addons = getAddons(state);
   const passData = passHolders.map(({
@@ -81,12 +79,14 @@ export const createOrder = () => async (dispatch, getState) => {
   };
 
   try {
-    const order = api.create(ORDER, data, {
+    const order = await api.create(ORDER, data, {
       headers: {
         Authorization: `Customer ${customer.email} ${customer.identityDocument}`,
       },
     });
     dispatch(orderCreateSuccess(order));
+
+    window.location = buildPaymentURL(order.preferenceId);
   } catch (e) {
     dispatch(orderCreateFailure(e.message));
   }

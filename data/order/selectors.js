@@ -32,7 +32,17 @@ export const getAddons = createSelector(
   R.prop('addons'),
 );
 
-export const getCustomer = createSelector(
+export const isProcessingOrder = createSelector(
   [getOrder],
-  R.prop('customer'),
+  R.prop('processing'),
+);
+
+export const getProcessedOrder = createSelector(
+  [getOrder],
+  R.prop('processedOrder'),
+);
+
+export const getProcessedOrderPreferenceId = createSelector(
+  [getProcessedOrder],
+  R.prop('preferenceId'),
 );

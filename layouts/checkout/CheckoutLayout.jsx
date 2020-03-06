@@ -101,8 +101,8 @@ const HeaderDate = styled.p`
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--color-secondary-light);
-
   @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 1.72rem;
     margin-top: 3.5625rem;
   }
 `;

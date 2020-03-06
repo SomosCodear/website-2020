@@ -36,6 +36,9 @@ const Container = styled.div`
       flex-direction: row;
       padding: 8px;
     `}
+    ${({ autoWidth }) => autoWidth && css`
+      display: inline-flex;
+    `}
   }
 `;
 const Label = styled.label`
@@ -44,14 +47,19 @@ const Label = styled.label`
   font-weight: bold;
   opacity: 0.6;
   font-size: 1.125rem;
+  word-break: break-all;
+  white-space: nowrap;
   ${({ inline }) => inline && css`
-    word-break: break-all;
-    white-space: nowrap;
     padding-right: 8px;
     border-right: 1px solid var(--color-text);
     height: 20px;
     margin: 4px 8px 0 0;
   `}
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    ${({ autoWidth }) => autoWidth && css`
+      align-self: flex-start;
+    `}
+  }
 `;
 const Input = styled.input`
   width: 100%;
@@ -87,11 +95,13 @@ export const TextBox = ({
   large,
   small,
   inlineLabel,
+  autoWidth,
   ...inputProps
 }) => {
   const allInputProps = {
     id,
     inlineLabel,
+    autoWidth,
     ...inputProps,
   };
   const containerProps = {
@@ -99,12 +109,14 @@ export const TextBox = ({
     medium,
     large,
     inlineLabel,
+    autoWidth,
   };
   return (
     <Container {...containerProps}>
       <Label
         htmlFor={id}
         inline={inlineLabel}
+        autoWidth={autoWidth}
         {...labelProps}
       >
         {label}
@@ -120,6 +132,7 @@ TextBox.defaultProps = {
   large: false,
   small: false,
   inlineLabel: false,
+  autoWidth: false,
 };
 
 TextBox.propTypes = {
@@ -130,4 +143,5 @@ TextBox.propTypes = {
   large: PropTypes.bool,
   small: PropTypes.bool,
   inlineLabel: PropTypes.bool,
+  autoWidth: PropTypes.bool,
 };

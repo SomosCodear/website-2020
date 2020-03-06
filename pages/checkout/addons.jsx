@@ -49,13 +49,6 @@ const Content = styled.div`
   }
 `;
 
-const ActionsWrapper = styled.div`
-  display: none;
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    display: block;
-  }
-`;
-
 const CheckoutThirdStep = () => {
   useRedirect(isOrderProcessed, '/checkout/confirmation');
 
@@ -102,12 +95,10 @@ const CheckoutThirdStep = () => {
             </CheckoutActions>
           </OrderDetails>
         </Content>
-        <ActionsWrapper>
-          <CheckoutActions>
-            <CheckoutAction backButton onClick={router.back} />
-            <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
-          </CheckoutActions>
-        </ActionsWrapper>
+        <CheckoutActions hideOnMobile>
+          <CheckoutAction backButton onClick={router.back} />
+          <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
+        </CheckoutActions>
       </Wrapper>
     </CheckoutLayout>
   );

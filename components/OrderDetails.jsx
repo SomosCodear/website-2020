@@ -14,6 +14,7 @@ const DetailContainer = styled.div`
   padding: 0 2.125rem;
   @media (min-width: ${BREAKPOINTS.hd}) {
     align-self: flex-start;
+    min-width: 20.5rem;
   }
 `;
 

@@ -17,6 +17,9 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    height: 100%;
+  }
 `;
 
 const ContainerLines = styled.div`
@@ -47,7 +50,7 @@ const Section = styled.section`
     flex-direction: row;
     width: 100%;
     max-width: 105.625rem;
-    padding: 5rem;
+    padding: 4.375rem 5rem 1.875rem 5rem;
   }
 `;
 

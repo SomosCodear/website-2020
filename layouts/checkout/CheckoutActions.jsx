@@ -20,6 +20,7 @@ export const CheckoutActions = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
     width: 100%;
     margin: 0;
+    padding-bottom: 0;
 
     > * {
       min-width: 310px;

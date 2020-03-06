@@ -36,6 +36,20 @@ const Fields = styled.div`
   }
 `;
 
+const ToggleWrapper = styled.div`
+  display: none;
+  & + * {
+    flex-grow: 1;
+    margin-left: 0;
+  }
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    display: block;
+    & + * {
+      flex-grow: 0;
+    }
+  }
+`;
+
 const Checkout = () => {
   useRedirect(isOrderProcessed, '/checkout/confirmation');
 
@@ -97,7 +111,7 @@ const Checkout = () => {
               </ErrorNugget>
             ) : null}
             <CheckoutActions>
-              <div />
+              <ToggleWrapper><div /></ToggleWrapper>
               <CheckoutAction
                 type="submit"
                 disabled={isSubmitting}

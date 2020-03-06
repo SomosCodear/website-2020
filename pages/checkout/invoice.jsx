@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
+import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
-import { getPassHolder } from '../../data/order/selectors';
+import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { setCustomerData } from '../../data/customer/actions';
 import { customerSchema } from '../../data/order/schemas';
@@ -23,6 +24,8 @@ const Fields = styled.div`
 `;
 
 const CheckoutFourthStep = () => {
+  useRedirect(isOrderProcessed, '/checkout/confirmation');
+
   const dispatch = useDispatch();
   const router = useRouter();
 

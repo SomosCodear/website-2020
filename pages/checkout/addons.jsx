@@ -3,10 +3,11 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_ADDON } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
-import { getAddons } from '../../data/order/selectors';
+import { getAddons, isOrderProcessed } from '../../data/order/selectors';
 import { setOrderAddonAmount } from '../../data/order/actions';
 import {
   CheckoutLayout,
@@ -28,6 +29,8 @@ const ProductItem = styled.li`
 `;
 
 const CheckoutThirdStep = () => {
+  useRedirect(isOrderProcessed, '/checkout/confirmation');
+
   const router = useRouter();
   const dispatch = useDispatch();
 

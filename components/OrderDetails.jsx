@@ -1,5 +1,5 @@
 import R from 'ramda';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
@@ -127,46 +127,48 @@ export const OrderDetails = ({ children }) => {
     <DetailContainer>
       <DetailTitle>Resumen de cuenta</DetailTitle>
       <Disclaimer>Todos los precios son finales y en Pesos Argentinos.</Disclaimer>
-      <DetailItems>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Pase de conferencia</DetailItemLabel>
-            <DetailItemPrice bold>
-              $&nbsp;
-              {passesTotal}
-            </DetailItemPrice>
-          </DetailItemTitle>
-          {passHolderNames.map((name) => (
-            <DetailItemSubtitle key={name}>
-              {name}
-            </DetailItemSubtitle>
-          ))}
-          <DetailItems>
-            <Items items={passes} itemsById={itemsById} />
-          </DetailItems>
-        </DetailItem>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Extras</DetailItemLabel>
-            <DetailItemPrice bold>
-              $&nbsp;
-              {addonsTotal}
-            </DetailItemPrice>
-          </DetailItemTitle>
-          <DetailItems>
-            <Items items={addons} itemsById={itemsById} />
-          </DetailItems>
-        </DetailItem>
-        <DetailItem>
-          <DetailItemTitle>
-            <DetailItemLabel>Total a pagar</DetailItemLabel>
-            <DetailItemPrice big bold>
-              $&nbsp;
-              {total}
-            </DetailItemPrice>
-          </DetailItemTitle>
-        </DetailItem>
-      </DetailItems>
+      {!R.isEmpty(itemsById) ? (
+        <DetailItems>
+          <DetailItem>
+            <DetailItemTitle>
+              <DetailItemLabel>Pase de conferencia</DetailItemLabel>
+              <DetailItemPrice bold>
+                $&nbsp;
+                {passesTotal}
+              </DetailItemPrice>
+            </DetailItemTitle>
+            {passHolderNames.map((name) => (
+              <DetailItemSubtitle key={name}>
+                {name}
+              </DetailItemSubtitle>
+            ))}
+            <DetailItems>
+              <Items items={passes} itemsById={itemsById} />
+            </DetailItems>
+          </DetailItem>
+          <DetailItem>
+            <DetailItemTitle>
+              <DetailItemLabel>Extras</DetailItemLabel>
+              <DetailItemPrice bold>
+                $&nbsp;
+                {addonsTotal}
+              </DetailItemPrice>
+            </DetailItemTitle>
+            <DetailItems>
+              <Items items={addons} itemsById={itemsById} />
+            </DetailItems>
+          </DetailItem>
+          <DetailItem>
+            <DetailItemTitle>
+              <DetailItemLabel>Total a pagar</DetailItemLabel>
+              <DetailItemPrice big bold>
+                $&nbsp;
+                {total}
+              </DetailItemPrice>
+            </DetailItemTitle>
+          </DetailItem>
+        </DetailItems>
+      ) : null}
       {children}
     </DetailContainer>
   );

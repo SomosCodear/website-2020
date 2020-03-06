@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
+import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_PASS } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolder } from '../../data/order/selectors';
+import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
 import { RadioGroup } from '../../components/RadioGroup';
 import { ItemPrice } from '../../components/ItemPrice';
 import {
@@ -58,6 +59,8 @@ const WrappedCheckoutActions = styled(CheckoutActions)`
 const RadioButtons = styled.div``;
 
 const CheckoutSecondStep = () => {
+  useRedirect(isOrderProcessed, '/checkout/confirmation');
+
   const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
   const { item } = useSelector((state) => getPassHolder(state, 0));
   const dispatch = useDispatch();

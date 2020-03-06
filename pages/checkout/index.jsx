@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
+import { useRedirect } from '../../hooks/useRedirect';
 import { BREAKPOINTS } from '../../style/constants';
 import { passHolderSchema } from '../../data/order/schemas';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolder } from '../../data/order/selectors';
+import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
 import {
   CheckoutLayout,
   CheckoutTitle,
@@ -36,6 +37,8 @@ const Fields = styled.div`
 `;
 
 const Checkout = () => {
+  useRedirect(isOrderProcessed, '/checkout/confirmation');
+
   const dispatch = useDispatch();
   const router = useRouter();
   const onSubmit = useCallback((values) => {

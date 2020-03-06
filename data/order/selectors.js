@@ -42,6 +42,14 @@ export const getProcessedOrder = createSelector(
   R.prop('processedOrder'),
 );
 
+export const isOrderProcessed = createSelector(
+  [getProcessedOrder],
+  R.compose(
+    R.not,
+    R.isNil,
+  ),
+);
+
 export const getProcessedOrderPreferenceId = createSelector(
   [getProcessedOrder],
   R.prop('preferenceId'),

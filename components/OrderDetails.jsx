@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
+import { BREAKPOINTS } from '../style/constants';
 import { getOrderPasses, getOrderPassHolderNames, getAddons } from '../data/order/selectors';
 import { getItemsById } from '../data/items/selectors';
 import { ItemPrice } from './ItemPrice';
@@ -11,6 +12,9 @@ const DetailContainer = styled.div`
   color: var(--color-text);
   background: #00000080 0% 0%;
   padding: 0 2.125rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    align-self: flex-start;
+  }
 `;
 
 const DetailTitle = styled.h2`

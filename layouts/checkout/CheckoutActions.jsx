@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { BREAKPOINTS } from '../../style/constants';
 
 export const CheckoutActions = styled.div`
-  display: flex;
+  display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'flex')};
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
@@ -18,6 +18,7 @@ export const CheckoutActions = styled.div`
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
+    display: ${({ hideOnDesktop }) => (hideOnDesktop ? 'none' : 'flex')};
     width: 100%;
     margin: 0;
     padding-bottom: 0;

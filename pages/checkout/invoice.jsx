@@ -9,7 +9,7 @@ import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { setCustomerData } from '../../data/customer/actions';
-import { customerSchema } from '../../data/order/schemas';
+import { customerSchema } from '../../data/customer/schemas';
 import {
   CheckoutLayout,
   CheckoutTitle,

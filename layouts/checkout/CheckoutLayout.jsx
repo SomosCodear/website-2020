@@ -8,6 +8,7 @@ import { META } from '../../data/constants';
 import { useAnalytics } from '../../utils/analytics';
 
 const Container = styled.main`
+  min-height: 100vh;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
@@ -17,9 +18,6 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    height: 100%;
-  }
 `;
 
 const ContainerLines = styled.div`
@@ -38,6 +36,7 @@ const ContainerLines = styled.div`
 `;
 
 const Section = styled.section`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,12 +44,13 @@ const Section = styled.section`
   width: 100%;
   min-width: 20.75rem;
   box-sizing: border-box;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
-    height: 100%;
-    flex-direction: row;
     width: 100%;
     max-width: 105.625rem;
     padding: 4.375rem 5rem 1.875rem 5rem;
+    align-items: stretch;
+    flex-direction: row;
   }
 `;
 
@@ -139,9 +139,8 @@ const Logo = styled.img`
 
 const Content = styled.div`
   width: 100%;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
-    height: 100%;
-    align-self: flex-start;
     display: flex;
     flex-direction: column;
   }
@@ -211,5 +210,9 @@ export const CheckoutLayout = ({ children }) => {
 };
 
 CheckoutLayout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+};
+
+CheckoutLayout.defaultProps = {
+  children: null,
 };

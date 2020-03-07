@@ -3,18 +3,24 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
-import { BREAKPOINTS } from '../style/constants';
+import { transparentize } from 'polished';
+import { BREAKPOINTS, COLORS } from '../style/constants';
 import { getOrderPasses, getOrderPassHolderNames, getAddons } from '../data/order/selectors';
 import { getItemsById } from '../data/items/selectors';
 import { ItemPrice } from './ItemPrice';
 
 const DetailContainer = styled.div`
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
   color: var(--color-text);
-  background: #00000080 0% 0%;
-  padding: 0 2.125rem;
+  background-color: ${transparentize(0.5, COLORS.lilac.black)};
+  border-radius: 0.625rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     align-self: flex-start;
-    min-width: 20.5rem;
+    min-width: 27rem;
+    max-width: 27rem;
   }
 `;
 
@@ -55,12 +61,15 @@ const DetailItemTitle = styled.div`
   font-size: 1.5rem;
 `;
 
-const DetailItemLabel = styled.span`
-  display: block;
+const DetailItemLabel = styled.div`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
-const DetailItemPrice = styled.span`
-  display: block;
+const DetailItemPrice = styled.div`
+  margin-left: 1rem;
+  flex-shrink: 0;
   ${({ bold }) => bold && css`font-weight: bold;`}
   ${({ big }) => big && css`font-size: 2rem;`}
 `;
@@ -79,11 +88,13 @@ const DetailSubItem = styled.li`
   font-size: 1.5rem;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+
   &:first-child {
     padding-top: 0.8rem;
   }
+
   &:last-child {
     padding-bottom: 0;
   }
@@ -107,9 +118,11 @@ const Items = ({ items, itemsById }) => R.compose(
     <DetailSubItem key={id}>
       <DetailItemLabel>
         {itemsById[id].name}
+      </DetailItemLabel>
+      <div>
         &nbsp;x
         {amount}
-      </DetailItemLabel>
+      </div>
       <DetailItemPrice>
         <ItemPrice id={id} amount={amount} />
       </DetailItemPrice>

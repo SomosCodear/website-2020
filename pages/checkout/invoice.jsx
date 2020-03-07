@@ -68,7 +68,7 @@ const Subtitle = styled.p`
 
 const OrderDetailsWrapper = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
-    padding-top: 2.6875rem;
+    padding-top: 1rem;
   }
 `;
 

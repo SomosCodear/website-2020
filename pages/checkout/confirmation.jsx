@@ -63,6 +63,12 @@ const Subtitle = styled.p`
   }
 `;
 
+const OrderDetailsWrapper = styled.div`
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding-top: 1rem;
+  }
+`;
+
 const CheckoutFifthStep = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -93,23 +99,25 @@ const CheckoutFifthStep = () => {
               Necesitamos que confirmes lo siguiente y podrás proceder al pago
             </Subtitle>
           </Texts>
-          <OrderDetails>
-            <CheckoutActions hideOnDesktop>
-              {preferenceId == null ? (
+          <OrderDetailsWrapper>
+            <OrderDetails>
+              <CheckoutActions hideOnDesktop>
+                {preferenceId == null ? (
+                  <CheckoutAction
+                    onClick={router.back}
+                    backButton
+                    disabled={isProcessing}
+                  />
+                ) : null}
                 <CheckoutAction
-                  onClick={router.back}
-                  backButton
+                  label="Proceder al pago"
+                  color="accent"
+                  onClick={onProceed}
                   disabled={isProcessing}
                 />
-              ) : null}
-              <CheckoutAction
-                label="Proceder al pago"
-                color="accent"
-                onClick={onProceed}
-                disabled={isProcessing}
-              />
-            </CheckoutActions>
-          </OrderDetails>
+              </CheckoutActions>
+            </OrderDetails>
+          </OrderDetailsWrapper>
         </Content>
         <CheckoutActions hideOnMobile>
           {preferenceId == null ? (

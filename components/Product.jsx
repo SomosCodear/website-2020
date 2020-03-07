@@ -10,6 +10,7 @@ const Container = styled.div`
     flex-direction: row;
   }
 `;
+
 const ImageContainer = styled.div`
   text-align:center;
   img {
@@ -19,6 +20,7 @@ const ImageContainer = styled.div`
     margin-right: 1.6875rem;
   }
 `;
+
 const Text = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
     display: flex;
@@ -33,18 +35,26 @@ const ProductName = styled.p`
   color: var(--color-text);
   margin: 1.25rem 1rem 1.0625rem 1rem;
   text-align: center;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     text-align: left;
     margin: 0 1rem 1.0625rem 0rem;
   }
 `;
+
 const ProductDetail = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    justify-content: flex-start;
+  }
 `;
+
 const CounterContainer = styled.div``;
+
 const Price = styled.div`
   margin-left: 1.75rem;
   font-size: 3rem;

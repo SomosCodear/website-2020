@@ -7,9 +7,8 @@ import {
   CUSTOMER_CREATE_FAILURE,
 } from './actionTypes';
 
-const defaultCustomer = {};
 // eslint-disable-next-line no-underscore-dangle
-const _customer = (state = defaultCustomer, { type, payload }) => {
+const _customer = (state = null, { type, payload }) => {
   switch (type) {
     case CUSTOMER_SET_DATA:
     case CUSTOMER_CREATE_SUCCESS:

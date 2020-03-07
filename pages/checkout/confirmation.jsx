@@ -9,7 +9,7 @@ import { createOrder } from '../../data/order/actions';
 import { isProcessingOrder, getProcessedOrderPreferenceId } from '../../data/order/selectors';
 import { buildPaymentURL } from '../../data/order/utils';
 import {
-  CheckoutLayout,
+  CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
@@ -82,7 +82,7 @@ const CheckoutFifthStep = () => {
   );
 
   return (
-    <CheckoutLayout>
+    <CheckoutStep>
       <Wrapper>
         <CheckoutTitleWrapper>
           <CheckoutTitle title="¡Todo listo!" />
@@ -127,7 +127,7 @@ const CheckoutFifthStep = () => {
           />
         </CheckoutActions>
       </Wrapper>
-    </CheckoutLayout>
+    </CheckoutStep>
   );
 };
 

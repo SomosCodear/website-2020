@@ -4,14 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { BREAKPOINTS } from '../../style/constants';
-import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_ADDON } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
-import { getAddons, isOrderProcessed } from '../../data/order/selectors';
+import { getAddons } from '../../data/order/selectors';
 import { setOrderAddonAmount } from '../../data/order/actions';
 import {
-  CheckoutLayout,
+  CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
@@ -50,8 +49,6 @@ const Content = styled.div`
 `;
 
 const CheckoutThirdStep = () => {
-  useRedirect(isOrderProcessed, '/checkout/confirmation');
-
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -64,7 +61,7 @@ const CheckoutThirdStep = () => {
   );
 
   return (
-    <CheckoutLayout>
+    <CheckoutStep>
       <Wrapper>
         <CheckoutTitle
           title="¿Querés algo más?"
@@ -100,7 +97,7 @@ const CheckoutThirdStep = () => {
           <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
         </CheckoutActions>
       </Wrapper>
-    </CheckoutLayout>
+    </CheckoutStep>
   );
 };
 

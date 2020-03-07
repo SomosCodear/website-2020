@@ -5,14 +5,13 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import { BREAKPOINTS } from '../../style/constants';
-import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
-import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
+import { getPassHolder } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { setCustomerData } from '../../data/customer/actions';
 import { customerSchema } from '../../data/customer/schemas';
 import {
-  CheckoutLayout,
+  CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
@@ -81,8 +80,6 @@ const Fields = styled.div`
 `;
 
 const CheckoutFourthStep = () => {
-  useRedirect(isOrderProcessed, '/checkout/confirmation');
-
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -104,7 +101,7 @@ const CheckoutFourthStep = () => {
   }, [dispatch, router]);
 
   return (
-    <CheckoutLayout>
+    <CheckoutStep>
       <Wrapper>
         <CheckoutTitleWrapper>
           <CheckoutTitle
@@ -180,7 +177,7 @@ const CheckoutFourthStep = () => {
           )}
         </Formik>
       </Wrapper>
-    </CheckoutLayout>
+    </CheckoutStep>
   );
 };
 

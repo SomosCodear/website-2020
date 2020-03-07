@@ -4,13 +4,12 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRedirect } from '../../hooks/useRedirect';
 import { BREAKPOINTS } from '../../style/constants';
 import { passHolderSchema } from '../../data/order/schemas';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
+import { getPassHolder } from '../../data/order/selectors';
 import {
-  CheckoutLayout,
+  CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
@@ -59,8 +58,6 @@ const defaultPassHolder = {
 };
 
 const Checkout = () => {
-  useRedirect(isOrderProcessed, '/checkout/confirmation');
-
   const dispatch = useDispatch();
   const router = useRouter();
   const onSubmit = useCallback((values) => {
@@ -71,7 +68,7 @@ const Checkout = () => {
   const initialValues = useMemo(() => R.defaultTo(defaultPassHolder)(passHolder), [passHolder]);
 
   return (
-    <CheckoutLayout>
+    <CheckoutStep>
       <Formik
         initialValues={initialValues}
         validationSchema={passHolderSchema}
@@ -129,7 +126,7 @@ const Checkout = () => {
           </FormWrapper>
         )}
       </Formik>
-    </CheckoutLayout>
+    </CheckoutStep>
   );
 };
 

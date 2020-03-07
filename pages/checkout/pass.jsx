@@ -4,16 +4,15 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
 import { BREAKPOINTS } from '../../style/constants';
-import { useRedirect } from '../../hooks/useRedirect';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_PASS } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolder, isOrderProcessed } from '../../data/order/selectors';
+import { getPassHolder } from '../../data/order/selectors';
 import { RadioGroup } from '../../components/RadioGroup';
 import { ItemPrice } from '../../components/ItemPrice';
 import {
-  CheckoutLayout,
+  CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
@@ -111,8 +110,6 @@ const Subtitle = styled.div`
 const RadioButtons = styled.div``;
 
 const CheckoutSecondStep = () => {
-  useRedirect(isOrderProcessed, '/checkout/confirmation');
-
   const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
   const { item } = useSelector((state) => getPassHolder(state, 0));
   const dispatch = useDispatch();
@@ -123,7 +120,7 @@ const CheckoutSecondStep = () => {
   }, [dispatch, router]);
 
   return (
-    <CheckoutLayout>
+    <CheckoutStep>
       {items.length > 0 ? (
         <Formik
           initialValues={{ item: item != null ? item : items[0].id }}
@@ -174,7 +171,7 @@ const CheckoutSecondStep = () => {
           )}
         </Formik>
       ) : null}
-    </CheckoutLayout>
+    </CheckoutStep>
   );
 };
 

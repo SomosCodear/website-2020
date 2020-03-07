@@ -76,6 +76,11 @@ export const createOrder = () => async (dispatch, getState) => {
       ...passData,
       ...addonsData,
     ],
+    backUrls: {
+      success: `${window.location.origin}/checkout/success`,
+      pending: `${window.location.origin}/checkout/pending`,
+      failure: `${window.location.origin}/checkout/failure`,
+    },
   };
 
   try {

@@ -58,17 +58,12 @@ export const baseSerialize = (type, data, rootType = type) => R.compose(
     )(RELATIONSHIP_DEFINITIONS);
     let serializedValue = value;
 
-    switch (R.type(value)) {
-      case 'Object':
-        serializedValue = baseSerialize(nestedType, value);
-        break;
-      case 'Array':
-        serializedValue = value.map((item) => baseSerialize(nestedType, item, rootType));
-        break;
-      default:
-        if (isIdentifier) {
-          serializedValue = buildJSONApiIdentifier(nestedType, value);
-        }
+    if (isIdentifier) {
+      serializedValue = buildJSONApiIdentifier(nestedType, value);
+    } else if (nestedType != null && R.type(value) === 'Array') {
+      serializedValue = value.map((item) => baseSerialize(nestedType, item, rootType));
+    } else if (nestedType != null) {
+      serializedValue = baseSerialize(nestedType, value);
     }
 
     return serializedValue;

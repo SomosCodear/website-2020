@@ -1,4 +1,5 @@
-import React, { useCallback } from 'react';
+import R from 'ramda';
+import React, { useMemo, useCallback } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
@@ -50,6 +51,13 @@ const ToggleWrapper = styled.div`
   }
 `;
 
+const defaultPassHolder = {
+  firstName: '',
+  lastName: '',
+  identityDocument: '',
+  email: '',
+};
+
 const Checkout = () => {
   useRedirect(isOrderProcessed, '/checkout/confirmation');
 
@@ -60,11 +68,12 @@ const Checkout = () => {
     router.push('/checkout/pass');
   }, [dispatch, router]);
   const passHolder = useSelector((state) => getPassHolder(state, 0));
+  const initialValues = useMemo(() => R.defaultTo(defaultPassHolder)(passHolder), [passHolder]);
 
   return (
     <CheckoutLayout>
       <Formik
-        initialValues={passHolder}
+        initialValues={initialValues}
         validationSchema={passHolderSchema}
         onSubmit={onSubmit}
       >

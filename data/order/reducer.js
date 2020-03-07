@@ -5,21 +5,17 @@ import {
   ORDER_SET_ADDON_AMOUNT,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
-  ORDER_CREATE_FAILURE,
 } from './actionTypes';
 
-const defaultPassHolder = {
-  firstName: '',
-  lastName: '',
-  identityDocument: '',
-  email: '',
-  item: null,
-};
-const defaultPassHolders = [defaultPassHolder];
+const defaultPassHolders = [];
 const passHolders = (state = defaultPassHolders, { type, payload }) => {
   switch (type) {
     case ORDER_SET_PASS_INFO:
-      return R.adjust(payload.index, R.mergeLeft(payload.value))(state);
+      if (state.length > payload.index) {
+        return R.adjust(payload.index, R.mergeLeft(payload.value))(state);
+      }
+
+      return R.append(payload.value)(state);
     default:
       return state;
   }

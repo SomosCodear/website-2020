@@ -1,15 +1,5 @@
 {
   "version": 2,
   "name": "website-2020",
-  "alias": ["webconf.tech", "www.webconf.tech"],
-  "redirects": [
-    {
-      "source": "/cfp-form",
-      "destination": "https://forms.gle/9gTiyXQC6oLRsP3u7"
-    },
-    {
-      "source": "/sponsorships",
-      "destination": "https://drive.google.com/open?id=1upEFAKQM_KiVPJJ3OgSW4dtvK0tG3vsV"
-    }
-  ]
+  "alias": ["webconf.tech", "www.webconf.tech"]
 }

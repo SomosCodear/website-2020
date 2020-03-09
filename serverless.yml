@@ -1,0 +1,4 @@
+webconf2020:
+  component: serverless-next.js
+  inputs:
+    bucketName: webconf-2020-web

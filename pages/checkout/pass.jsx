@@ -109,7 +109,7 @@ const Subtitle = styled.div`
  */
 const RadioButtons = styled.div``;
 
-const CheckoutSecondStep = () => {
+const Passes = () => {
   const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
   const { item } = useSelector((state) => getPassHolder(state, 0));
   const dispatch = useDispatch();
@@ -175,10 +175,10 @@ const CheckoutSecondStep = () => {
   );
 };
 
-CheckoutSecondStep.getInitialProps = async ({ store, isServer }) => {
+Passes.getInitialProps = async ({ store, isServer }) => {
   await conditionallyFetchItems(store, isServer);
 
   return {};
 };
 
-export default CheckoutSecondStep;
+export default Passes;

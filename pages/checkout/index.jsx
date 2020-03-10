@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { BREAKPOINTS } from '../../style/constants';
+import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { passHolderSchema } from '../../data/order/schemas';
 import { setOrderPassInfo } from '../../data/order/actions';
 import { getPassHolder } from '../../data/order/selectors';
@@ -57,7 +58,7 @@ const defaultPassHolder = {
   email: '',
 };
 
-const Checkout = () => {
+const PassHolders = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const onSubmit = useCallback((values) => {
@@ -130,4 +131,10 @@ const Checkout = () => {
   );
 };
 
-export default Checkout;
+PassHolders.getInitialProps = async ({ store, isServer }) => {
+  await conditionallyFetchItems(store, isServer);
+
+  return {};
+};
+
+export default PassHolders;

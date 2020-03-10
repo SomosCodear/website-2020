@@ -79,7 +79,7 @@ const Fields = styled.div`
   }
 `;
 
-const CheckoutFourthStep = () => {
+const Invoice = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -181,10 +181,10 @@ const CheckoutFourthStep = () => {
   );
 };
 
-CheckoutFourthStep.getInitialProps = async ({ store, isServer }) => {
+Invoice.getInitialProps = async ({ store, isServer }) => {
   await conditionallyFetchItems(store, isServer);
 
   return {};
 };
 
-export default CheckoutFourthStep;
+export default Invoice;

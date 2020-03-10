@@ -69,7 +69,7 @@ const OrderDetailsWrapper = styled.div`
   }
 `;
 
-const CheckoutFifthStep = () => {
+const Confirmation = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -139,10 +139,10 @@ const CheckoutFifthStep = () => {
   );
 };
 
-CheckoutFifthStep.getInitialProps = async ({ store, isServer }) => {
+Confirmation.getInitialProps = async ({ store, isServer }) => {
   await conditionallyFetchItems(store, isServer);
 
   return {};
 };
 
-export default CheckoutFifthStep;
+export default Confirmation;

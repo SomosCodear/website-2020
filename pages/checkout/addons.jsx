@@ -48,7 +48,7 @@ const Content = styled.div`
   }
 `;
 
-const CheckoutThirdStep = () => {
+const Addons = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -101,10 +101,10 @@ const CheckoutThirdStep = () => {
   );
 };
 
-CheckoutThirdStep.getInitialProps = async ({ store, isServer }) => {
+Addons.getInitialProps = async ({ store, isServer }) => {
   await conditionallyFetchItems(store, isServer);
 
   return {};
 };
 
-export default CheckoutThirdStep;
+export default Addons;

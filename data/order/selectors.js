@@ -1,12 +1,24 @@
 import R from 'ramda';
 import { createSelector } from 'reselect';
 import createCachedSelector from 're-reselect';
+import { passHolderSchema } from './schemas';
 
 export const getOrder = (state) => state.order;
 
 export const getPassHolders = createSelector(
   [getOrder],
   R.prop('passHolders'),
+);
+export const getFirstInvalidPassholder = createSelector(
+  [getPassHolders],
+  R.compose(
+    R.indexOf(false),
+    R.map(R.bind(passHolderSchema.isValidSync, passHolderSchema)),
+  ),
+);
+export const arePassHoldersValid = createSelector(
+  [getFirstInvalidPassholder],
+  R.equals(-1),
 );
 export const getPassHolder = createCachedSelector(
   [R.nthArg(1), getPassHolders],

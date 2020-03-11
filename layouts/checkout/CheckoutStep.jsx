@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-import { getPassHolders, isOrderProcessed } from '../../data/order/selectors';
+import { getPassHolders, arePassHoldersValid, isOrderProcessed } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { CheckoutLayout } from './CheckoutLayout';
 import { CheckoutStepsIndicator } from './CheckouStepsIndicator';
@@ -22,7 +22,6 @@ const STEPS = [
   CONFIRMATION,
 ];
 
-const hasPassHolders = (state) => getPassHolders(state).length > 0;
 const hasSelectedPasses = R.compose(
   R.lt(0),
   R.length,
@@ -34,7 +33,7 @@ const hasCustomer = (state) => getCustomer(state) != null;
 
 const REQUIREMENTS = {
   [PASS_HOLDERS]: R.T,
-  [PASSES]: hasPassHolders,
+  [PASSES]: arePassHoldersValid,
   [ADDONS]: hasSelectedPasses,
   [INVOICE]: hasSelectedPasses,
   [CONFIRMATION]: R.both(hasSelectedPasses, hasCustomer),

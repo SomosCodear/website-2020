@@ -1,21 +1,29 @@
 import R from 'ramda';
 import { combineReducers } from 'redux';
 import {
+  ORDER_ADD_PASS,
+  ORDER_REMOVE_PASS,
   ORDER_SET_PASS_INFO,
   ORDER_SET_ADDON_AMOUNT,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
 } from './actionTypes';
 
-const defaultPassHolders = [];
+const defaultPassHolder = {
+  firstName: '',
+  lastName: '',
+  identityDocument: '',
+  email: '',
+};
+const defaultPassHolders = [defaultPassHolder];
 const passHolders = (state = defaultPassHolders, { type, payload }) => {
   switch (type) {
+    case ORDER_ADD_PASS:
+      return R.append(defaultPassHolder)(state);
+    case ORDER_REMOVE_PASS:
+      return R.remove(payload, 1)(state);
     case ORDER_SET_PASS_INFO:
-      if (state.length > payload.index) {
-        return R.adjust(payload.index, R.mergeLeft(payload.value))(state);
-      }
-
-      return R.append(payload.value)(state);
+      return R.adjust(payload.index, R.mergeLeft(payload.value))(state);
     default:
       return state;
   }

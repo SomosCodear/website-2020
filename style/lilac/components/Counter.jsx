@@ -9,7 +9,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
 `;
-const Button = styled.button`
+const Button = styled.button.attrs(() => ({ type: 'button' }))`
   font-family: inherit;
   background: transparent;
   color: var(--color-accent);

@@ -6,6 +6,8 @@ import { getCustomer } from '../customer/selectors';
 import { getItemOption } from '../items/selectors';
 import { getPassHolders, getAddons } from './selectors';
 import {
+  ORDER_ADD_PASS,
+  ORDER_REMOVE_PASS,
   ORDER_SET_PASS_INFO,
   ORDER_SET_ADDON_AMOUNT,
   ORDER_CREATE_REQUEST,
@@ -13,6 +15,15 @@ import {
   ORDER_CREATE_FAILURE,
 } from './actionTypes';
 import { buildPaymentURL } from './utils';
+
+export const addOrderPass = () => ({
+  type: ORDER_ADD_PASS,
+});
+
+export const removeOrderPass = (index) => ({
+  type: ORDER_REMOVE_PASS,
+  payload: index,
+});
 
 export const setOrderPassInfo = (index, value) => ({
   type: ORDER_SET_PASS_INFO,

@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { getPassHolders, isOrderProcessed } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { CheckoutLayout } from './CheckoutLayout';
+import { CheckoutStepsIndicator } from './CheckouStepsIndicator';
 
 const PASS_HOLDERS = '/checkout';
 const PASSES = '/checkout/pass';
@@ -68,6 +69,10 @@ export const CheckoutStep = ({ children }) => {
 
   return (
     <CheckoutLayout>
+      <CheckoutStepsIndicator
+        steps={STEPS}
+        currentStep={R.indexOf(currentStep, STEPS)}
+      />
       {validated ? children : null}
     </CheckoutLayout>
   );

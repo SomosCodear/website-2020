@@ -1,3 +1,4 @@
+import R from 'ramda';
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -111,7 +112,7 @@ const RadioButtons = styled.div``;
 
 const Passes = () => {
   const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
-  const { item } = useSelector((state) => getPassHolder(state, 0));
+  const { item } = useSelector((state) => R.defaultTo({}, getPassHolder(state, 0)));
   const dispatch = useDispatch();
   const router = useRouter();
   const onSubmit = useCallback((values) => {
@@ -121,6 +122,22 @@ const Passes = () => {
 
   return (
     <CheckoutStep>
+      <CheckoutTitle
+        title="Elegí el tipo de pase"
+        description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
+        hideDescriptionOnDesktop
+      >
+        <Subtitle>
+          <p>
+            { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
+            Un pase <strong>Full</strong> te dará acceso a toda la conferencia durante los días del evento, 29 y 30 de mayo.
+          </p>
+          <p>
+            { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
+            Un pase <strong>Simple</strong> te dará acceso al día de conferencia que elijas.
+          </p>
+        </Subtitle>
+      </CheckoutTitle>
       {items.length > 0 ? (
         <Formik
           initialValues={{ item: item != null ? item : items[0].id }}
@@ -128,22 +145,6 @@ const Passes = () => {
         >
           {({ values }) => (
             <FormWrapper>
-              <CheckoutTitle
-                title="Elegí el tipo de pase"
-                description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
-                hideDescriptionOnDesktop
-              >
-                <Subtitle>
-                  <p>
-                    { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
-                    Un pase <strong>Full</strong> te dará acceso a toda la conferencia durante los días del evento, 29 y 30 de mayo.
-                  </p>
-                  <p>
-                    { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
-                    Un pase <strong>Simple</strong> te dará acceso al día de conferencia que elijas.
-                  </p>
-                </Subtitle>
-              </CheckoutTitle>
               <FormContent>
                 <RadioButtonsContainer>
                   <RadioButtons>

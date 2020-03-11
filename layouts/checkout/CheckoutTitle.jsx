@@ -6,20 +6,25 @@ import { BREAKPOINTS } from '../../style/constants';
 const Container = styled.div`
   text-align: center;
   margin-bottom: 1.5rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-top: 1rem;
     text-align: left;
   }
 `;
 
 const Title = styled.h1`
+  margin: 2rem 0 0 0;
+  padding: 0 2rem;
   font-size: 2.3125rem;
   font-weight: normal;
   color: var(--color-accent);
-  margin: 1.25rem 0 0 0;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 0;
+    padding: 0;
     font-size: 4.5rem;
     font-weight: lighter;
-    margin: 0;
   }
 `;
 
@@ -29,6 +34,7 @@ const Description = styled.p`
   margin: 0.4375rem 0 0 0;
   line-height: 1.375rem;
   padding: 0 2rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     font-size: 2.25rem;
     line-height: 2.6875rem;

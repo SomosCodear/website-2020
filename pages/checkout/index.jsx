@@ -70,6 +70,10 @@ const PassHolders = () => {
 
   return (
     <CheckoutStep>
+      <CheckoutTitle
+        title="Completá tus datos"
+        description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
+      />
       <Formik
         initialValues={initialValues}
         validationSchema={passHolderSchema}
@@ -77,10 +81,6 @@ const PassHolders = () => {
       >
         {({ isSubmitting, isValid, submitCount }) => (
           <FormWrapper>
-            <CheckoutTitle
-              title="Completá tus datos"
-              description="Para generar tu pase, necesitaremos: nombre y apellido, DNI o pasaporte y dirección de correo electrónico."
-            />
             <Fields>
               <Field
                 as={TextBox}

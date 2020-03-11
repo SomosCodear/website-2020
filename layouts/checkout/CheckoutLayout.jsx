@@ -48,7 +48,7 @@ const Section = styled.section`
   @media (min-width: ${BREAKPOINTS.hd}) {
     width: 100%;
     max-width: 105.625rem;
-    padding: 4.375rem 5rem 1.875rem 5rem;
+    padding: 2rem 5rem 1.875rem 5rem;
     align-items: stretch;
     flex-direction: row;
   }
@@ -56,8 +56,10 @@ const Section = styled.section`
 
 const Header = styled.header`
   width: 17rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     min-width: 19.5rem;
+    padding-top: 2.75rem;
     padding-right: 8.625rem;
   }
 `;
@@ -76,21 +78,19 @@ const HeaderLogo = styled.div`
 `;
 
 const HeaderInfo = styled.div`
-  margin-top: 1.875rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 100%;
-    display: block;
-  }
+  display: none;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     align-self: stretch;
-    margin-top: 0;
+
+    img {
+      width: 100%;
+      display: block;
+    }
   }
 `;
 

@@ -41,7 +41,10 @@ const Content = styled.div`
   }
 `;
 const Texts = styled.div`
+  padding: 0 2rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 0;
     flex-grow: 1;
     display: flex;
     flex-direction: column;

@@ -87,11 +87,15 @@ const Invoice = () => {
   const firstPassHolder = useSelector((store) => getPassHolder(store, 0));
 
   const initialValues = useMemo(
-    () => R.defaultTo({
-      identityDocument: firstPassHolder.identityDocument,
-      firstName: `${firstPassHolder.firstName} ${firstPassHolder.lastName}`,
-      email: firstPassHolder.email,
-    })(customer),
+    () => (
+      firstPassHolder != null
+        ? R.defaultTo({
+          identityDocument: firstPassHolder.identityDocument,
+          firstName: `${firstPassHolder.firstName} ${firstPassHolder.lastName}`,
+          email: firstPassHolder.email,
+        })(customer)
+        : customer
+    ),
     [customer, firstPassHolder],
   );
 
@@ -105,7 +109,7 @@ const Invoice = () => {
       <Wrapper>
         <CheckoutTitleWrapper>
           <CheckoutTitle
-            title="¿A quién le emitimos la factura?"
+            title="Datos de facturación"
           />
         </CheckoutTitleWrapper>
         <Formik

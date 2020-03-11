@@ -5,4 +5,5 @@ export const passHolderSchema = yup.object().shape({
   lastName: yup.string().required(),
   identityDocument: yup.string().required(),
   email: yup.string().email().required(),
+  foodPreference: yup.string(),
 });

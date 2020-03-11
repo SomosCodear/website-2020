@@ -13,6 +13,7 @@ const defaultPassHolder = {
   firstName: '',
   lastName: '',
   identityDocument: '',
+  foodPreference: '',
   email: '',
 };
 const defaultPassHolders = [defaultPassHolder];

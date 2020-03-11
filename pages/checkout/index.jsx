@@ -216,30 +216,37 @@ const PassHolders = () => {
                   as={TextBox}
                   id="firstName"
                   name="firstName"
-                  label="Nombre"
+                  label="Nombre*"
                   medium
                 />
                 <Field
                   as={TextBox}
                   id="lastName"
                   name="lastName"
-                  label="Apellido"
+                  label="Apellido*"
                   medium
                 />
                 <Field
                   as={TextBox}
                   id="identityDocument"
                   name="identityDocument"
-                  label="DNI o Pasaporte"
+                  label="DNI o Pasaporte*"
                   small
                 />
                 <Field
                   as={TextBox}
                   id="email"
                   name="email"
-                  label="E-mail"
+                  label="E-mail*"
                   type="email"
                   large
+                />
+                <Field
+                  as={TextBox}
+                  id="foodPreference"
+                  name="foodPreference"
+                  label="Preferencia/Restricción alimentaria"
+                  autoWidth
                 />
               </Fields>
               {(showError || submitCount > 0) && !isValid ? (
@@ -249,7 +256,10 @@ const PassHolders = () => {
               ) : null}
             </div>
             <Info>
-              La información solicitada en esta pantalla es utilizada para: 1) identificarte en la acreditación y durante la conferencia; 2) enviarte por correo electrónico tu pase; 3) indicar a nuestro servicio de catering que tenga en consideración tu preferencia alimentaria.
+              La información solicitada en esta pantalla es utilizada para: 1) identificarte en la
+              acreditación y durante la conferencia; 2) enviarte por correo electrónico tu pase; 3)
+              indicar a nuestro servicio de catering que tenga en consideración tu preferencia
+              alimentaria.
             </Info>
             <CheckoutActions>
               <MultipassWrapper>

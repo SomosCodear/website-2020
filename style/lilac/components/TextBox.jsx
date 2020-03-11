@@ -6,38 +6,41 @@ import { BREAKPOINTS } from '../../constants';
 
 const Container = styled.div`
   border: 1px solid var(--color-text);
-  border-radius: 10px;
+  border-radius: 0.625rem;
   display: flex;
   flex-direction: column;
   margin: 0.875rem 0;
-  padding: 15px 15px 4px 15px;
+  padding: 1rem 1rem 0.25rem 1rem;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
     box-sizing: border-box;
-    margin: 0 18px 0.875rem 0;
+    margin: 0 1rem 0.875rem 0;
+
     &:last-child {
-      margin-left: 0;
+      margin: 0;
     }
+
     ${({ medium }) => medium && css`
-      width: calc(50% - 10px);
+      width: calc(50% - 0.625rem);
       &:nth-child(even) {
         margin-right: 0;
       }
     `}
     ${({ small }) => small && css`
-      width: calc(35% - 10px);
+      width: calc(35% - 0.625rem);
       & + ${Container} {
         margin-right: 0;
       }
     `}
     ${({ large }) => large && css`
-      width: calc(65% - 10px);
+      width: calc(65% - 0.625rem);
     `}
     ${({ inlineLabel }) => inlineLabel && css`
       flex-direction: row;
-      padding: 8px;
+      padding: 0.5rem;
     `}
     ${({ autoWidth }) => autoWidth && css`
-      display: inline-flex;
+      flex-grow: 1;
     `}
   }
 `;
@@ -50,10 +53,10 @@ const Label = styled.label`
   word-break: break-all;
   white-space: nowrap;
   ${({ inline }) => inline && css`
-    padding-right: 8px;
+    padding-right: 0.5rem;
     border-right: 1px solid var(--color-text);
-    height: 20px;
-    margin: 4px 8px 0 0;
+    height: 1.25rem;
+    margin: 0.25rem 0.5rem 0 0;
   `}
   @media (min-width: ${BREAKPOINTS.hd}) {
     ${({ autoWidth }) => autoWidth && css`

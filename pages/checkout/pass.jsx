@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback } from 'react';
+import React, { Fragment, useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
@@ -232,7 +232,7 @@ const Passes = () => {
             <FormWrapper>
               <FormContent multipass={multipass}>
                 {values.passHolders.map(({ firstName, lastName, item }, index) => (
-                  <>
+                  <Fragment key={index /* eslint-disable-line react/no-array-index-key */}>
                     {multipass ? (
                       <PassInfo>
                         <PassIndex>
@@ -260,7 +260,7 @@ const Passes = () => {
                         </TotalPrice>
                       </Total>
                     </PassContainer>
-                  </>
+                  </Fragment>
                 ))}
               </FormContent>
               <Disclaimer hideOnDesktop>

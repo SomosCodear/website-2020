@@ -1,15 +1,15 @@
-import R from 'ramda';
-import React, { useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form } from 'formik';
-import { BREAKPOINTS } from '../../style/constants';
+import { transparentize } from 'polished';
+import { BREAKPOINTS, COLORS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_PASS } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolder } from '../../data/order/selectors';
+import { getPassHolders } from '../../data/order/selectors';
 import { RadioGroup } from '../../components/RadioGroup';
 import { ItemPrice } from '../../components/ItemPrice';
 import {
@@ -18,69 +18,6 @@ import {
   CheckoutActions,
   CheckoutAction,
 } from '../../layouts/checkout';
-
-const Disclaimer = styled.p`
-  font-size: 0.875rem;
-  color: var(--color-text);
-  text-align: center;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'flex')};
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    display: ${({ hideOnDesktop }) => (hideOnDesktop ? 'none' : 'flex')};
-  }
-`;
-
-const Total = styled.div`
-  text-align: center;
-  margin: 1.9375rem 0 2.1875rem 0;
-`;
-
-const TotalLabel = styled.h2`
-  font-size: 2.25rem;
-  color: var(--color-gray-lighter);
-  font-weight: lighter;
-  margin: 0;
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    font-size: 4.5rem;
-    color: var(--color-accent);
-  }
-`;
-
-const TotalPrice = styled.strong`
-  font-size: 4.5rem;
-  color: var(--color-text);
-  display: block;
-`;
-
-const RadioButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const FormWrapper = styled(Form)`
-  display: block;
-  padding: 0 2rem;
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    padding: 0;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-`;
-
-const FormContent = styled.div`
-  @media (min-width: ${BREAKPOINTS.hd}) {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-`;
 
 const Subtitle = styled.div`
   display: none;
@@ -104,19 +41,162 @@ const Subtitle = styled.div`
   }
 `;
 
-/**
- * This is necessary so the radio buttons will be aligned on the same Y no matter
- * the width of their labels.
- */
-const RadioButtons = styled.div``;
+const FormWrapper = styled(Form)`
+  display: block;
+  padding: 0 2rem;
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+`;
+
+const PassInfo = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const PassIndex = styled.h2`
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 2.25rem;
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+
+const PassHolderName = styled.p`
+  margin: 0 0 0 4.75rem;
+  color: var(--color-text);
+  font-size: 1.5rem;
+`;
+
+const PassContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  & + ${PassInfo} {
+    margin-top: 2.5rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-direction: row;
+  }
+`;
+
+const RadioButtonsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+`;
+
+const Total = styled.div`
+  text-align: center;
+  margin: 2rem 0;
+`;
+
+const TotalLabel = styled.h2`
+  font-size: 2.25rem;
+  color: var(--color-gray-lighter);
+  font-weight: lighter;
+  margin: 0;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 4.5rem;
+    color: var(--color-accent);
+  }
+`;
+
+const TotalPrice = styled.strong`
+  display: block;
+  white-space: nowrap;
+  font-size: 4.5rem;
+  color: var(--color-text);
+`;
+
+const FormContent = styled.div`
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: ${({ multipass }) => (multipass ? 'column' : 'row')};
+    justify-content: ${({ multipass }) => (multipass ? 'flex-start' : 'space-between')};
+    align-items: ${({ multipass }) => (multipass ? 'stretch' : 'center')};
+
+    ${PassContainer} {
+      flex-grow: ${({ multipass }) => (multipass ? 0 : 1)};
+    }
+
+    ${RadioButtonsContainer} {
+      flex-direction: ${({ multipass }) => (multipass ? 'row' : 'column')};
+      align-items: ${({ multipass }) => (multipass ? 'center' : 'flex-start')};
+
+      label {
+        margin-right: ${({ multipass }) => (multipass ? '2.5rem' : 0)};
+      }
+    }
+
+    ${Total} {
+      margin: ${({ multipass }) => (multipass ? 0 : '2rem')} 0;
+    }
+
+    ${TotalLabel} {
+      display: ${({ multipass }) => (multipass ? 'none' : 'block')};
+    }
+
+    ${TotalPrice} {
+      font-size: ${({ multipass }) => (multipass ? '3rem' : '4.5rem')};
+      color: var(--color-${({ multipass }) => (multipass ? 'accent' : 'text')});
+    }
+  }
+`;
+
+const Disclaimer = styled.p`
+  margin: ${({ withBackground }) => (withBackground ? '0 2.5rem' : '0 0 1rem 0')};
+  padding: ${({ withBackground }) => (withBackground ? '2.5rem' : 0)};
+  background-color: ${({ withBackground }) => (
+    withBackground ? transparentize(0.5, COLORS.lilac.black) : 'none'
+  )};
+  border-radius: 0.625rem;
+  font-size: 0.875rem;
+  color: var(--color-text);
+  text-align: ${({ withBackground }) => (withBackground ? 'start' : 'center')};
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-self: flex-end;
+  display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'block')};
+
+  strong {
+    color: var(--color-accent);
+    font-weight: 500;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    display: ${({ hideOnDesktop }) => (hideOnDesktop ? 'none' : 'block')};
+  }
+`;
 
 const Passes = () => {
-  const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
-  const { item } = useSelector((state) => R.defaultTo({}, getPassHolder(state, 0)));
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_PASS));
+  const itemOptions = useMemo(
+    () => items.map(({ id, name }) => ({ label: name, value: id })),
+    [items],
+  );
+  const passHolders = useSelector(getPassHolders);
+  const multipass = useMemo(() => passHolders.length > 1, [passHolders]);
+
   const onSubmit = useCallback((values) => {
-    dispatch(setOrderPassInfo(0, values));
+    for (let i = 0; i < values.passHolders.length; i += 1) {
+      dispatch(setOrderPassInfo(i, { item: values.passHolders[i].item }));
+    }
+
     router.push('/checkout/addons');
   }, [dispatch, router]);
 
@@ -127,45 +207,83 @@ const Passes = () => {
         description="Un pase Full te dará acceso a toda la conferencia durante los dos días del evento, 29 y 30 de mayo."
         hideDescriptionOnDesktop
       >
-        <Subtitle>
-          <p>
-            { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
-            Un pase <strong>Full</strong> te dará acceso a toda la conferencia durante los días del evento, 29 y 30 de mayo.
-          </p>
-          <p>
-            { /* eslint-disable-next-line react/jsx-one-expression-per-line, max-len */ }
-            Un pase <strong>Simple</strong> te dará acceso al día de conferencia que elijas.
-          </p>
-        </Subtitle>
+        {!multipass ? (
+          <Subtitle>
+            <p>
+              Un pase&nbsp;
+              <strong>Full</strong>
+              &nbsp;te dará acceso a toda la conferencia durante los días del evento,
+              29 y 30 de mayo.
+            </p>
+            <p>
+              Un pase&nbsp;
+              <strong>Simple</strong>
+              &nbsp;te dará acceso al día de conferencia que elijas.
+            </p>
+          </Subtitle>
+        ) : null}
       </CheckoutTitle>
       {items.length > 0 ? (
         <Formik
-          initialValues={{ item: item != null ? item : items[0].id }}
+          initialValues={{ passHolders }}
           onSubmit={onSubmit}
         >
           {({ values }) => (
             <FormWrapper>
-              <FormContent>
-                <RadioButtonsContainer>
-                  <RadioButtons>
-                    <RadioGroup
-                      name="item"
-                      options={items.map(({ id, name }) => ({ label: name, value: id }))}
-                    />
-                  </RadioButtons>
-                </RadioButtonsContainer>
-                <Total>
-                  <TotalLabel>Tu pase costará</TotalLabel>
-                  <TotalPrice>
-                    <ItemPrice id={values.item} />
-                  </TotalPrice>
-                </Total>
+              <FormContent multipass={multipass}>
+                {values.passHolders.map(({ firstName, lastName, item }, index) => (
+                  <>
+                    {multipass ? (
+                      <PassInfo>
+                        <PassIndex>
+                          Pase&nbsp;
+                          {index + 1}
+                        </PassIndex>
+                        <PassHolderName>
+                          {firstName}
+                          &nbsp;
+                          {lastName}
+                        </PassHolderName>
+                      </PassInfo>
+                    ) : null}
+                    <PassContainer>
+                      <RadioButtonsContainer>
+                        <RadioGroup
+                          name={`passHolders.${index}.item`}
+                          options={itemOptions}
+                        />
+                      </RadioButtonsContainer>
+                      <Total>
+                        <TotalLabel>Tu pase costará</TotalLabel>
+                        <TotalPrice>
+                          <ItemPrice id={item} />
+                        </TotalPrice>
+                      </Total>
+                    </PassContainer>
+                  </>
+                ))}
               </FormContent>
-              <Disclaimer>
+              <Disclaimer hideOnDesktop>
                 Todos los precios son finales y en Pesos Argentinos.
               </Disclaimer>
               <CheckoutActions>
                 <CheckoutAction backButton onClick={router.back} />
+                <Disclaimer hideOnMobile withBackground={multipass}>
+                  {multipass ? (
+                    <>
+                      Un pase&nbsp;
+                      <strong>Full</strong>
+                      &nbsp;te dará acceso a toda la conferencia durante los dos días del
+                      evento, 29 y 30 de mayo.
+                      <br />
+                      Un pase&nbsp;
+                      <strong>Simple</strong>
+                      &nbsp;te dará acceso al día de conferencia que elijas.
+                    </>
+                  ) : null}
+                  <br />
+                  Todos los precios son finales y en Pesos Argentinos.
+                </Disclaimer>
                 <CheckoutAction type="submit" />
               </CheckoutActions>
             </FormWrapper>

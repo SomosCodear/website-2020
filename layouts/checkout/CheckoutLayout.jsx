@@ -42,12 +42,10 @@ const Section = styled.section`
   align-items: center;
   padding-top: 1.25rem;
   width: 100%;
-  min-width: 20.75rem;
   box-sizing: border-box;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     width: 100%;
-    max-width: 105.625rem;
     padding: 2rem 5rem 1.875rem 5rem;
     align-items: stretch;
     flex-direction: row;

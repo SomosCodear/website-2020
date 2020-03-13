@@ -6,7 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { passHolderSchema } from '../../data/order/schemas';
-import { addOrderPass, removeOrderPass, setOrderPassInfo } from '../../data/order/actions';
+import {
+  addOrderPass,
+  removeOrderPass,
+  setOrderPassInfoWithDefaultItem,
+} from '../../data/order/actions';
 import { getPassHolders, getFirstInvalidPassholder } from '../../data/order/selectors';
 import {
   CheckoutStep,
@@ -128,7 +132,7 @@ const PassHolders = () => {
     }
   }, [passHolders, current, dispatch, setCurrent]);
   const saveCurrentPassHolder = useCallback((values) => {
-    dispatch(setOrderPassInfo(current, values));
+    dispatch(setOrderPassInfoWithDefaultItem(current, values));
   }, [current, dispatch]);
 
   // multipass mannagement

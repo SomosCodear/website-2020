@@ -3,8 +3,9 @@ import R from 'ramda';
 import { api, ORDER } from '../api';
 import { createCustomer } from '../customer/actions';
 import { getCustomer } from '../customer/selectors';
-import { getItemOption } from '../items/selectors';
-import { getPassHolders, getAddons } from './selectors';
+import { ITEM_TYPE_PASS } from '../items/constants';
+import { getItemsByType, getItemOption } from '../items/selectors';
+import { getPassHolders, getPassHolder, getAddons } from './selectors';
 import {
   ORDER_ADD_PASS,
   ORDER_REMOVE_PASS,
@@ -54,6 +55,16 @@ const orderCreateFailure = (error) => ({
   type: ORDER_CREATE_FAILURE,
   payload: error,
 });
+
+export const setOrderPassInfoWithDefaultItem = (index, value) => (dispatch, getState) => {
+  const state = getState();
+  const { id: defaultItemId } = R.head(getItemsByType(state, ITEM_TYPE_PASS));
+
+  dispatch(setOrderPassInfo(index, {
+    item: defaultItemId,
+    ...value,
+  }));
+};
 
 export const createOrder = () => async (dispatch, getState) => {
   dispatch(orderCreateRequest());

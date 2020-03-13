@@ -5,6 +5,7 @@ export const CheckoutActions = styled.div`
   display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'flex')};
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
   padding-bottom: 1.25rem;
 
   > *:only-child {

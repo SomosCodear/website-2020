@@ -21,7 +21,7 @@ const Label = styled.label`
   align-items: center;
 `;
 
-const Radio = styled.span`
+const Radio = styled.span.attrs(() => ({ tabIndex: 0 }))`
   display: block;
   position: absolute;
   top: 0;
@@ -30,6 +30,7 @@ const Radio = styled.span`
   width: 3.875rem;
   border: 0.0625rem solid #FFFFFF;
   border-radius: 0.625rem;
+
   &::after {
     content: '';
     position: absolute;
@@ -39,6 +40,13 @@ const Radio = styled.span`
     width: 3.25rem;
     height: 3.25rem;
     margin: 0.3125rem;
+  }
+
+  &:focus {
+    &::after {
+      display: block;
+      opacity: 0.5;
+    }
   }
 `;
 
@@ -68,11 +76,16 @@ export const RadioButton = ({
   const onFakeRadioClick = useCallback(() => {
     radioRef.current.click();
   }, [radioRef]);
+  const onKeyDown = useCallback(({ key }) => {
+    if ([' ', 'Enter'].includes(key)) {
+      onFakeRadioClick();
+    }
+  }, [onFakeRadioClick]);
 
   return (
     <Container>
       <Input ref={radioRef} {...allInputProps} />
-      <Radio onClick={onFakeRadioClick} />
+      <Radio onClick={onFakeRadioClick} onKeyDown={onKeyDown} />
       <Label htmlFor={allInputProps.id} {...labelProps}>{label}</Label>
     </Container>
   );

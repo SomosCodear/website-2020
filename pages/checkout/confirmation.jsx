@@ -136,18 +136,23 @@ const Confirmation = () => {
               <ul>
                 <li>
                   los términos establecidos en el&nbsp;
-                  <a href="https://codear.org/codigo-de-conducta">Código de Conducta</a>
+                  <a
+                    href="https://codear.org/codigo-de-conducta"
+                    target="blank"
+                  >
+                    Código de Conducta
+                  </a>
                   &nbsp;de la Comunidad de Desarrolladores de Argentina,
                   organización que produce WebConf 2020
                 </li>
                 <li>
                   los&nbsp;
-                  <a href="/">Términos y Condiciones</a>
+                  <a href="/" target="blank">Términos y Condiciones</a>
                   &nbsp;de la venta de pases de Córdoba WebConf 2020
                 </li>
                 <li>
                   y la&nbsp;
-                  <a href="/">Política de Privacidad</a>
+                  <a href="/" target="blank">Política de Privacidad</a>
                   &nbsp;de Córdoba WebConf 2020.
                 </li>
               </ul>

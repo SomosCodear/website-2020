@@ -1,5 +1,5 @@
 /* eslint-disable react/forbid-prop-types, react/jsx-props-no-spreading */
-import React from 'react';
+import React, { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import { BREAKPOINTS } from '../../constants';
@@ -90,7 +90,7 @@ const Input = styled.input`
   `}
 `;
 
-export const TextBox = ({
+export const TextBox = forwardRef(({
   id,
   label,
   labelProps,
@@ -101,9 +101,10 @@ export const TextBox = ({
   inlineLabel,
   autoWidth,
   ...inputProps
-}) => {
+}, ref) => {
   const allInputProps = {
     id,
+    ref,
     inlineLabel,
     autoWidth,
     ...inputProps,
@@ -129,7 +130,7 @@ export const TextBox = ({
       <Input {...allInputProps} />
     </Container>
   );
-};
+});
 
 TextBox.defaultProps = {
   labelProps: {},

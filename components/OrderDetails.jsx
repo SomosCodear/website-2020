@@ -58,7 +58,11 @@ const DetailItemTitle = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 1.5rem;
+  }
 `;
 
 const DetailItemLabel = styled.div`
@@ -72,11 +76,12 @@ const DetailItemPrice = styled.div`
   margin-left: 1rem;
   flex-shrink: 0;
   ${({ bold }) => bold && css`font-weight: bold;`}
-  ${({ big }) => big && css`font-size: 2rem;`}
+  ${({ big }) => big && css`font-size: 1.75rem;`}
   text-align: right;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     min-width: 4.85rem;
+    ${({ big }) => big && css`font-size: 2rem;`}
   }
 `;
 

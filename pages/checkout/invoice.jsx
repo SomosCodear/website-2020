@@ -159,13 +159,13 @@ const Invoice = () => {
                   <OrderDetails>
                     <CheckoutActions hideOnDesktop>
                       <CheckoutAction
+                        type="submit"
+                        disabled={isSubmitting}
+                      />
+                      <CheckoutAction
                         onClick={router.back}
                         disabled={isSubmitting}
                         backButton
-                      />
-                      <CheckoutAction
-                        type="submit"
-                        disabled={isSubmitting}
                       />
                     </CheckoutActions>
                   </OrderDetails>
@@ -173,13 +173,13 @@ const Invoice = () => {
               </FormContent>
               <CheckoutActions hideOnMobile>
                 <CheckoutAction
+                  type="submit"
+                  disabled={isSubmitting}
+                />
+                <CheckoutAction
                   onClick={router.back}
                   disabled={isSubmitting}
                   backButton
-                />
-                <CheckoutAction
-                  type="submit"
-                  disabled={isSubmitting}
                 />
               </CheckoutActions>
             </FormWrapper>

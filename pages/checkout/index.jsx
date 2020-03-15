@@ -108,16 +108,8 @@ const Info = styled.p`
 const MultipassWrapper = styled.div`
   display: none;
 
-  & + * {
-    flex-grow: 1;
-    margin-left: 0;
-  }
-
   @media (min-width: ${BREAKPOINTS.hd}) {
     display: block;
-    & + * {
-      flex-grow: 0;
-    }
   }
 `;
 
@@ -280,13 +272,13 @@ const PassHolders = () => {
               alimentaria.
             </Info>
             <CheckoutActions>
+              <CheckoutAction type="submit" />
               <MultipassWrapper>
                 <CheckoutAction
                   label={multipass ? 'Comprar pase individual' : 'Comprar varios pases'}
                   onClick={toggleMultipass}
                 />
               </MultipassWrapper>
-              <CheckoutAction type="submit" />
             </CheckoutActions>
           </FormWrapper>
         )}

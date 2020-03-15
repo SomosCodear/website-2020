@@ -105,6 +105,12 @@ const Confirmation = () => {
           <OrderDetailsWrapper>
             <OrderDetails>
               <CheckoutActions hideOnDesktop>
+                <CheckoutAction
+                  label="Pagar ahora"
+                  color="accent"
+                  onClick={onProceed}
+                  disabled={isProcessing}
+                />
                 {preferenceId == null ? (
                   <CheckoutAction
                     onClick={router.back}
@@ -112,17 +118,17 @@ const Confirmation = () => {
                     disabled={isProcessing}
                   />
                 ) : null}
-                <CheckoutAction
-                  label="Proceder al pago"
-                  color="accent"
-                  onClick={onProceed}
-                  disabled={isProcessing}
-                />
               </CheckoutActions>
             </OrderDetails>
           </OrderDetailsWrapper>
         </Content>
         <CheckoutActions hideOnMobile>
+          <CheckoutAction
+            label="Pagar ahora"
+            color="accent"
+            onClick={onProceed}
+            disabled={isProcessing}
+          />
           {preferenceId == null ? (
             <CheckoutAction
               onClick={router.back}
@@ -130,12 +136,6 @@ const Confirmation = () => {
               disabled={isProcessing}
             />
           ) : null}
-          <CheckoutAction
-            label="Proceder al pago"
-            color="accent"
-            onClick={onProceed}
-            disabled={isProcessing}
-          />
         </CheckoutActions>
       </Wrapper>
     </CheckoutStep>

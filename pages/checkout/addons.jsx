@@ -87,14 +87,14 @@ const Addons = () => {
           </ProductsList>
           <OrderDetails>
             <CheckoutActions hideOnDesktop>
-              <CheckoutAction backButton onClick={router.back} />
               <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
+              <CheckoutAction backButton onClick={router.back} />
             </CheckoutActions>
           </OrderDetails>
         </Content>
         <CheckoutActions hideOnMobile>
-          <CheckoutAction backButton onClick={router.back} />
           <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
+          <CheckoutAction backButton onClick={router.back} />
         </CheckoutActions>
       </Wrapper>
     </CheckoutStep>

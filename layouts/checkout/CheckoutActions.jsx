@@ -3,18 +3,17 @@ import { BREAKPOINTS } from '../../style/constants';
 
 export const CheckoutActions = styled.div`
   display: ${({ hideOnMobile }) => (hideOnMobile ? 'none' : 'flex')};
-  flex-direction: row;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 1.25rem;
 
-  > *:only-child {
+  > *:not(:last-child) {
     flex-grow: 1;
   }
 
-  > * + * {
-    flex-grow: 1;
-    margin-left: 2.5rem;
+  > *:last-child {
+    margin-right: 2.5rem;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
@@ -25,8 +24,14 @@ export const CheckoutActions = styled.div`
 
     > * {
       min-width: 310px;
+    }
+
+    > *:not(:last-child) {
       flex-grow: 0;
-      margin-left: 0;
+    }
+
+    > *:last-child {
+      margin-right: 0;
     }
   }
 `;

@@ -267,7 +267,7 @@ const Passes = () => {
                 Todos los precios son finales y en Pesos Argentinos.
               </Disclaimer>
               <CheckoutActions>
-                <CheckoutAction backButton onClick={router.back} />
+                <CheckoutAction type="submit" />
                 <Disclaimer hideOnMobile withBackground={multipass}>
                   {multipass ? (
                     <>
@@ -284,7 +284,7 @@ const Passes = () => {
                   <br />
                   Todos los precios son finales y en Pesos Argentinos.
                 </Disclaimer>
-                <CheckoutAction type="submit" />
+                <CheckoutAction backButton onClick={router.back} />
               </CheckoutActions>
             </FormWrapper>
           )}

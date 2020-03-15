@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
+
 const FormWrapper = styled(Form)`
   @media (min-width: ${BREAKPOINTS.hd}) {
     flex-grow: 1;
@@ -79,6 +80,10 @@ const Fields = styled.div`
   }
 `;
 
+const StyledTextBox = styled(TextBox)`
+  margin: 0 0 0.85rem;
+`;
+
 const Invoice = () => {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -125,20 +130,20 @@ const Invoice = () => {
                     Los siguientes datos son necesarios para poder generar tu factura electrónica.
                   </Subtitle>
                   <Field
-                    as={TextBox}
+                    as={StyledTextBox}
                     id="identityDocument"
                     name="identityDocument"
                     label="Número de documento o CUIT"
                     autoWidth
                   />
                   <Field
-                    as={TextBox}
+                    as={StyledTextBox}
                     id="firstName"
                     name="firstName"
                     label="Nombre y apellido o razón social"
                   />
                   <Field
-                    as={TextBox}
+                    as={StyledTextBox}
                     id="email"
                     name="email"
                     label="Dirección de correo electrónico"

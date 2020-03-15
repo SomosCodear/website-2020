@@ -72,7 +72,7 @@ const Input = styled.input`
   margin: 0;
   background: transparent;
   color: white;
-  font-size: 3rem;
+  font-size: 2rem;
   :-webkit-autofill,
   :-webkit-autofill:hover,
   :-webkit-autofill:focus,
@@ -82,12 +82,28 @@ const Input = styled.input`
     &::first-line {
       /* This needs to be !important and can't be inherit in order to work */
       font-family: Roboto, sans-serif !important;
-      font-size: 3rem;
+      font-size: 2rem;
     }
   }
   ${({ inlineLabel }) => inlineLabel && css`
     font-size: 1.5rem;
   `}
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 3rem;
+    :-webkit-autofill,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus,
+    :-webkit-autofill:active {
+      -webkit-transition-delay: 99999s;
+      transition-delay: 99999s;
+      &::first-line {
+        /* This needs to be !important and can't be inherit in order to work */
+        font-family: Roboto, sans-serif !important;
+        font-size: 3rem;
+      }
+    }
+  }
 `;
 
 export const TextBox = forwardRef(({

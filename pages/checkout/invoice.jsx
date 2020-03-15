@@ -70,6 +70,9 @@ const Subtitle = styled.p`
 const OrderDetailsWrapper = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
     padding-top: 1rem;
+    margin-bottom: 3rem;
+    align-self: stretch;
+    display: flex;
   }
 `;
 

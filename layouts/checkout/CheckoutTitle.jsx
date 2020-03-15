@@ -5,7 +5,7 @@ import { BREAKPOINTS } from '../../style/constants';
 
 const Container = styled.div`
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     margin-top: 1rem;

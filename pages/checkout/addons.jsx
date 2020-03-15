@@ -37,11 +37,12 @@ const Wrapper = styled.div`
 `;
 const Content = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-bottom: 3rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-grow: 1;
-    padding: 1.375rem 0 3.125rem 0;
+
     > *:first-child {
       flex-grow: 1;
     }

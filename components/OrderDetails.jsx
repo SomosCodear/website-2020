@@ -17,7 +17,6 @@ const DetailContainer = styled.div`
   background-color: ${transparentize(0.5, COLORS.lilac.black)};
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    align-self: flex-start;
     min-width: 27rem;
     max-width: 27rem;
     border-radius: 0.625rem;
@@ -38,18 +37,24 @@ const Disclaimer = styled.p`
   opacity: .5;
 `;
 
-const DetailItems = styled.div`
-  list-style: none;
+const DetailItems = styled.ul`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
   margin: 0;
   padding: 0;
+  list-style: none;
 `;
 
 const DetailItem = styled.li`
-  padding-bottom: 0.9375rem;
-  margin-bottom: 0.9375rem;
-  border-bottom: 1px solid var(--color-accent);
+  &:not(:first-child) {
+    padding-top: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--color-accent);
+  }
+
   &:last-child {
-    border-bottom: 0;
+    margin-bottom: 1rem;
   }
 `;
 
@@ -114,6 +119,10 @@ const DetailSubItem = styled.li`
     font-size: 1.5rem;
   }
 
+`;
+
+const Strut = styled.div`
+  flex-grow: 1;
 `;
 
 const getItemPrice = (id, itemsById) => R.compose(
@@ -192,6 +201,7 @@ export const OrderDetails = ({ children }) => {
               <Items items={addons} itemsById={itemsById} />
             </DetailItems>
           </DetailItem>
+          <Strut />
           <DetailItem>
             <DetailItemTitle>
               <DetailItemLabel>Total a pagar</DetailItemLabel>

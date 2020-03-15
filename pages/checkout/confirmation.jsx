@@ -34,41 +34,71 @@ const Wrapper = styled.div`
 
 const Content = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
+    margin-bottom: 3rem;
+    flex-grow: 1;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    flex-grow: 1;
   }
 `;
+
 const Texts = styled.div`
   padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     padding: 0;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
   }
 `;
 
-const Subtitle = styled.p`
-  font-size: 1.125rem;
+const Subtitle = styled.h2`
+  margin: -0.5rem 3rem 0;
+  font-size: 1.75rem;
+  font-weight: lighter;
   color: var(--color-text);
-  margin: 0 0 1.875rem 0;
-  line-height: 1.375rem;
   text-align: center;
+
   @media (min-width: ${BREAKPOINTS.hd}) {
+    margin: 0.5rem 0 0;
     font-size: 2.25rem;
     line-height: 2.6875rem;
-    font-weight: lighter;
     text-align: left;
-    margin-top: 0.4375rem;
+  }
+`;
+
+const Terms = styled.div`
+  font-size: 1.25rem;
+  color: var(--color-text);
+  margin-top: 1.25rem;
+
+  ul {
+    padding-left: 1.75rem;
+  }
+
+  li {
+    margin-top: 1.25rem;
+    list-style: disc;
+
+    ::marker {
+      font-size: 2rem;
+      color: var(--color-secondary-light)
+    }
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
   }
 `;
 
 const OrderDetailsWrapper = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
     padding-top: 1rem;
+    align-self: stretch;
+    display: flex;
   }
 `;
 
@@ -99,8 +129,29 @@ const Confirmation = () => {
         <Content>
           <Texts>
             <Subtitle>
-              Necesitamos que confirmes lo siguiente y podrás proceder al pago
+              Solo resta que pagues tu compra
             </Subtitle>
+            <Terms>
+              Proceder al pago implica que has leído, aceptado y entendido:
+              <ul>
+                <li>
+                  los términos establecidos en el&nbsp;
+                  <a href="https://codear.org/codigo-de-conducta">Código de Conducta</a>
+                  &nbsp;de la Comunidad de Desarrolladores de Argentina,
+                  organización que produce WebConf 2020
+                </li>
+                <li>
+                  los&nbsp;
+                  <a href="/">Términos y Condiciones</a>
+                  &nbsp;de la venta de pases de Córdoba WebConf 2020
+                </li>
+                <li>
+                  y la&nbsp;
+                  <a href="/">Política de Privacidad</a>
+                  &nbsp;de Córdoba WebConf 2020.
+                </li>
+              </ul>
+            </Terms>
           </Texts>
           <OrderDetailsWrapper>
             <OrderDetails>

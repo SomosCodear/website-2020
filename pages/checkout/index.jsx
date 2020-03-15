@@ -149,6 +149,8 @@ const PassHolders = () => {
         dispatch(removeOrderPass(i));
       }
       setCurrent(0);
+    } else {
+      dispatch(addOrderPass());
     }
 
     setMultipass(!multipass);
@@ -195,7 +197,7 @@ const PassHolders = () => {
                   <PassCounter>
                     ¿Cuántos pases vas a comprar?&nbsp;&nbsp;
                     <Counter
-                      min={1}
+                      min={2}
                       max={5}
                       value={passHolders.length}
                       onChange={(value) => (

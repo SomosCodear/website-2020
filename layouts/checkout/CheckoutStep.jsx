@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { useScrollToTop } from '../../hooks/useScrollToTop';
 import { getPassHolders, arePassHoldersValid, isOrderProcessed } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { CheckoutLayout } from './CheckoutLayout';
@@ -47,6 +48,8 @@ export const CheckoutStep = ({ children }) => {
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const currentStep = router.pathname;
+
+  useScrollToTop();
   useEffect(() => {
     if (currentStep !== CONFIRMATION && isProcessed) {
       router.replace(CONFIRMATION);

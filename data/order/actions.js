@@ -1,11 +1,11 @@
 /* globals window */
 import R from 'ramda';
 import { api, ORDER } from '../api';
-import { createCustomer } from '../customer/actions';
+import { createCustomer, setCustomerData } from '../customer/actions';
 import { getCustomer } from '../customer/selectors';
 import { ITEM_TYPE_PASS } from '../items/constants';
 import { getItemsByType, getItemOption } from '../items/selectors';
-import { getPassHolders, getPassHolder, getAddons } from './selectors';
+import { getPassHolders, getAddons } from './selectors';
 import {
   ORDER_ADD_PASS,
   ORDER_REMOVE_PASS,
@@ -112,6 +112,7 @@ export const createOrder = () => async (dispatch, getState) => {
       },
     });
     dispatch(orderCreateSuccess(order));
+    dispatch(setCustomerData(null));
 
     window.location = buildPaymentURL(order.preferenceId);
   } catch (e) {

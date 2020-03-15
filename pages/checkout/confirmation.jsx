@@ -1,5 +1,5 @@
 /* globals window */
-import React, { useCallback } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
@@ -7,7 +7,6 @@ import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { createOrder } from '../../data/order/actions';
 import { isProcessingOrder, getProcessedOrderPreferenceId } from '../../data/order/selectors';
-import { buildPaymentURL } from '../../data/order/utils';
 import {
   CheckoutStep,
   CheckoutTitle,
@@ -106,19 +105,16 @@ const Confirmation = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const [orderSent, setOrderSent] = useState(false);
   const isProcessing = useSelector(isProcessingOrder);
-  const preferenceId = useSelector(getProcessedOrderPreferenceId);
+  const processed = useMemo(() => orderSent && !isProcessing, [orderSent, isProcessing]);
+  const onProceed = useCallback(() => dispatch(createOrder()), [dispatch]);
 
-  const onProceed = useCallback(
-    () => {
-      if (preferenceId == null) {
-        dispatch(createOrder());
-      } else {
-        window.location = buildPaymentURL(preferenceId);
-      }
-    },
-    [dispatch, preferenceId],
-  );
+  useEffect(() => {
+    if (isProcessing) {
+      setOrderSent(true);
+    }
+  }, [isProcessing, setOrderSent]);
 
   return (
     <CheckoutStep>
@@ -126,73 +122,77 @@ const Confirmation = () => {
         <CheckoutTitleWrapper>
           <CheckoutTitle title="¡Todo listo!" />
         </CheckoutTitleWrapper>
-        <Content>
-          <Texts>
-            <Subtitle>
-              Solo resta que pagues tu compra
-            </Subtitle>
-            <Terms>
-              Proceder al pago implica que has leído, aceptado y entendido:
-              <ul>
-                <li>
-                  los términos establecidos en el&nbsp;
-                  <a
-                    href="https://codear.org/codigo-de-conducta"
-                    target="blank"
-                  >
-                    Código de Conducta
-                  </a>
-                  &nbsp;de la Comunidad de Desarrolladores de Argentina,
-                  organización que produce WebConf 2020
-                </li>
-                <li>
-                  los&nbsp;
-                  <a href="/" target="blank">Términos y Condiciones</a>
-                  &nbsp;de la venta de pases de Córdoba WebConf 2020
-                </li>
-                <li>
-                  y la&nbsp;
-                  <a href="/" target="blank">Política de Privacidad</a>
-                  &nbsp;de Córdoba WebConf 2020.
-                </li>
-              </ul>
-            </Terms>
-          </Texts>
-          <OrderDetailsWrapper>
-            <OrderDetails>
-              <CheckoutActions hideOnDesktop>
-                <CheckoutAction
-                  label="Pagar ahora"
-                  color="accent"
-                  onClick={onProceed}
-                  disabled={isProcessing}
-                />
-                {preferenceId == null ? (
-                  <CheckoutAction
-                    onClick={router.back}
-                    backButton
-                    disabled={isProcessing}
-                  />
-                ) : null}
-              </CheckoutActions>
-            </OrderDetails>
-          </OrderDetailsWrapper>
-        </Content>
-        <CheckoutActions hideOnMobile>
-          <CheckoutAction
-            label="Pagar ahora"
-            color="accent"
-            onClick={onProceed}
-            disabled={isProcessing}
-          />
-          {preferenceId == null ? (
-            <CheckoutAction
-              onClick={router.back}
-              backButton
-              disabled={isProcessing}
-            />
-          ) : null}
-        </CheckoutActions>
+        {!processed ? (
+          <>
+            <Content>
+              <Texts>
+                <Subtitle>
+                  Solo resta que pagues tu compra
+                </Subtitle>
+                <Terms>
+                  Proceder al pago implica que has leído, aceptado y entendido:
+                  <ul>
+                    <li>
+                      los términos establecidos en el&nbsp;
+                      <a
+                        href="https://codear.org/codigo-de-conducta"
+                        target="blank"
+                      >
+                        Código de Conducta
+                      </a>
+                      &nbsp;de la Comunidad de Desarrolladores de Argentina,
+                      organización que produce WebConf 2020
+                    </li>
+                    <li>
+                      los&nbsp;
+                      <a href="/" target="blank">Términos y Condiciones</a>
+                      &nbsp;de la venta de pases de Córdoba WebConf 2020
+                    </li>
+                    <li>
+                      y la&nbsp;
+                      <a href="/" target="blank">Política de Privacidad</a>
+                      &nbsp;de Córdoba WebConf 2020.
+                    </li>
+                  </ul>
+                </Terms>
+              </Texts>
+              <OrderDetailsWrapper>
+                <OrderDetails>
+                  <CheckoutActions hideOnDesktop>
+                    <CheckoutAction
+                      label="Pagar ahora"
+                      color="accent"
+                      onClick={onProceed}
+                      disabled={isProcessing}
+                    />
+                    <CheckoutAction
+                      onClick={router.back}
+                      backButton
+                      disabled={isProcessing}
+                    />
+                  </CheckoutActions>
+                </OrderDetails>
+              </OrderDetailsWrapper>
+            </Content>
+            <CheckoutActions hideOnMobile>
+              <CheckoutAction
+                label="Pagar ahora"
+                color="accent"
+                onClick={onProceed}
+                disabled={isProcessing}
+              />
+              <CheckoutAction
+                onClick={router.back}
+                backButton
+                disabled={isProcessing}
+              />
+            </CheckoutActions>
+          </>
+        ) : (
+          <Subtitle>
+            Te estamos redirigiendo a para que ralizes tu pago...
+          </Subtitle>
+        )}
       </Wrapper>
     </CheckoutStep>
   );

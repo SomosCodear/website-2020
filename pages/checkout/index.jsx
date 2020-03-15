@@ -255,7 +255,7 @@ const PassHolders = () => {
                   as={TextBox}
                   id="foodPreference"
                   name="foodPreference"
-                  label="Preferencia/Restricción alimentaria"
+                  label="Preferencia alimentaria"
                   autoWidth
                 />
               </Fields>

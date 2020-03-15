@@ -15,12 +15,12 @@ const DetailContainer = styled.div`
   flex-direction: column;
   color: var(--color-text);
   background-color: ${transparentize(0.5, COLORS.lilac.black)};
-  border-radius: 0.625rem;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     align-self: flex-start;
     min-width: 27rem;
     max-width: 27rem;
+    border-radius: 0.625rem;
   }
 `;
 
@@ -38,7 +38,7 @@ const Disclaimer = styled.p`
   opacity: .5;
 `;
 
-const DetailItems = styled.ul`
+const DetailItems = styled.div`
   list-style: none;
   margin: 0;
   padding: 0;
@@ -68,10 +68,16 @@ const DetailItemLabel = styled.div`
 `;
 
 const DetailItemPrice = styled.div`
+  min-width: 3.85rem;
   margin-left: 1rem;
   flex-shrink: 0;
   ${({ bold }) => bold && css`font-weight: bold;`}
   ${({ big }) => big && css`font-size: 2rem;`}
+  text-align: right;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    min-width: 4.85rem;
+  }
 `;
 
 const DetailItemSubtitle = styled.p`
@@ -85,11 +91,11 @@ const DetailSubItem = styled.li`
   opacity: .5;
   margin-left: 1.9375rem;
   padding: 0.5rem 0;
-  font-size: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  font-size: 1.25rem;
 
   &:first-child {
     padding-top: 0.8rem;
@@ -98,6 +104,11 @@ const DetailSubItem = styled.li`
   &:last-child {
     padding-bottom: 0;
   }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 1.5rem;
+  }
+
 `;
 
 const getItemPrice = (id, itemsById) => R.compose(

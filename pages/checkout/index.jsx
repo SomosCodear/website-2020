@@ -1,4 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { Formik, Form, Field } from 'formik';
@@ -119,6 +124,7 @@ const MultipassWrapper = styled.div`
 const PassHolders = () => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const firstNameRef = useRef(null);
   const [current, setCurrent] = useState(0);
 
   // pass holders management
@@ -146,6 +152,7 @@ const PassHolders = () => {
     }
 
     setMultipass(!multipass);
+    firstNameRef.current.focus();
   }, [multipass, passHolders, dispatch, setMultipass]);
 
   // submit
@@ -216,13 +223,18 @@ const PassHolders = () => {
                 </>
               ) : null}
               <Fields>
-                <Field
-                  as={TextBox}
-                  id="firstName"
-                  name="firstName"
-                  label="Nombre*"
-                  medium
-                />
+                <Field name="firstName">
+                  {({ field }) => (
+                    <TextBox
+                      ref={firstNameRef}
+                      id="firstName"
+                      label="Nombre*"
+                      autoFocus
+                      medium
+                      {...field /* eslint-disable-line react/jsx-props-no-spreading */}
+                    />
+                  )}
+                </Field>
                 <Field
                   as={TextBox}
                   id="lastName"

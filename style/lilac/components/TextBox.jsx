@@ -94,9 +94,10 @@ export const TextBox = ({
   id,
   label,
   labelProps,
+  className,
+  small,
   medium,
   large,
-  small,
   inlineLabel,
   autoWidth,
   ...inputProps
@@ -108,6 +109,7 @@ export const TextBox = ({
     ...inputProps,
   };
   const containerProps = {
+    className,
     small,
     medium,
     large,
@@ -131,9 +133,10 @@ export const TextBox = ({
 
 TextBox.defaultProps = {
   labelProps: {},
+  className: null,
+  small: false,
   medium: false,
   large: false,
-  small: false,
   inlineLabel: false,
   autoWidth: false,
 };
@@ -142,9 +145,10 @@ TextBox.propTypes = {
   id: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   labelProps: PropTypes.object,
+  className: PropTypes.string,
+  small: PropTypes.bool,
   medium: PropTypes.bool,
   large: PropTypes.bool,
-  small: PropTypes.bool,
   inlineLabel: PropTypes.bool,
   autoWidth: PropTypes.bool,
 };

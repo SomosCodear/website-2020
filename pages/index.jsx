@@ -27,6 +27,10 @@ const Container = styled.main`
     background-position: left center;
     background-size: auto;
   }
+
+  div + & {
+    padding-top: 5rem;
+  }
 `;
 
 const Header = styled.header`
@@ -161,12 +165,46 @@ const ActionDate = styled.p`
   color: var(--color-text);
 `;
 
+const Alert = styled.div`
+  a {
+    display: block;
+    background-color: var(--color-accent);
+    padding: 0.5rem;
+    padding-left: 0;
+    color: var(--color-text);
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: background-color, color, 100ms linear;
+  }
+
+  a:hover {
+    background-color: var(--color-text);
+    color: var(--color-accent);
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    letter-spacing: 0.25rem;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+  }
+`;
+
 const Home = () => {
   const {
     trackClickedCodear,
   } = useAnalytics();
 
-  return (
+  return [
+    <Alert>
+      <a target="_blank" rel="noopener noreferrer" href="https://codear.org/comunicaciones#covid-19">
+        ⚠ IMPORTANTE: COMUNICADO OFICIAL POR COVID-19
+      </a>
+    </Alert>,
     <Container>
       <Head>
         <title>
@@ -242,8 +280,8 @@ const Home = () => {
           </ActionDate>
         </Action>
       </ActionsSection>
-    </Container>
-  );
+    </Container>,
+  ];
 };
 
 export default Home;

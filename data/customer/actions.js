@@ -1,4 +1,5 @@
 import R from 'ramda';
+import { captureException } from '@sentry/browser';
 import { api, CUSTOMER } from '../api';
 import { getCustomer } from './selectors';
 import {
@@ -41,5 +42,6 @@ export const createCustomer = () => async (dispatch, getState) => {
     dispatch(customerCreateSuccess(relevantCustomerData));
   } catch (e) {
     dispatch(customerCreateFailure(e.message));
+    captureException(e);
   }
 };

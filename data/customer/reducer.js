@@ -12,7 +12,7 @@ const _customer = (state = null, { type, payload }) => {
   switch (type) {
     case CUSTOMER_SET_DATA:
     case CUSTOMER_CREATE_SUCCESS:
-      return R.mergeLeft(payload)(state);
+      return payload != null ? R.mergeLeft(payload)(state) : null;
     default:
       return state;
   }

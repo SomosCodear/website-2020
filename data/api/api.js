@@ -38,14 +38,25 @@ const makeURL = (resource, params) => {
 
 const makeHeaders = (headers = {}) => R.mergeLeft(headers, DEFAULT_HEADERS);
 
+const handleResponse = async (response) => {
+  if (!response.ok) {
+    const err = new Error(`HTTP status code: ${response.status}`);
+    err.response = response;
+    err.status = response.status;
+    throw err;
+  }
+
+  const json = await response.json();
+  return deserialize(json);
+};
+
 const findAll = async (resource, options = {}) => {
   const url = makeURL(resource, options.params).toString();
   const response = await fetch(url, {
     heders: makeHeaders(options.headers),
   });
 
-  const json = await response.json();
-  return deserialize(json);
+  return handleResponse(response);
 };
 
 const create = async (resource, data, options = {}) => {
@@ -58,8 +69,7 @@ const create = async (resource, data, options = {}) => {
     body: JSON.stringify(serializedData),
   });
 
-  const json = await response.json();
-  return deserialize(json);
+  return handleResponse(response);
 };
 
 export const api = {

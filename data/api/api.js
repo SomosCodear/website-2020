@@ -42,7 +42,7 @@ const handleResponse = async (response) => {
   if (!response.ok) {
     const err = new Error(`HTTP status code: ${response.status}`);
     err.response = response;
-    err.status = response.status;
+
     throw err;
   }
 

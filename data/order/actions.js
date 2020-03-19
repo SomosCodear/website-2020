@@ -1,6 +1,6 @@
 /* globals window */
 import R from 'ramda';
-import { captureException } from '@sentry/browser';
+import { reportException } from '../../utils/sentry';
 import { api, ORDER } from '../api';
 import { createCustomer, setCustomerData } from '../customer/actions';
 import { getCustomer } from '../customer/selectors';
@@ -118,6 +118,6 @@ export const createOrder = () => async (dispatch, getState) => {
     window.location = buildPaymentURL(order.preferenceId);
   } catch (e) {
     dispatch(orderCreateFailure(e.message));
-    captureException(e);
+    reportException(e);
   }
 };

@@ -2,6 +2,7 @@
 import R from 'ramda';
 import { reportException } from '../../utils/sentry';
 import { api, ORDER } from '../api';
+import { buildCustomerAuthenticationHeaders } from '../customer/utils';
 import { createCustomer, setCustomerData } from '../customer/actions';
 import { getCustomer } from '../customer/selectors';
 import { ITEM_TYPE_PASS } from '../items/constants';
@@ -108,9 +109,7 @@ export const createOrder = () => async (dispatch, getState) => {
 
   try {
     const order = await api.create(ORDER, data, {
-      headers: {
-        Authorization: `Customer ${customer.email} ${customer.identityDocument}`,
-      },
+      headers: buildCustomerAuthenticationHeaders(customer.email, customer.identity_document),
     });
     dispatch(orderCreateSuccess(order));
     dispatch(setCustomerData(null));

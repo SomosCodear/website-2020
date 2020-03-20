@@ -7,6 +7,7 @@ import {
   ORDER_SET_ADDON_AMOUNT,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
+  ORDER_CREATE_FAILURE,
 } from './actionTypes';
 
 const defaultPassHolder = {
@@ -52,8 +53,19 @@ const processing = (state = false, { type }) => {
     case ORDER_CREATE_REQUEST:
       return true;
     case ORDER_CREATE_SUCCESS:
-    case ORDER_SET_PASS_INFO:
+    case ORDER_CREATE_FAILURE:
       return false;
+    default:
+      return state;
+  }
+};
+
+const error = (state = null, { type, payload }) => {
+  switch (type) {
+    case ORDER_CREATE_REQUEST:
+      return null;
+    case ORDER_CREATE_FAILURE:
+      return payload;
     default:
       return state;
   }
@@ -63,4 +75,5 @@ export const order = combineReducers({
   passHolders,
   addons,
   processing,
+  error,
 });

@@ -109,7 +109,7 @@ export const createOrder = () => async (dispatch, getState) => {
 
   try {
     const order = await api.create(ORDER, data, {
-      headers: buildCustomerAuthenticationHeaders(customer.email, customer.identity_document),
+      headers: buildCustomerAuthenticationHeaders(customer.email, customer.identityDocument),
     });
     dispatch(orderCreateSuccess(order));
     dispatch(setCustomerData(null));

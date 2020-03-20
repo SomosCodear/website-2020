@@ -56,10 +56,17 @@ export const getProcessedOrder = createSelector(
 
 export const isOrderProcessed = createSelector(
   [getProcessedOrder],
-  R.compose(
-    R.not,
-    R.isNil,
-  ),
+  R.complement(R.isNil),
+);
+
+export const getOrderCreationError = createSelector(
+  [getOrder],
+  R.prop('error'),
+);
+
+export const hasOrderCreationError = createSelector(
+  [getOrderCreationError],
+  R.complement(R.isNil),
 );
 
 export const getProcessedOrderPreferenceId = createSelector(

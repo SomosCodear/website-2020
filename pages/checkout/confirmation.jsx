@@ -1,18 +1,23 @@
-/* globals window */
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { createOrder } from '../../data/order/actions';
-import { isProcessingOrder, getProcessedOrderPreferenceId } from '../../data/order/selectors';
+import { isProcessingOrder, hasOrderCreationError } from '../../data/order/selectors';
 import {
   CheckoutStep,
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
 } from '../../layouts/checkout';
+import { ErrorNugget } from '../../style/lilac/components';
 import { OrderDetails } from '../../components/OrderDetails';
 
 const CheckoutTitleWrapper = styled.div`
@@ -107,7 +112,11 @@ const Confirmation = () => {
 
   const [orderSent, setOrderSent] = useState(false);
   const isProcessing = useSelector(isProcessingOrder);
-  const processed = useMemo(() => orderSent && !isProcessing, [orderSent, isProcessing]);
+  const hasError = useSelector(hasOrderCreationError);
+  const processed = useMemo(
+    () => orderSent && !isProcessing && !hasError,
+    [orderSent, isProcessing, hasError],
+  );
   const onProceed = useCallback(() => dispatch(createOrder()), [dispatch]);
 
   useEffect(() => {
@@ -181,6 +190,14 @@ const Confirmation = () => {
                 onClick={onProceed}
                 disabled={isProcessing}
               />
+              {hasError ? (
+                <ErrorNugget>
+                  Ocurrió un error al intentar crear la orden, contactanos a&nbsp;
+                  <a href="mailto:hola@webconf.tech">
+                    hola@webconf.tech
+                  </a>
+                </ErrorNugget>
+              ) : null}
               <CheckoutAction
                 onClick={router.back}
                 backButton

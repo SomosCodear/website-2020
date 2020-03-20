@@ -124,8 +124,11 @@ const Invoice = () => {
           initialValues={initialValues}
           validationSchema={customerSchema}
           onSubmit={onSubmit}
+          validateOnMount
+          validateOnBlur={false}
+          validateOnChange={false}
         >
-          {({ isSubmitting, isValid, submitCount }) => (
+          {({ isSubmitting, isValid, errors }) => (
             <FormWrapper>
               <FormContent>
                 <Fields>
@@ -152,9 +155,9 @@ const Invoice = () => {
                     label="Dirección de correo electrónico"
                     type="email"
                   />
-                  {submitCount > 0 && !isValid ? (
+                  {!isValid ? (
                     <ErrorNugget>
-                      Revisá estos datos.
+                      {errors.identityDocument ? errors.identityDocument : 'Revisá estos datos.'}
                     </ErrorNugget>
                   ) : null}
                 </Fields>

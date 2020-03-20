@@ -25,8 +25,8 @@ const appendParameters = (urlObject, params) => {
   }
 };
 
-const makeURL = (resource, params) => {
-  const url = `${API_URL}/${ENDPOINTS[resource]}/`;
+const makeURL = (resource, { params, postfix = '/' } = {}) => {
+  const url = `${API_URL}/${ENDPOINTS[resource]}${postfix}`;
   const urlObject = new URL(url);
 
   if (params != null) {
@@ -47,20 +47,21 @@ const handleResponse = async (response) => {
   }
 
   const json = await response.json();
-  return deserialize(json);
+
+  return R.isNil(json.data) ? json : deserialize(json);
 };
 
 const findAll = async (resource, options = {}) => {
-  const url = makeURL(resource, options.params).toString();
+  const url = makeURL(resource, options).toString();
   const response = await fetch(url, {
-    heders: makeHeaders(options.headers),
+    headers: makeHeaders(options.headers),
   });
 
   return handleResponse(response);
 };
 
 const create = async (resource, data, options = {}) => {
-  const url = makeURL(resource, options.params).toString();
+  const url = makeURL(resource, options).toString();
   const serializedData = serialize(resource, data);
 
   const response = await fetch(url, {

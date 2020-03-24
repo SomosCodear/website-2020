@@ -15,9 +15,9 @@ import {
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
+  CheckoutOrderDetails,
 } from '../../layouts/checkout';
 import { TextBox, ErrorNugget } from '../../style/lilac/components';
-import { OrderDetails } from '../../components/OrderDetails';
 
 const Wrapper = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
@@ -162,7 +162,7 @@ const Invoice = () => {
                   ) : null}
                 </Fields>
                 <OrderDetailsWrapper>
-                  <OrderDetails>
+                  <CheckoutOrderDetails>
                     <CheckoutActions hideOnDesktop>
                       <CheckoutAction
                         type="submit"
@@ -174,7 +174,7 @@ const Invoice = () => {
                         backButton
                       />
                     </CheckoutActions>
-                  </OrderDetails>
+                  </CheckoutOrderDetails>
                 </OrderDetailsWrapper>
               </FormContent>
               <CheckoutActions hideOnMobile>

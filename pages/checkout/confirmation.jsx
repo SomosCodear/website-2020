@@ -16,9 +16,9 @@ import {
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
+  CheckoutOrderDetails,
 } from '../../layouts/checkout';
 import { ErrorNugget } from '../../style/lilac/components';
-import { OrderDetails } from '../../components/OrderDetails';
 
 const CheckoutTitleWrapper = styled.div`
   @media (min-width: ${BREAKPOINTS.hd}) {
@@ -166,7 +166,7 @@ const Confirmation = () => {
                 </Terms>
               </Texts>
               <OrderDetailsWrapper>
-                <OrderDetails>
+                <CheckoutOrderDetails>
                   <CheckoutActions hideOnDesktop>
                     <CheckoutAction
                       label="Pagar ahora"
@@ -180,7 +180,7 @@ const Confirmation = () => {
                       disabled={isProcessing}
                     />
                   </CheckoutActions>
-                </OrderDetails>
+                </CheckoutOrderDetails>
               </OrderDetailsWrapper>
             </Content>
             <CheckoutActions hideOnMobile>

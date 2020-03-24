@@ -14,9 +14,9 @@ import {
   CheckoutTitle,
   CheckoutActions,
   CheckoutAction,
+  CheckoutOrderDetails,
 } from '../../layouts/checkout';
 import { Product } from '../../components/Product';
-import { OrderDetails } from '../../components/OrderDetails';
 
 const ProductsList = styled.ul`
   list-style: none;
@@ -86,12 +86,12 @@ const Addons = () => {
               </ProductItem>
             ))}
           </ProductsList>
-          <OrderDetails>
+          <CheckoutOrderDetails>
             <CheckoutActions hideOnDesktop>
               <CheckoutAction onClick={() => router.push('/checkout/invoice')} />
               <CheckoutAction backButton onClick={router.back} />
             </CheckoutActions>
-          </OrderDetails>
+          </CheckoutOrderDetails>
         </Content>
         <CheckoutActions hideOnMobile>
           <CheckoutAction onClick={() => router.push('/checkout/invoice')} />

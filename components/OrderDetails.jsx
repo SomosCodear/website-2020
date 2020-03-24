@@ -1,12 +1,9 @@
 import R from 'ramda';
 import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { transparentize } from 'polished';
 import { BREAKPOINTS, COLORS } from '../style/constants';
-import { getOrderPasses, getOrderPassHolderNames, getAddons } from '../data/order/selectors';
-import { getItemsById } from '../data/items/selectors';
 import { ItemPrice } from './ItemPrice';
 
 const DetailContainer = styled.div`
@@ -126,6 +123,7 @@ const Strut = styled.div`
 `;
 
 const getItemPrice = (id, itemsById) => R.compose(
+  parseInt,
   R.defaultTo(0),
   R.prop('price'),
   R.prop(id),
@@ -155,12 +153,13 @@ const Items = ({ items, itemsById }) => R.compose(
   )),
 )(items);
 
-export const OrderDetails = ({ children }) => {
-  const passes = useSelector(getOrderPasses);
-  const addons = useSelector(getAddons);
-  const passHolderNames = useSelector(getOrderPassHolderNames);
-  const itemsById = useSelector(getItemsById);
-
+export const OrderDetails = ({
+  itemsById,
+  passes,
+  addons,
+  passHolderNames,
+  children,
+}) => {
   const passesTotal = useMemo(() => calculateTotal(passes, itemsById), [passes, itemsById]);
   const addonsTotal = useMemo(() => calculateTotal(addons, itemsById), [addons, itemsById]);
   const total = useMemo(() => passesTotal + addonsTotal, [passesTotal, addonsTotal]);
@@ -219,6 +218,12 @@ export const OrderDetails = ({ children }) => {
 };
 
 OrderDetails.propTypes = {
+  itemsById: PropTypes.objectOf(PropTypes.shape({
+    price: PropTypes.string.isRequired,
+  })).isRequired,
+  passes: PropTypes.objectOf(PropTypes.number).isRequired,
+  addons: PropTypes.objectOf(PropTypes.number).isRequired,
+  passHolderNames: PropTypes.arrayOf(PropTypes.string).isRequired,
   children: PropTypes.node,
 };
 

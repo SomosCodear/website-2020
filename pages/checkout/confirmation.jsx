@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { createOrder } from '../../data/order/actions';
-import { isProcessingOrder, hasOrderCreationError } from '../../data/order/selectors';
+import { isProcessingNewOrder, hasNewOrderCreationError } from '../../data/order/selectors';
 import {
   CheckoutStep,
   CheckoutTitle,
@@ -111,8 +111,8 @@ const Confirmation = () => {
   const dispatch = useDispatch();
 
   const [orderSent, setOrderSent] = useState(false);
-  const isProcessing = useSelector(isProcessingOrder);
-  const hasError = useSelector(hasOrderCreationError);
+  const isProcessing = useSelector(isProcessingNewOrder);
+  const hasError = useSelector(hasNewOrderCreationError);
   const processed = useMemo(
     () => orderSent && !isProcessing && !hasError,
     [orderSent, isProcessing, hasError],

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 import { useScrollToTop } from '../../hooks/useScrollToTop';
-import { getPassHolders, arePassHoldersValid, isOrderProcessed } from '../../data/order/selectors';
+import { getNewOrderPassHolders, areNewOrderPassHoldersValid } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { CheckoutLayout } from './CheckoutLayout';
 import { CheckoutStepsIndicator } from './CheckouStepsIndicator';
@@ -28,13 +28,13 @@ const hasSelectedPasses = R.compose(
   R.length,
   R.reject(R.isNil),
   R.map(R.prop('item')),
-  getPassHolders,
+  getNewOrderPassHolders,
 );
 const hasCustomer = (state) => getCustomer(state) != null;
 
 const REQUIREMENTS = {
   [PASS_HOLDERS]: R.T,
-  [PASSES]: arePassHoldersValid,
+  [PASSES]: areNewOrderPassHoldersValid,
   [ADDONS]: hasSelectedPasses,
   [INVOICE]: hasSelectedPasses,
   [CONFIRMATION]: R.both(hasSelectedPasses, hasCustomer),
@@ -44,27 +44,22 @@ export const CheckoutStep = ({ children }) => {
   const requirements = useSelector(
     (state) => R.map((requirement) => requirement(state))(REQUIREMENTS),
   );
-  const isProcessed = useSelector(isOrderProcessed);
   const router = useRouter();
   const [validated, setValidated] = useState(false);
   const currentStep = router.pathname;
 
   useScrollToTop();
   useEffect(() => {
-    if (currentStep !== CONFIRMATION && isProcessed) {
-      router.replace(CONFIRMATION);
+    let redirectStep = currentStep;
+
+    while (!requirements[redirectStep]) {
+      redirectStep = STEPS[STEPS.indexOf(redirectStep) - 1];
+    }
+
+    if (currentStep !== redirectStep) {
+      router.replace(redirectStep);
     } else {
-      let redirectStep = currentStep;
-
-      while (!requirements[redirectStep]) {
-        redirectStep = STEPS[STEPS.indexOf(redirectStep) - 1];
-      }
-
-      if (currentStep !== redirectStep) {
-        router.replace(redirectStep);
-      } else {
-        setValidated(true);
-      }
+      setValidated(true);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

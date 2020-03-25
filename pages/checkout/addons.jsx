@@ -7,7 +7,7 @@ import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_ADDON } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
-import { getAddons } from '../../data/order/selectors';
+import { getNewOrderAddons } from '../../data/order/selectors';
 import { setOrderAddonAmount } from '../../data/order/actions';
 import {
   CheckoutStep,
@@ -53,7 +53,7 @@ const Addons = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const addons = useSelector(getAddons);
+  const addons = useSelector(getNewOrderAddons);
   const items = useSelector((state) => getItemsByType(state, ITEM_TYPE_ADDON));
 
   const updateAmount = useCallback(

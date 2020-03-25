@@ -3,73 +3,58 @@ import { createSelector } from 'reselect';
 import createCachedSelector from 're-reselect';
 import { passHolderSchema } from './schemas';
 
-export const getOrder = (state) => state.order;
+export const getNewOrder = (state) => state.order.newOrder;
 
-export const getPassHolders = createSelector(
-  [getOrder],
+export const getNewOrderPassHolders = createSelector(
+  [getNewOrder],
   R.prop('passHolders'),
 );
-export const getFirstInvalidPassholder = createSelector(
-  [getPassHolders],
+export const getNewOrderFirstInvalidPassholder = createSelector(
+  [getNewOrderPassHolders],
   R.compose(
     R.indexOf(false),
     R.map(R.bind(passHolderSchema.isValidSync, passHolderSchema)),
   ),
 );
-export const arePassHoldersValid = createSelector(
-  [getFirstInvalidPassholder],
+export const areNewOrderPassHoldersValid = createSelector(
+  [getNewOrderFirstInvalidPassholder],
   R.equals(-1),
 );
-export const getPassHolder = createCachedSelector(
-  [R.nthArg(1), getPassHolders],
+export const getNewOrderPassHolder = createCachedSelector(
+  [R.nthArg(1), getNewOrderPassHolders],
   R.nth,
 )(R.nthArg((1)));
-export const getOrderPasses = createSelector(
-  [getPassHolders],
+export const getNewOrderPasses = createSelector(
+  [getNewOrderPassHolders],
   R.compose(
     R.map(R.length),
     R.groupBy(R.prop('item')),
   ),
 );
-export const getOrderPassHolderNames = createSelector(
-  [getPassHolders],
+export const getNewOrderPassHolderNames = createSelector(
+  [getNewOrderPassHolders],
   R.map(R.compose(
     R.join(' '),
     R.props(['firstName', 'lastName']),
   )),
 );
 
-export const getAddons = createSelector(
-  [getOrder],
+export const getNewOrderAddons = createSelector(
+  [getNewOrder],
   R.prop('addons'),
 );
 
-export const isProcessingOrder = createSelector(
-  [getOrder],
+export const isProcessingNewOrder = createSelector(
+  [getNewOrder],
   R.prop('processing'),
 );
 
-export const getProcessedOrder = createSelector(
-  [getOrder],
-  R.prop('processedOrder'),
-);
-
-export const isOrderProcessed = createSelector(
-  [getProcessedOrder],
-  R.complement(R.isNil),
-);
-
-export const getOrderCreationError = createSelector(
-  [getOrder],
+export const getNewOrderCreationError = createSelector(
+  [getNewOrder],
   R.prop('error'),
 );
 
-export const hasOrderCreationError = createSelector(
-  [getOrderCreationError],
+export const hasNewOrderCreationError = createSelector(
+  [getNewOrderCreationError],
   R.complement(R.isNil),
-);
-
-export const getProcessedOrderPreferenceId = createSelector(
-  [getProcessedOrder],
-  R.prop('preferenceId'),
 );

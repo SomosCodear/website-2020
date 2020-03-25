@@ -72,8 +72,10 @@ const error = (state = null, { type, payload }) => {
 };
 
 export const order = combineReducers({
-  passHolders,
-  addons,
-  processing,
-  error,
+  newOrder: combineReducers({
+    passHolders,
+    addons,
+    processing,
+    error,
+  }),
 });

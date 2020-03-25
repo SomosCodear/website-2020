@@ -7,7 +7,7 @@ import { createCustomer, setCustomerData } from '../customer/actions';
 import { getCustomer } from '../customer/selectors';
 import { ITEM_TYPE_PASS } from '../items/constants';
 import { getItemsByType, getItemOption } from '../items/selectors';
-import { getPassHolders, getAddons } from './selectors';
+import { getNewOrderPassHolders, getNewOrderAddons } from './selectors';
 import {
   ORDER_ADD_PASS,
   ORDER_REMOVE_PASS,
@@ -76,8 +76,8 @@ export const createOrder = () => async (dispatch, getState) => {
   const state = getState();
   const customer = getCustomer(state);
 
-  const passHolders = getPassHolders(state);
-  const addons = getAddons(state);
+  const passHolders = getNewOrderPassHolders(state);
+  const addons = getNewOrderAddons(state);
   const passData = passHolders.map(({
     item,
     ...options

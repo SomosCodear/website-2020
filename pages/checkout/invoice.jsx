@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Formik, Form, Field } from 'formik';
 import { BREAKPOINTS } from '../../style/constants';
 import { conditionallyFetchItems } from '../../utils/dataFetching';
-import { getPassHolder } from '../../data/order/selectors';
+import { getNewOrderPassHolder } from '../../data/order/selectors';
 import { getCustomer } from '../../data/customer/selectors';
 import { setCustomerData } from '../../data/customer/actions';
 import { customerSchema } from '../../data/customer/schemas';
@@ -92,7 +92,7 @@ const Invoice = () => {
   const router = useRouter();
 
   const customer = useSelector(getCustomer);
-  const firstPassHolder = useSelector((store) => getPassHolder(store, 0));
+  const firstPassHolder = useSelector((store) => getNewOrderPassHolder(store, 0));
 
   const initialValues = useMemo(
     () => (

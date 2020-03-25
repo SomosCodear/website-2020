@@ -16,7 +16,10 @@ import {
   removeOrderPass,
   setOrderPassInfoWithDefaultItem,
 } from '../../data/order/actions';
-import { getPassHolders, getFirstInvalidPassholder } from '../../data/order/selectors';
+import {
+  getNewOrderPassHolders,
+  getNewOrderFirstInvalidPassholder,
+} from '../../data/order/selectors';
 import {
   CheckoutStep,
   CheckoutTitle,
@@ -120,7 +123,7 @@ const PassHolders = () => {
   const [current, setCurrent] = useState(0);
 
   // pass holders management
-  const passHolders = useSelector(getPassHolders);
+  const passHolders = useSelector(getNewOrderPassHolders);
   const addPassHolder = useCallback(() => dispatch(addOrderPass()), [dispatch]);
   const removePassHolder = useCallback(() => {
     dispatch(removeOrderPass(passHolders.length - 1));
@@ -152,7 +155,7 @@ const PassHolders = () => {
   // submit
   const [showError, setShowError] = useState(false);
   const [shouldContinue, setShouldContinue] = useState(false);
-  const firstInvalid = useSelector(getFirstInvalidPassholder);
+  const firstInvalid = useSelector(getNewOrderFirstInvalidPassholder);
   const onPassHolderSubmit = useCallback((values) => {
     saveCurrentPassHolder(values);
     setShouldContinue(true);

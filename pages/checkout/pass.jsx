@@ -9,7 +9,7 @@ import { conditionallyFetchItems } from '../../utils/dataFetching';
 import { ITEM_TYPE_PASS } from '../../data/items/constants';
 import { getItemsByType } from '../../data/items/selectors';
 import { setOrderPassInfo } from '../../data/order/actions';
-import { getPassHolders } from '../../data/order/selectors';
+import { getNewOrderPassHolders } from '../../data/order/selectors';
 import { RadioGroup } from '../../components/RadioGroup';
 import { ItemPrice } from '../../components/ItemPrice';
 import {
@@ -189,7 +189,7 @@ const Passes = () => {
     () => items.map(({ id, name }) => ({ label: name, value: id })),
     [items],
   );
-  const passHolders = useSelector(getPassHolders);
+  const passHolders = useSelector(getNewOrderPassHolders);
   const multipass = useMemo(() => passHolders.length > 1, [passHolders]);
 
   const onSubmit = useCallback((values) => {

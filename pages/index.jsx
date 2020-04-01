@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
 import styled from 'styled-components';
 import { transparentize } from 'polished';
 import { BREAKPOINTS, COLORS } from '../style/constants';
@@ -245,7 +244,7 @@ const Home = () => {
         <EventCountdown />
       </TimerSection>
       <ActionsSection>
-        <Action>
+        {/* <Action>
           <Link href="/cfp">
             <LilacButton href="/cfp" color="primary-light" shadow>
               <ActionText>
@@ -256,8 +255,7 @@ const Home = () => {
           <ActionDate>
             Hasta el 31/03
           </ActionDate>
-        </Action>
-        {/* <Action>
+        </Action><Action>
           <Link href="/">
             <LilacButton href="/" color="accent" shadow>
               <ActionText>

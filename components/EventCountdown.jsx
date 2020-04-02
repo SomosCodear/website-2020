@@ -36,11 +36,13 @@ const TimerComponent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  text-shadow: 0px 0px 10px #000;
 
   p {
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
+    text-shadow: 0px 0px 2px #000, 0px 0px 2px #000;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {

@@ -4,6 +4,10 @@
   "alias": ["webconf.tech", "www.webconf.tech"],
   "redirects": [
     {
+      "source": "/cfp",
+      "destination": "/"
+    },
+    {
       "source": "/cfp-form",
       "destination": "https://forms.gle/9gTiyXQC6oLRsP3u7"
     },

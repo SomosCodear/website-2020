@@ -49,11 +49,12 @@ const HeaderLogo = styled.div`
 
   img {
     width: 100%;
-    max-height: 20rem;
+    max-height: 15rem;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     padding: 0 2rem;
+    max-height: 20rem;
   }
 `;
 
@@ -195,12 +196,11 @@ const Letter = styled.article`
   background: rgba(0, 0, 0, 0.6);
   color: var(--color-text);
   width: 100%;
-  font-size: 1.25rem;
-  line-height: 1.75rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
   box-sizing: border-box;
   padding: 2rem;
   text-align: center;
-  margin-top: 5rem;
 
   a, h1 {
     color: var(--color-accent);

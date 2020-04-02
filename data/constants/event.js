@@ -1,1 +1,1 @@
-export const EVENT_DATE = '2020-05-29';
+export const EVENT_DATE = '2021-05-29';

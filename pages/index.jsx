@@ -10,7 +10,6 @@ import { EventCountdown } from '../components/EventCountdown';
 
 const Container = styled.main`
   min-height: 100vh;
-  padding: 2rem;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
@@ -26,6 +25,7 @@ const Container = styled.main`
     background-image: url(/images/backgrounds/home-background.jpg);
     background-position: left center;
     background-size: auto;
+    padding: 2rem;
   }
 
   div + & {

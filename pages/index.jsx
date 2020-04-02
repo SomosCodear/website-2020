@@ -261,9 +261,6 @@ const Home = () => {
         <meta name="twitter:site" content={META.twitterSite} />
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
-      <TimerSection>
-        <EventCountdown />
-      </TimerSection>
       <Letter>
         <HeaderLogo>
           <img src="/images/logos/webconf-2021.svg" alt="Logo de WebConf" />
@@ -294,7 +291,6 @@ const Home = () => {
           esfuerzo a elaborar las postulaciones para nuestra conferencia, para conversar sobre nuevas oportunidades de presentación que estamos trabajando desde la Asociación. Queremos agradecer a esas personas que apostaron a presentar sus ideas en WebConf, por todo el trabajo y la paciencia que han dedicado durante estos meses a trabajar con nosotros, y queremos asegurarles que haremos nuestro mejor esfuerzo en hallar nuevas maneras de ayudarnos mutuamente a dar a conocer sus ideas.
 
         </p>
-        <p>Decidimos no eliminar la cuenta regresiva, con la intención de dejar un mensaje: quizá haya que esperar un poco más, pero WebConf va a volver. Y cuando eso pase, será un evento aún más maravilloso de lo que habíamos planeado.</p>
         <p>Gracias a todas las personas que nos acompañan desde la edición de 2019 y a quienes conocimos este año.</p>
         <p>Todo pasa, y esto también pasará. ¡Hasta que nos reencontremos!</p>
 

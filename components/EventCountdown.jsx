@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
 import { EVENT_DATE } from '../data/constants';
+import { BREAKPOINTS } from '../style/constants';
 
 const padNumber = (n) => String(n).padStart(2, '0');
 
@@ -34,12 +35,16 @@ const TimerContainer = styled.div`
 const TimerComponent = styled.div`
   display: flex;
   flex-direction: column;
-  font-size: 6.25rem;
+  padding: 1rem;
 
   p {
     margin: 0;
     font-size: 1rem;
     font-weight: 400;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 6.25rem;
   }
 `;
 

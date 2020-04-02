@@ -104,8 +104,6 @@ const HeaderCodear = styled.div`
 `;
 
 const TimerSection = styled.section`
-  display: none;
-
   @media (min-width: ${BREAKPOINTS.hd}) {
     margin-top: 5rem;
     display: block;
@@ -172,9 +170,6 @@ const Alert = styled.div`
     padding-left: 0;
     color: var(--color-text);
     text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     text-decoration: none;
     font-size: 0.85rem;
@@ -187,9 +182,29 @@ const Alert = styled.div`
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    letter-spacing: 0.25rem;
-    font-size: 1rem;
-    padding-left: 0.5rem;
+    a {
+      font-size: 3rem;
+    }
+  }
+`;
+
+const Letter = styled.article`
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
+  width: 100%;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  box-sizing: border-box;
+  padding: 2rem;
+
+  a {
+    color: var(--color-accent);
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    padding: 5rem 10rem;
   }
 `;
 
@@ -199,15 +214,10 @@ const Home = () => {
   } = useAnalytics();
 
   return [
-    <Alert>
-      <a target="_blank" rel="noopener noreferrer" href="https://codear.org/comunicaciones#covid-19">
-        ⚠ IMPORTANTE: COMUNICADO OFICIAL POR COVID-19
-      </a>
-    </Alert>,
     <Container>
       <Head>
         <title>
-          Córdoba WebConf 2020
+          Córdoba WebConf 2021
         </title>
         <meta name="description" content={META.description} />
         <meta property="og:title" content={META.ogTitle} />
@@ -224,13 +234,9 @@ const Home = () => {
       </Head>
       <Header>
         <HeaderLogo>
-          <img src="/images/logos/webconf-vertical.svg" alt="Logo de WebConf" />
+          <img src="/images/logos/webconf-2021.svg" alt="Logo de WebConf" />
         </HeaderLogo>
         <HeaderInfo>
-          <HeaderDate>
-            29 y 30 de Mayo de 2020
-          </HeaderDate>
-          <img src="/images/logos/utn.svg" alt="Logo de la UTN" />
           <HeaderCodear>
             un evento de
             <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
@@ -240,7 +246,6 @@ const Home = () => {
         </HeaderInfo>
       </Header>
       <TimerSection>
-        Falta cada vez menos
         <EventCountdown />
       </TimerSection>
       <ActionsSection>
@@ -267,7 +272,7 @@ const Home = () => {
             Hasta el 01/05
           </ActionDate>
         </Action> */}
-        <Action>
+        {/* <Action>
           <LilacButton href="/sponsorships" color="primary-light" shadow>
             <ActionText>
               Auspiciá el Evento
@@ -276,8 +281,33 @@ const Home = () => {
           <ActionDate>
             Hasta el 12/04
           </ActionDate>
-        </Action>
+        </Action> */}
       </ActionsSection>
+      <Letter>
+        <h1>Sobre WebConf 2020</h1>
+        <p>
+          Conforme a la
+          {' '}
+          <a href="https://codear.org/comunicaciones" target="_blank">comunicación oficial</a>
+          {' '}
+          de la Comunidad
+          de Desarrolladores de Argentina, lamentamos informar que la edición 2020 de WebConf
+          {' '}
+          <strong>no se llevará a cabo</strong>
+          .
+          Fue una decisión difícil de tomar, pero todas las personas que formamos el
+          equipo de WebConf estamos de acuerdo en que es lo mejor que podemos hacer, dadas las circunstancias
+          y la realidad que nos toca vivir.
+        </p>
+        <p>
+          En los próximos días, nos comunicaremos con aquellas personas que dedicaron tiempo y
+          esfuerzo a elaborar las postulaciones para nuestra conferencia, para conversar sobre nuevas oportunidades de presentación que estamos trabajando desde la Asociación. Queremos agradecer a esas personas que apostaron a presentar sus ideas en WebConf, por todo el trabajo y la paciencia que han dedicado durante estos meses a trabajar con nosotros, y queremos asegurarles que haremos nuestro mejor esfuerzo en hallar nuevas maneras de ayudarnos mutuamente a dar a conocer sus ideas.
+
+        </p>
+        <p>Decidimos no eliminar la cuenta regresiva, con la intención de dejar un mensaje: quizá haya que esperar un poco más, pero WebConf va a volver. Y cuando eso pase, será un evento aún más maravilloso de lo que habíamos planeado.</p>
+        <p>Gracias a todas las personas que nos acompañan desde la edición de 2019 y a quienes conocimos este año.</p>
+        <p>Todo pasa, y esto también pasará. ¡Hasta que nos reencontremos!</p>
+      </Letter>
     </Container>,
   ];
 };

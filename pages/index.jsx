@@ -20,6 +20,7 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     background-image: url(/images/backgrounds/home-background.jpg);
@@ -36,6 +37,7 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: auto;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     flex-direction: row;
@@ -93,6 +95,7 @@ const HeaderCodear = styled.div`
   font-weight: 100;
   white-space: nowrap;
   color: var(--color-text);
+  justify-content: center;
 
   a {
     margin-left: 0.625rem;
@@ -196,15 +199,41 @@ const Letter = styled.article`
   line-height: 1.75rem;
   box-sizing: border-box;
   padding: 2rem;
+  text-align: center;
+  margin-top: 5rem;
 
-  a {
+  a, h1 {
     color: var(--color-accent);
+  }
+
+  h1 {
+    margin-top: 5rem;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     font-size: 1.5rem;
     line-height: 2.5rem;
     padding: 5rem 10rem;
+  }
+`;
+
+const FooterSocialLinks = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    width: 50%;
+    margin: 0 auto;
+  }
+`;
+
+const FooterSocialLink = styled.a`
+  padding: 1rem;
+
+  img {
+    width: 2rem;
+    height: 2rem;
   }
 `;
 
@@ -232,58 +261,19 @@ const Home = () => {
         <meta name="twitter:site" content={META.twitterSite} />
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
-      <Header>
-        <HeaderLogo>
-          <img src="/images/logos/webconf-2021.svg" alt="Logo de WebConf" />
-        </HeaderLogo>
-        <HeaderInfo>
-          <HeaderCodear>
-            un evento de
-            <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
-              <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
-            </a>
-          </HeaderCodear>
-        </HeaderInfo>
-      </Header>
       <TimerSection>
         <EventCountdown />
       </TimerSection>
-      <ActionsSection>
-        {/* <Action>
-          <Link href="/cfp">
-            <LilacButton href="/cfp" color="primary-light" shadow>
-              <ActionText>
-                Proponé tu Charla
-              </ActionText>
-            </LilacButton>
-          </Link>
-          <ActionDate>
-            Hasta el 31/03
-          </ActionDate>
-        </Action><Action>
-          <Link href="/">
-            <LilacButton href="/" color="accent" shadow>
-              <ActionText>
-                Comprá tu Pase
-              </ActionText>
-            </LilacButton>
-          </Link>
-          <ActionDate>
-            Hasta el 01/05
-          </ActionDate>
-        </Action> */}
-        {/* <Action>
-          <LilacButton href="/sponsorships" color="primary-light" shadow>
-            <ActionText>
-              Auspiciá el Evento
-            </ActionText>
-          </LilacButton>
-          <ActionDate>
-            Hasta el 12/04
-          </ActionDate>
-        </Action> */}
-      </ActionsSection>
       <Letter>
+        <HeaderLogo>
+          <img src="/images/logos/webconf-2021.svg" alt="Logo de WebConf" />
+        </HeaderLogo>
+        <HeaderCodear>
+          un evento de
+          <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
+            <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+          </a>
+        </HeaderCodear>
         <h1>Sobre WebConf 2020</h1>
         <p>
           Conforme a la
@@ -307,6 +297,39 @@ const Home = () => {
         <p>Decidimos no eliminar la cuenta regresiva, con la intención de dejar un mensaje: quizá haya que esperar un poco más, pero WebConf va a volver. Y cuando eso pase, será un evento aún más maravilloso de lo que habíamos planeado.</p>
         <p>Gracias a todas las personas que nos acompañan desde la edición de 2019 y a quienes conocimos este año.</p>
         <p>Todo pasa, y esto también pasará. ¡Hasta que nos reencontremos!</p>
+
+        <h1>Mientras tanto...</h1>
+        <p>Te invitamos a seguir el resto de las actividades de CoDeAr en nuestras redes.</p>
+        <FooterSocialLinks>
+          <FooterSocialLink
+            href="https://fb.me/SomosCodear/"
+            title="Seguinos en Facebook"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-facebook.svg" alt="Icono de Facebook" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://www.instagram.com/SomosCodear/"
+            title="Seguinos en Instagram"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-instagram.svg" alt="Icono de Instagram" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://twitter.com/SomosCodear"
+            title="Seguinos en Twitter"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-twitter.svg" alt="Icono de Twitter" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://linkedin.com/company/codear/"
+            title="Seguinos en LinkedIn"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-linkedin.svg" alt="Icono de LinkedIn" />
+          </FooterSocialLink>
+        </FooterSocialLinks>
       </Letter>
     </Container>,
   ];

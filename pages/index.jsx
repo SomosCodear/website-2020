@@ -10,7 +10,6 @@ import { EventCountdown } from '../components/EventCountdown';
 
 const Container = styled.main`
   min-height: 100vh;
-  padding: 2rem;
   display: flex;
   box-sizing: border-box;
   flex-direction: column;
@@ -20,11 +19,13 @@ const Container = styled.main`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  background-attachment: fixed;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     background-image: url(/images/backgrounds/home-background.jpg);
     background-position: left center;
     background-size: auto;
+    padding: 2rem;
   }
 
   div + & {
@@ -36,6 +37,7 @@ const Header = styled.header`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: auto;
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     flex-direction: row;
@@ -47,11 +49,12 @@ const HeaderLogo = styled.div`
 
   img {
     width: 100%;
-    max-height: 20rem;
+    max-height: 15rem;
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
     padding: 0 2rem;
+    max-height: 20rem;
   }
 `;
 
@@ -93,6 +96,7 @@ const HeaderCodear = styled.div`
   font-weight: 100;
   white-space: nowrap;
   color: var(--color-text);
+  justify-content: center;
 
   a {
     margin-left: 0.625rem;
@@ -104,8 +108,6 @@ const HeaderCodear = styled.div`
 `;
 
 const TimerSection = styled.section`
-  display: none;
-
   @media (min-width: ${BREAKPOINTS.hd}) {
     margin-top: 5rem;
     display: block;
@@ -172,9 +174,6 @@ const Alert = styled.div`
     padding-left: 0;
     color: var(--color-text);
     text-align: center;
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     text-decoration: none;
     font-size: 0.85rem;
@@ -187,9 +186,54 @@ const Alert = styled.div`
   }
 
   @media (min-width: ${BREAKPOINTS.hd}) {
-    letter-spacing: 0.25rem;
-    font-size: 1rem;
-    padding-left: 0.5rem;
+    a {
+      font-size: 3rem;
+    }
+  }
+`;
+
+const Letter = styled.article`
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--color-text);
+  width: 100%;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  box-sizing: border-box;
+  padding: 2rem;
+  text-align: center;
+
+  a, h1 {
+    color: var(--color-accent);
+  }
+
+  h1 {
+    margin-top: 5rem;
+  }
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    padding: 5rem 10rem;
+  }
+`;
+
+const FooterSocialLinks = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  @media (min-width: ${BREAKPOINTS.hd}) {
+    width: 50%;
+    margin: 0 auto;
+  }
+`;
+
+const FooterSocialLink = styled.a`
+  padding: 1rem;
+
+  img {
+    width: 2rem;
+    height: 2rem;
   }
 `;
 
@@ -199,15 +243,10 @@ const Home = () => {
   } = useAnalytics();
 
   return [
-    <Alert>
-      <a target="_blank" rel="noopener noreferrer" href="https://codear.org/comunicaciones#covid-19">
-        ⚠ IMPORTANTE: COMUNICADO OFICIAL POR COVID-19
-      </a>
-    </Alert>,
     <Container>
       <Head>
         <title>
-          Córdoba WebConf 2020
+          Córdoba WebConf 2021
         </title>
         <meta name="description" content={META.description} />
         <meta property="og:title" content={META.ogTitle} />
@@ -222,62 +261,72 @@ const Home = () => {
         <meta name="twitter:site" content={META.twitterSite} />
         <meta name="twitter:creator" content={META.twitterCreator} />
       </Head>
-      <Header>
+      <Letter>
         <HeaderLogo>
-          <img src="/images/logos/webconf-vertical.svg" alt="Logo de WebConf" />
+          <img src="/images/logos/webconf-2021.svg" alt="Logo de WebConf" />
         </HeaderLogo>
-        <HeaderInfo>
-          <HeaderDate>
-            29 y 30 de Mayo de 2020
-          </HeaderDate>
-          <img src="/images/logos/utn.svg" alt="Logo de la UTN" />
-          <HeaderCodear>
-            un evento de
-            <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
-              <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
-            </a>
-          </HeaderCodear>
-        </HeaderInfo>
-      </Header>
-      <TimerSection>
-        Falta cada vez menos
-        <EventCountdown />
-      </TimerSection>
-      <ActionsSection>
-        {/* <Action>
-          <Link href="/cfp">
-            <LilacButton href="/cfp" color="primary-light" shadow>
-              <ActionText>
-                Proponé tu Charla
-              </ActionText>
-            </LilacButton>
-          </Link>
-          <ActionDate>
-            Hasta el 31/03
-          </ActionDate>
-        </Action><Action>
-          <Link href="/">
-            <LilacButton href="/" color="accent" shadow>
-              <ActionText>
-                Comprá tu Pase
-              </ActionText>
-            </LilacButton>
-          </Link>
-          <ActionDate>
-            Hasta el 01/05
-          </ActionDate>
-        </Action> */}
-        <Action>
-          <LilacButton href="/sponsorships" color="primary-light" shadow>
-            <ActionText>
-              Auspiciá el Evento
-            </ActionText>
-          </LilacButton>
-          <ActionDate>
-            Hasta el 12/04
-          </ActionDate>
-        </Action>
-      </ActionsSection>
+        <HeaderCodear>
+          un evento de
+          <a href="https://codear.org" title="CoDeAr" onClick={trackClickedCodear}>
+            <img src="/images/logos/codear-small.svg" alt="Logo de CoDeAr" />
+          </a>
+        </HeaderCodear>
+        <h1>Sobre WebConf 2020</h1>
+        <p>
+          Conforme a la
+          {' '}
+          <a href="https://codear.org/comunicaciones" target="_blank">comunicación oficial</a>
+          {' '}
+          de la Comunidad
+          de Desarrolladores de Argentina, lamentamos informar que la edición 2020 de WebConf
+          {' '}
+          <strong>no se llevará a cabo</strong>
+          .
+          Fue una decisión difícil de tomar, pero todas las personas que formamos el
+          equipo de WebConf estamos de acuerdo en que es lo mejor que podemos hacer, dadas las circunstancias
+          y la realidad que nos toca vivir.
+        </p>
+        <p>
+          En los próximos días, nos comunicaremos con aquellas personas que dedicaron tiempo y
+          esfuerzo a elaborar las postulaciones para nuestra conferencia, para conversar sobre nuevas oportunidades de presentación que estamos trabajando desde la Asociación. Queremos agradecer a esas personas que apostaron a presentar sus ideas en WebConf, por todo el trabajo y la paciencia que han dedicado durante estos meses a trabajar con nosotros, y queremos asegurarles que haremos nuestro mejor esfuerzo en hallar nuevas maneras de ayudarnos mutuamente a dar a conocer sus ideas.
+
+        </p>
+        <p>Gracias a todas las personas que nos acompañan desde la edición de 2019 y a quienes conocimos este año.</p>
+        <p>Todo pasa, y esto también pasará. ¡Hasta que nos reencontremos!</p>
+
+        <h1>Mientras tanto...</h1>
+        <p>Te invitamos a seguir el resto de las actividades de CoDeAr en nuestras redes.</p>
+        <FooterSocialLinks>
+          <FooterSocialLink
+            href="https://fb.me/SomosCodear/"
+            title="Seguinos en Facebook"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-facebook.svg" alt="Icono de Facebook" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://www.instagram.com/SomosCodear/"
+            title="Seguinos en Instagram"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-instagram.svg" alt="Icono de Instagram" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://twitter.com/SomosCodear"
+            title="Seguinos en Twitter"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-twitter.svg" alt="Icono de Twitter" />
+          </FooterSocialLink>
+          <FooterSocialLink
+            href="https://linkedin.com/company/codear/"
+            title="Seguinos en LinkedIn"
+            target="_blank"
+          >
+            <img src="/images/icons/icon-linkedin.svg" alt="Icono de LinkedIn" />
+          </FooterSocialLink>
+        </FooterSocialLinks>
+      </Letter>
     </Container>,
   ];
 };
